@@ -169,7 +169,7 @@ void programTerminator (int& menuSelector) {
          << " " << "                  TERMINATE PROGRAM                 " << "\n"
          << " " << "====================================================" << "\n"
          << " " << "[1] Terminate Program                               " << "\n"
-         << " " << "[2] Cancel Termination                              " << "\n"
+         << " " << "[0] Cancel Termination                              " << "\n"
          << " " << "====================================================" << "\n"
          << endl;
 
@@ -188,7 +188,7 @@ void programTerminator (int& menuSelector) {
         if (userinput == 1) {
             exit(1);
         }
-        if (userinput == 2) {
+        if (userinput == 0) {
 
             clrscreen();
             menuSelector = 0;
@@ -329,9 +329,60 @@ void adminLogin (int& menuSelector) {
 
 void adminMenu (int& menuSelector) {
 
+    mainProgHeader();
 
+    cout << " " << "HOME >> MODE SELECTION >> ADMIN MODE" << "\n"
+         << endl;
 
+    cout << " " << "====================================================" << "\n"
+         << " " << "                     ADMIN MODE                     " << "\n"
+         << " " << "====================================================" << "\n"
+         << " " << "[1] Manage Films                                    " << "\n"
+         << " " << "[2] Manage Snacks                                   " << "\n"
+         << " " << "[3] Sales                                           " << "\n"
+         << " " << "[0] Mode Selection                                  " << "\n"
+         << " " << "====================================================" << "\n"
+         << endl;
+    while (1) {
+        int userInput;
+        cout << " " << "[INPUT] Select Option: ";
+        cin >> userInput;
+        while (cin.fail()) {
+            cin.clear();
+            cin.ignore();
+            inpErr();
+            cout << " " << "[INPUT] Select Option: ";
+            cin >> userInput;
+        }
+        if (userInput == 1){
 
+            clrscreen();
+            menuSelector = 31;
+            break;
+        }
+        else if (userInput == 2) {
+
+            clrscreen();
+            menuSelector = 32;
+            break;
+        }
+        else if (userInput == 3) {
+
+            clrscreen();
+            menuSelector = 33;
+            break;
+        }
+        else if (userInput == 0) {
+
+            clrscreen();
+            menuSelector = 0;
+            break;
+        }
+        else {
+            inpErr();
+        }
+
+    }
 
 }
 
