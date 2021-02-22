@@ -13,7 +13,7 @@ class Film
         Film();
 
         //Overload Constructor
-        Film(string, string, int, double);
+        Film(string, string, int, double, int);
 
         //Deconstructor
         virtual ~Film();
@@ -24,6 +24,7 @@ class Film
         int     getYear() const;
         double  getPrice() const;
         bool    getStatus() const;
+        int     getSeats() const;
 
         //Mutator Functions
         void    setTitle(string);
@@ -31,6 +32,7 @@ class Film
         void    setYear (int);
         void    setPrice (double);
         void    setStatus (bool);
+        void    setSeats (int);
 
     private:
         string  StoredTitle;
@@ -38,6 +40,7 @@ class Film
         int     StoredYear;
         double  StoredPrice;
         bool    StoredStatus;
+        int     StoredSeats;
 };
 
 #endif // FILM_H
