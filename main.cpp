@@ -58,4 +58,10 @@ void mainProgHeader () {
          << endl;
 }
 
-void parentMenu (int& menSel)
+void parentMenu (int& menSel) {
+
+    mainProgHeader();
+
+    cout << ""
+
+}
