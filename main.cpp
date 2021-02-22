@@ -114,7 +114,7 @@ void parentMenu (int& menuSelector) {
     while (1) {
 
         int input;
-        cout << " " << "[INP] Select Mode: ";
+        cout << " " << "[INPUT] Select Mode: ";
         cin >> input;
         while (cin.fail()) {
             cin.clear();
@@ -197,7 +197,7 @@ void programTerminator (int& menuSelector) {
 
 }
 
-void mainMenu (int& MenuSelector) {
+void mainMenu (int& menuSelector) {
 
     mainProgHeader();
     cout << " " << "HOME >> MODE SELECTION >> MAIN MODE" << "\n"
@@ -213,7 +213,7 @@ void mainMenu (int& MenuSelector) {
 
     while (1) {
 
-        int = userInput;
+        int userInput;
         cout << " " << "[INPUT] Select Options: ";
         cin >> userInput;
         while (cin.fail()) {
@@ -226,7 +226,7 @@ void mainMenu (int& MenuSelector) {
         if (userInput == 0) {
 
             clrscreen();
-            MenuSelector = 0;
+            menuSelector = 0;
             break;
 
         }
@@ -236,5 +236,50 @@ void mainMenu (int& MenuSelector) {
     }
 }
 
+void adminLogin (int& menuSelector) {
+
+    mainProgHeader ();
+
+    cout << " " << "HOME >> MODE SELECTION >> ADMIN LOGIN" << "\n"
+         << endl;
+
+    cout << " " << "====================================================" << "\n"
+         << " " << "                    ADMIN LOGIN                     " << "\n"
+         << " " << "====================================================" << "\n"
+         << " " << "[1] Log In                                          " << "\n"
+         << " " << "[0] Mode Selection                                  " << "\n"
+         << " " << "====================================================" << "\n"
+         << endl;
+
+    while (1){
+        int userInput;
+        cout << " " << "[INPUT] Select Option: ";
+        cin >> userInput;
+            while (cin.fail()) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                inpErr();
+                cout << " " << "[INPUT] Select Option: ";
+                cin >> userInput;
+            }
+        if (userInput == 1) {
+
+            clrscreen();
+
+        }
+        else if (userInput == 0) {
+
+            clrscreen();
+            menuSelector = 0;
+            break;
+        }
+
+        else {
+            inpErr();
+        }
+    }
+
+
+}
 
 
