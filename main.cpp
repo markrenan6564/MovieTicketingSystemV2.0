@@ -12,6 +12,8 @@ static vector<Film> SavedFilms;
 
 void mainProgHeader ();
 
+void inpErr();
+
 void parentMenu (int&);
 
 void programTerminator (int&);
@@ -58,6 +60,12 @@ void mainProgHeader () {
          << endl;
 }
 
+void inpErr () {
+
+    cout << " " << "[ERROR] Invalid input. Please enter a valid value" << "\n"
+         << endl;
+}
+
 void parentMenu (int& menSel) {
 
     mainProgHeader();
@@ -76,8 +84,11 @@ void parentMenu (int& menSel) {
     cout << " " << "[INP] Select Mode: ";
     cin >> menuSel;
         while (cin.fail()){
-
-
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n')
+            inpErr();
+            cout << " " << "[INP] Select Mode: ";
+            cin >> menuSel;
         }
 
 
