@@ -14,6 +14,8 @@ void mainProgHeader ();
 
 void inpErr();
 
+void inpError();
+
 void progStop ();
 
 void clrscreen();
@@ -89,12 +91,18 @@ void mainProgHeader () {
          << " " << "Movie Ticketing System [Version 69.420.666]" << "\n"
          << " " << "(c) 2021 Group 4 | BSIT 1-4. All rights reserved." << "\n"
          << endl;
+
 }
 
 void inpErr () {
 
     cout << " " << "[ERROR] Invalid input. Please enter a valid value" << "\n"
          << endl;
+}
+
+void inpError () {
+
+    cout << " " << "[ERROR] Invalid input. Please enter a valid value" << "\n";
 }
 
 void progStop () {
@@ -472,7 +480,123 @@ void manageFilms (int& menuSelector) {
     }
 }
 
-void addFilms(int& menuSelector, vector<Film>& Films) {
+void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
 
+    mainProgHeader();
+
+    cout << " " << "HOME >> MODE SELECTION >> ADMIN MODE >> MANAGE FILMS >> ADD FILMS" << "\n"
+         << endl;
+
+    cout << " " << "====================================================" << "\n"
+         << " " << "                      ADD FILMS                     " << "\n"
+         << " " << "====================================================" << "\n"
+         << endl;
+
+    int usernum;
+    cout << " " << "[INPUT] Specify numbers of movies to add: ";
+    cin >> usernum;
+
+    while (cin.fail()) {
+        cin.clear();
+        cin.ignore(numeric_limits<streamsize>::max(),'\n');
+        inpError();
+        cout << " " << "[INPUT] Specify numbers of films to add: ";
+        cin >> usernum;
+        }
+
+    cout << "\n"
+         << " " << "====================================================" << "\n"
+         << "\n"
+         << " " << "[INFO] You requested to add " << usernum << " films." << "\n"
+         << endl;
+
+    progStop();
+    clrscreen();
+
+    string title;
+    string director;
+    int year;
+    double price;
+    int seats;
+
+        for (int i = 1; i <= usernum; i++) {
+
+            mainProgHeader();
+
+            cout << " " << "HOME >> MODE SELECTION >> ADMIN MODE >> MANAGE FILMS >> ADD FILMS" << "\n"
+                 << endl;
+
+            cout << " " << "====================================================" << "\n"
+                 << " " << "                      ADD FILMS                     " << "\n"
+                 << " " << "====================================================" << "\n"
+                 << endl;
+
+            cout << " " << "----------------------------------------------------" << "\n"
+                 << " " << "[INFO] Adding " << i << " out of " << usernum << " films." << "\n"
+                 << " " << "----------------------------------------------------" << endl;
+
+            cout << " " << "Film Title     : ";
+            getline(cin, title);
+            cout << " " << "Film Director  : ";
+            getline (cin, director);
+            cout << " " << "Year Released  : ";
+            cin >> year;
+                while(cin.fail()) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    inpError();
+                    cout << " " << "Year Released  : ";
+                    cin >> year;
+                }
+            cout << " " << "Ticket Price   : ";
+            cin >> year;
+                while (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    inpError();
+                    cout << " " << "Ticket Price   : ";
+                    cin >> year;
+                }
+            cout << " " << "Available Seats: ";
+            cin >> seats;
+                while (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    inpError();
+                    cout << " " << "Available Seats: ";
+                    cin >> seats;
+                }
+
+            Film films(title, director, year, price, seats);
+            CurrentFilms.push_back(films);
+
+            cout << " " << "----------------------------------------------------" << "\n"
+                 << "\n"
+                 << " " << "=====================================================" << "\n"
+                 << "\n"
+                 << " " << "[INFO] Entry No. " << i << " has been successfully saved" << "\n"
+                 << endl;
+
+            progStop ();
+            clrscreen ();
+
+        }
+
+        mainProgHeader();
+
+        cout << " " << "HOME >> MODE SELECTION >> ADMIN MODE >> MANAGE FILMS >> ADD FILMS" << "\n"
+             << endl;
+
+        cout << " " << "====================================================" << "\n"
+             << " " << "                      ADD FILMS                     " << "\n"
+             << " " << "====================================================" << "\n"
+             << endl;
+        cout << " " << "[INFO] Successfuly added " << usernum << " films" << "\n"
+             << "\n"
+             << " " << "====================================================" << "\n"
+             << endl;
+        progStop();
+        clrscreen();
+        menuSelector = 31;
 }
 
