@@ -62,6 +62,13 @@ void parentMenu (int& menSel) {
 
     mainProgHeader();
 
-    cout << ""
+    cout << " " << "HOME >> MODE SELECTION" << "\n"
+         << endl;
+
+    cout << " " << "====================================================" << "\n"
+         << " " << "[1] Main Mode" << "\n"
+         << " " << "[2] Admin Mode" << "\n"
+         << " " << "[0] Terminate Program" << "\n"
+         << " " << "====================================================" << "\n"
 
 }
