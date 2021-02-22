@@ -316,7 +316,10 @@ void adminLogin (int& menuSelector) {
 
                 if ((username == "admin") && (password == "password")) {
 
-                    cout << " " << "[INFO] Login Successful" << "\n"
+
+                    cout << " " << "----------------------------------------------------" << "\n"
+                         << " " << "[INFO] Login Successful" << "\n"
+                         << " " << "----------------------------------------------------" << "\n"
                          << endl;
 
                     progStop();
@@ -325,8 +328,10 @@ void adminLogin (int& menuSelector) {
                 }
                 else {
 
-                    cout << " " << "[ERROR] Login Unsuccessful | Wrong Credentials" << "\n"
-                    << endl;
+                    cout << " " << "----------------------------------------------------" << "\n"
+                         << " " << "[ERROR] Login Unsuccessful | Wrong Credentials" << "\n"
+                         << " " << "----------------------------------------------------" << "\n"
+                         << endl;
 
                     progStop ();
                     clrscreen();
@@ -489,8 +494,7 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
 
     cout << " " << "====================================================" << "\n"
          << " " << "                      ADD FILMS                     " << "\n"
-         << " " << "====================================================" << "\n"
-         << endl;
+         << " " << "====================================================" << "\n";
 
     int usernum;
     cout << " " << "[INPUT] Specify numbers of movies to add: ";
@@ -504,10 +508,11 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
         cin >> usernum;
         }
 
-    cout << "\n"
-         << " " << "====================================================" << "\n"
+    cout << " " << "====================================================" << "\n"
          << "\n"
-         << " " << "[INFO] You requested to add " << usernum << " films." << "\n"
+         << " " << "----------------------------------------------------" << "\n"
+         << " " << "[INFO] You requested to add " << usernum << " films" << "\n"
+         << " " << "----------------------------------------------------" << "\n"
          << endl;
 
     progStop();
@@ -532,7 +537,7 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
                  << endl;
 
             cout << " " << "----------------------------------------------------" << "\n"
-                 << " " << "[INFO] Adding " << i << " out of " << usernum << " films." << "\n"
+                 << " " << "[INFO] Adding " << i << " out of " << usernum << " films" << "\n"
                  << " " << "----------------------------------------------------" << endl;
 
             cout << " " << "Film Title     : ";
@@ -574,7 +579,9 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
                  << "\n"
                  << " " << "=====================================================" << "\n"
                  << "\n"
+                 << " " << "----------------------------------------------------" << "\n"
                  << " " << "[INFO] Entry No. " << i << " has been successfully saved" << "\n"
+                 << " " << "----------------------------------------------------" << "\n"
                  << endl;
 
             progStop ();
@@ -590,9 +597,7 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
         cout << " " << "====================================================" << "\n"
              << " " << "                      ADD FILMS                     " << "\n"
              << " " << "====================================================" << "\n"
-             << endl;
-        cout << " " << "[INFO] Successfuly added " << usernum << " films" << "\n"
-             << "\n"
+             << " " << "[INFO] Successfuly added " << usernum << " films" << "\n"
              << " " << "====================================================" << "\n"
              << endl;
         progStop();
