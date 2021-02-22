@@ -83,7 +83,7 @@ void progStop () {
 
     cin.clear();
     fflush(stdin);
-    cout << "[INFO] Press \"Enter\" to continue";
+    cout <<" " << "[INFO] Press \"Enter\" to continue";
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 }
@@ -266,6 +266,48 @@ void adminLogin (int& menuSelector) {
 
             clrscreen();
 
+            mainProgHeader ();
+
+            cout << " " << "HOME >> MODE SELECTION >> ADMIN LOGIN" << "\n"
+                 << endl;
+
+            cout << " " << "====================================================" << "\n"
+                 << " " << "                    ADMIN LOGIN                     " << "\n"
+                 << " " << "====================================================" << "\n";
+
+            string username, password;
+
+            cin.clear();
+            fflush(stdin);
+
+            cout << " " << "USERNAME: ";
+            getline(cin, username);
+            cout << " " << "PASSWORD: ";
+            getline (cin, password);
+
+            cout << " " << "====================================================" << "\n"
+                 << endl;
+
+                if ((username == "admin") && (password == "password")) {
+
+                    cout << " " << "[INFO] Login Successful" << "\n"
+                         << endl;
+
+                    progStop();
+                    clrscreen ();
+                    menuSelector = 3;
+                }
+                else {
+
+                    cout << " " << "[ERROR] Login Unsuccessful | Wrong Credentials" << "\n"
+                    << endl;
+
+                    progStop ();
+                    clrscreen();
+                    menuSelector = 0;
+                }
+
+            break;
         }
         else if (userInput == 0) {
 
