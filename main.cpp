@@ -54,6 +54,9 @@ int main() {
         else if (menuSelector == 1) {
             mainMenu (menuSelector);
         }
+        else if (menuSelector == 2) {
+            adminLogin (menuSelector);
+        }
 
         else {
             parentMenu (menuSelector);
@@ -102,9 +105,9 @@ void parentMenu (int& menuSelector) {
     cout << " " << "====================================================" << "\n"
          << " " << "                   MODE SELECTOR                    " << "\n"
          << " " << "====================================================" << "\n"
-         << " " << "[1] Main Mode" << "\n"
-         << " " << "[2] Admin Mode" << "\n"
-         << " " << "[0] Terminate Program" << "\n"
+         << " " << "[1] Main Mode                                       " << "\n"
+         << " " << "[2] Admin Mode                                      " << "\n"
+         << " " << "[0] Terminate Program                               " << "\n"
          << " " << "====================================================" << "\n"
          << endl;
 
@@ -117,7 +120,7 @@ void parentMenu (int& menuSelector) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             inpErr();
-            cout << " " << "[INP] Select Mode: ";
+            cout << " " << "[INPUT] Select Mode: ";
             cin >> input;
         }
 
@@ -158,13 +161,80 @@ void programTerminator (int& menuSelector) {
          << endl;
 
     cout << " " << "====================================================" << "\n"
-         << " " << "                   MODE SELECTOR                    " << "\n"
+         << " " << "                  TERMINATE PROGRAM                 " << "\n"
          << " " << "====================================================" << "\n"
-         << " " << "[1] Main Mode" << "\n"
-         << " " << "[2] Admin Mode" << "\n"
-         << " " << "[0] Terminate Program" << "\n"
+         << " " << "[1] Terminate Program                               " << "\n"
+         << " " << "[2] Cancel Termination                              " << "\n"
          << " " << "====================================================" << "\n"
          << endl;
 
+    while (1) {
+
+        int userinput;
+        cout << " " << "[INPUT] Select Options: ";
+        cin >> userinput;
+            while (cin.fail()){
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                inpErr();
+                cout << " " << "[INPUT] Select Options: ";
+                cin >> userinput;
+            }
+        if (userinput == 1) {
+            exit(1);
+        }
+        if (userinput == 2) {
+
+            clrscreen();
+            menuSelector = 0;
+            break;
+        }
+        else{
+            inpErr();
+        }
+
+    }
+
 }
+
+void mainMenu (int& MenuSelector) {
+
+    mainProgHeader();
+    cout << " " << "HOME >> MODE SELECTION >> MAIN MODE" << "\n"
+         << endl;
+
+    cout << " " << "====================================================" << "\n"
+         << " " << "                      MAIN MODE                     " << "\n"
+         << " " << "====================================================" << "\n"
+         << " " << "[ERROR] Program under development. :<               " << "\n"
+         << " " << "[0] Mode Selection                                  " << "\n"
+         << " " << "====================================================" << "\n"
+         << endl;
+
+    while (1) {
+
+        int = userInput;
+        cout << " " << "[INPUT] Select Options: ";
+        cin >> userInput;
+        while (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            inpErr ();
+            cout << " " << "[INPUT] Select Options: ";
+            cin >> userInput;
+        }
+        if (userInput == 0) {
+
+            clrscreen();
+            MenuSelector = 0;
+            break;
+
+        }
+        else {
+            inpErr();
+        }
+    }
+}
+
+
 
