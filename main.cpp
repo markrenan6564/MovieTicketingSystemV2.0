@@ -4,11 +4,11 @@
 #include <limits>
 #include <string>
 
-#include "movie.h"
+#include "Film.h"
 
 using namespace std;
 
-static vector<film> MovieStorage;
+static vector<Film> SavedFilms;
 
 void mainProgHeader ();
 

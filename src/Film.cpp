@@ -1,15 +1,15 @@
-#include "movie.h"
+#include "Film.h"
 
-film::film(){
+Film::Film(){
     StoredYear = 0;
     StoredPrice = 0.00;
 }
 
-film::~film(){
+Film::~Film(){
 
 }
 
-film::film(string newTitle, string newDirector, int newYear, double newPrice){
+Film::Film(string newTitle, string newDirector, int newYear, double newPrice){
     StoredTitle = newTitle;
     StoredDirector = newDirector;
     StoredYear = newYear;
@@ -19,46 +19,46 @@ film::film(string newTitle, string newDirector, int newYear, double newPrice){
 
 
 
-string film::getTitle() const{
+string Film::getTitle() const{
     return StoredTitle;
 }
 
-string film::getDirector() const{
+string Film::getDirector() const{
     return StoredDirector;
 }
 
-int film::getYear() const{
+int Film::getYear() const{
     return StoredYear;
 }
 
-double film::getPrice() const{
+double Film::getPrice() const{
     return StoredPrice;
 }
 
-bool film::getStatus() const{
+bool Film::getStatus() const{
     return StoredStatus;
 }
 
 
 
 
-void film::setTitle(string newTitle){
+void Film::setTitle(string newTitle){
     StoredTitle = newTitle;
 }
 
-void film::setDirector(string newDirector){
+void Film::setDirector(string newDirector){
     StoredDirector = newDirector;
 }
 
-void film::setYear(int newYear){
+void Film::setYear(int newYear){
     StoredYear = newYear;
 }
 
-void film::setPrice(double newPrice){
+void Film::setPrice(double newPrice){
     StoredPrice = newPrice;
 }
 
-void film::setStatus(bool newStatus){
+void Film::setStatus(bool newStatus){
     StoredStatus = newStatus;
 }
 
