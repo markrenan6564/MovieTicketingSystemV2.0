@@ -28,6 +28,8 @@ void adminLogin (int&);
 
 void adminMenu (int&);
 
+void manageFilms (int&);
+
 int main() {
 
     // Index
@@ -37,6 +39,7 @@ int main() {
     // Main Mode = 1
     // Admin Login = 2
     // Admin Mode = 3
+        // Manage Films 31
 
 
     int menuSelector;
@@ -63,6 +66,10 @@ int main() {
             adminMenu (menuSelector);
         }
 
+        else if (menuSelector == 31) {
+            manageFilms (menuSelector);
+        }
+
         else {
             parentMenu (menuSelector);
         }
@@ -74,7 +81,7 @@ void mainProgHeader () {
 
     cout << "\n"
          << " " << "Movie Ticketing System [Version 69.420.666]" << "\n"
-         << " " << "(c) 2021 Group 4 | BSIT 1 - 4. All rights reserved." << "\n"
+         << " " << "(c) 2021 Group 4 | BSIT 1-4. All rights reserved." << "\n"
          << endl;
 }
 
@@ -386,4 +393,6 @@ void adminMenu (int& menuSelector) {
 
 }
 
+void manageFilms (int& menuSelector) {
 
+}
