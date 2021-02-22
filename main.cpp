@@ -70,5 +70,9 @@ void parentMenu (int& menSel) {
          << " " << "[2] Admin Mode" << "\n"
          << " " << "[0] Terminate Program" << "\n"
          << " " << "====================================================" << "\n"
+         << endl;
+
+    cout << " " << "[INP] Select Mode: ";
+
 
 }
