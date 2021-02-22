@@ -395,4 +395,27 @@ void adminMenu (int& menuSelector) {
 
 void manageFilms (int& menuSelector) {
 
+    mainProgHeader();
+
+    cout << " " << "HOME >> MODE SELECTION >> ADMIN MODE >> MANAGE FILMS" << "\n"
+         << endl;
+
+    cout << " " << "====================================================" << "\n"
+         << " " << "                    MANAGE FILMS                    " << "\n"
+         << " " << "====================================================" << "\n"
+         << " " << "[1] Add Films                                       " << "\n"
+         << " " << "[2] View Films                                      " << "\n"
+         << " " << "[3] Edit Films                                      " << "\n"
+         << " " << "[4] Deactivate Films                                " << "\n"
+         << " " << "[5] Reactivate Films                                " << "\n"
+         << " " << "[6] Delete Films                                    " << "\n"
+         << " " << "[0] Mode Selection                                  " << "\n"
+         << " " << "====================================================" << "\n"
+         << endl;
+
+    while(1) {
+        int userInput;
+
+
+    }
 }
