@@ -25,6 +25,7 @@ void adminMenu (int&);
 int main() {
 
     // Index
+    // menSel = Menu Selector
     // Program Terminator = -1
     // Parent Menu = 0
     // Main Mode = 1
@@ -32,18 +33,18 @@ int main() {
     // Admin Mode = 3
 
 
-    int MenuSelector;
+    int menSel;
 
-    if (MenuSelector == -1) {
-
+    if (menSel == -1) {
+        programTerminator (menSel);
     }
 
-    else if () {
-
+    else if (menSel == 0) {
+        parentMenu (menSel);
     }
 
     else {
-        parentMenu (MenuSelector);
+        parentMenu (menSel);
     }
 
 
@@ -56,3 +57,5 @@ void mainProgHeader () {
          << " " << "(c) 2021 Group 4 | BSIT 1 - 4. All rights reserved." << "\n"
          << endl;
 }
+
+void parentMenu (int& menSel)
