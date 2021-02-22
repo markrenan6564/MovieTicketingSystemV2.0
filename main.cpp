@@ -72,7 +72,13 @@ void parentMenu (int& menSel) {
          << " " << "====================================================" << "\n"
          << endl;
 
+    int menuSel;
     cout << " " << "[INP] Select Mode: ";
+    cin >> menuSel;
+        while (cin.fail()){
+
+
+        }
 
 
 }
