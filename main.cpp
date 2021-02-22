@@ -30,6 +30,8 @@ void adminMenu (int&);
 
 void manageFilms (int&);
 
+void addFilms (int&, vector<Film>&);
+
 int main() {
 
     // Index
@@ -68,6 +70,10 @@ int main() {
 
         else if (menuSelector == 31) {
             manageFilms (menuSelector);
+        }
+
+        else if (menuSelector == 311) {
+            addFilms (menuSelector, SavedFilms);
         }
 
         else {
@@ -415,7 +421,58 @@ void manageFilms (int& menuSelector) {
 
     while(1) {
         int userInput;
+        cout << " " << "[INPUT] Select Options: ";
+        cin >> userInput;
+            while(cin.fail()) {
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                inpErr ();
+                cout << " " << "[INPUT] Select Options: ";
+                cin >> userInput;
+            }
+        if (userInput == 1) {
 
+            clrscreen();
+            menuSelector = 311;
+            break;
+        }
+        else if (userInput == 2) {
 
+            clrscreen();
+            menuSelector = 312;
+            break;
+        }
+        else if (userInput == 3) {
+
+            clrscreen();
+            menuSelector = 313;
+            break;
+        }
+        else if (userInput == 4) {
+
+            clrscreen();
+            menuSelector = 314;
+            break;
+        }
+        else if (userInput == 5) {
+
+            clrscreen();
+            menuSelector = 315;
+            break;
+        }
+        else if (userInput == 6) {
+
+            clrscreen();
+            menuSelector = 316;
+            break;
+        }
+        else {
+            inpErr();
+        }
     }
 }
+
+void addFilms(int& menuSelector, vector<Film>& Films) {
+
+}
+
