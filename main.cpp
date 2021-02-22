@@ -54,8 +54,13 @@ int main() {
         else if (menuSelector == 1) {
             mainMenu (menuSelector);
         }
+
         else if (menuSelector == 2) {
             adminLogin (menuSelector);
+        }
+
+        else if (menuSelector == 3) {
+            adminMenu (menuSelector);
         }
 
         else {
@@ -320,6 +325,12 @@ void adminLogin (int& menuSelector) {
             inpErr();
         }
     }
+}
+
+void adminMenu (int& menuSelector) {
+
+
+
 
 
 }
