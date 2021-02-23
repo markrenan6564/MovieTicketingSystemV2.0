@@ -30,6 +30,7 @@ static vector<Film> SavedFilms;
     void editFilms (int&, vector<Film>&);
     void deactivateFilms (int&, vector<Film>&);
     void reactivateFilms (int&, vector<Film>&);
+    void deleteFilms (int&, vector<Film>&);
 
 int main() {
 
@@ -60,10 +61,10 @@ int main() {
                     Manage Snacks = 32
                         Add Snacks = 321
                         View Snacks = 322
-                        Edit Films = 323
-                        Deactivate Films = 324
-                        Reactivate Films = 325
-                        Delete Films = 326
+                        Edit Snacks = 323
+                        Deactivate Snacks = 324
+                        Reactivate Snacks = 325
+                        Delete Snacks = 326
 
                     Sales = 33
                         View Sales = 331
@@ -116,6 +117,10 @@ int main() {
 
         else if (menuSelector == 315) {
             reactivateFilms (menuSelector, SavedFilms);
+        }
+
+        else if (menuSelector == 316) {
+            deleteFilms (menuSelector, SavedFilms);
         }
 
         else {
@@ -242,13 +247,13 @@ void programTerminator (int& menuSelector) {
     while (1) {
 
         int userinput;
-        cout << " " << "[INP] Select Options: ";
+        cout << " " << "[INP] Select Option: ";
         cin >> userinput;
             while (cin.fail()){
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 inpErr();
-                cout << " " << "[INP] Select Options: ";
+                cout << " " << "[INP] Select Option: ";
                 cin >> userinput;
             }
         if (userinput == 1) {
@@ -284,13 +289,13 @@ void mainMenu (int& menuSelector) {
     while (1) {
 
         int userInput;
-        cout << " " << "[INP] Select Options: ";
+        cout << " " << "[INP] Select Option: ";
         cin >> userInput;
         while (cin.fail()) {
             cin.clear();
             cin.ignore(numeric_limits<streamsize>::max(), '\n');
             inpErr ();
-            cout << " " << "[INP] Select Options: ";
+            cout << " " << "[INP] Select Option: ";
             cin >> userInput;
         }
         if (userInput == 0) {
@@ -483,7 +488,7 @@ void manageFilms (int& menuSelector) {
                 cin.clear();
                 cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 inpErr ();
-                cout << " " << "[INP] Select Options: ";
+                cout << " " << "[INP] Select Option: ";
                 cin >> userInput;
             }
         if (userInput == 1) {
@@ -669,11 +674,7 @@ void viewFilms (int& menuSelector, vector<Film>& addedFilms) {
         cout << " " << "====================================================" << "\n"
              << " " << "                     VIEW FILMS                     " << "\n"
              << " " << "====================================================" << "\n"
-             << "\n"
-             << " " << "----------------------------------------------------" << "\n"
-             << " " << "[ERR] Unable to view. No films are added yet.     " << "\n"
-             << " " << "----------------------------------------------------" << "\n"
-             << "\n"
+             << " " << "[ERR] No films to view                              " << "\n"
              << " " << "====================================================" << "\n"
              << endl;
 
@@ -892,11 +893,7 @@ void editFilms (int& menuSelector, vector<Film>& currentFilms) {
         cout << " " << "====================================================" << "\n"
              << " " << "                    EDIT FILMS                      " << "\n"
              << " " << "====================================================" << "\n"
-             << "\n"
-             << " " << "----------------------------------------------------" << "\n"
-             << " " << "[ERR] Unable to edit. No films are added yet.     " << "\n"
-             << " " << "----------------------------------------------------" << "\n"
-             << "\n"
+             << " " << "[ERR] No films to edit     " << "\n"
              << " " << "====================================================" << "\n"
              << endl;
 
@@ -1152,7 +1149,7 @@ void deactivateFilms (int& menuSelector, vector<Film>& activeFilms) {
         cout << " " << "====================================================" << "\n"
              << " " << "                  DEACTIVATE FILMS                  " << "\n"
              << " " << "====================================================" << "\n"
-             << " " << "[ERR] Unable to deactivate: no films are added yet     " << "\n"
+             << " " << "[ERR] No films to deactivate                        " << "\n"
              << " " << "====================================================" << "\n"
              << endl;
 
@@ -1193,7 +1190,7 @@ void deactivateFilms (int& menuSelector, vector<Film>& activeFilms) {
 
                 int numAct = 0;
 
-                for (int i = 0; i < activeFilms.size(); i++) {
+                for (unsigned int i = 0; i < activeFilms.size(); i++) {
 
                     if (activeFilms[i].getStatus()){
                         numAct++;
@@ -1231,9 +1228,9 @@ void deactivateFilms (int& menuSelector, vector<Film>& activeFilms) {
                     cout << " " << "HOME >> ADMIN MODE >> MANAGE FILMS >> DEACTIVATE FILMS" << "\n";
 
                     cout << " " << "====================================================" << "\n"
-                        << " " << "                  DEACTIVATE FILMS                  " << "\n"
-                        << " " << "====================================================" << "\n"
-                        << endl;
+                         << " " << "                  DEACTIVATE FILMS                  " << "\n"
+                         << " " << "====================================================" << "\n"
+                         << endl;
 
                     cout << " " << "----------------------------------------------------" << "\n"
                         << " " << "[SYS] Showing all active films" << "\n"
@@ -1257,8 +1254,8 @@ void deactivateFilms (int& menuSelector, vector<Film>& activeFilms) {
 
                             if (realRef < 9) {
 
-                                cout << "0" << filmRef << "] Title  : " << activeFilms[realRef].getTitle() << "\n"
-                                << " " << "     Status : Active                                 " << "\n"
+                                cout << "0" << filmRef << "] Title         : " << activeFilms[realRef].getTitle() << "\n"
+                                << " " << "     Status        : Active                                 " << "\n"
                                 << " " << "----------------------------------------------------" << "\n"
                                 << " " << "     Film Title    : " << activeFilms[realRef].getTitle() << "\n"
                                 << " " << "     Film Director : " << activeFilms[realRef].getDirector() << "\n"
@@ -1272,8 +1269,8 @@ void deactivateFilms (int& menuSelector, vector<Film>& activeFilms) {
 
                             else {
 
-                                cout << filmRef << "] Title  : " << activeFilms[realRef].getTitle() << "\n"
-                                    << " " << "     Status : Active                                 " << "\n"
+                                cout << filmRef << "] Title         : " << activeFilms[realRef].getTitle() << "\n"
+                                    << " " << "     Status        : Active                                 " << "\n"
                                     << " " << "----------------------------------------------------" << "\n"
                                     << " " << "     Film Title    : " << activeFilms[realRef].getTitle() << "\n"
                                     << " " << "     Film Director : " << activeFilms[realRef].getDirector() << "\n"
@@ -1370,7 +1367,7 @@ void reactivateFilms (int& menuSelector, vector<Film>& inactiveFilms) {
         cout << " " << "====================================================" << "\n"
              << " " << "                  REACTIVATE FILMS                  " << "\n"
              << " " << "====================================================" << "\n"
-             << " " << "[ERR] Unable to reactivate. No films are added yet     " << "\n"
+             << " " << "[ERR] No films to reactivate                        " << "\n"
              << " " << "====================================================" << "\n"
              << endl;
 
@@ -1411,7 +1408,7 @@ void reactivateFilms (int& menuSelector, vector<Film>& inactiveFilms) {
 
                 int numAct = 0;
 
-                for (int i = 0; i < inactiveFilms.size(); i++) {
+                for (unsigned int i = 0; i < inactiveFilms.size(); i++) {
 
                     if (!inactiveFilms[i].getStatus()){
                         numAct++;
@@ -1449,14 +1446,14 @@ void reactivateFilms (int& menuSelector, vector<Film>& inactiveFilms) {
                     cout << " " << "HOME >> ADMIN MODE >> MANAGE FILMS >> REACTIVATE FILMS" << "\n";
 
                     cout << " " << "====================================================" << "\n"
-                        << " " << "                  REACTIVATE FILMS                  " << "\n"
-                        << " " << "====================================================" << "\n"
-                        << endl;
+                         << " " << "                  REACTIVATE FILMS                  " << "\n"
+                         << " " << "====================================================" << "\n"
+                         << endl;
 
                     cout << " " << "----------------------------------------------------" << "\n"
-                        << " " << "[SYS] Showing all inactive films" << "\n"
-                        << " " << "----------------------------------------------------" << "\n"
-                        << endl;
+                         << " " << "[SYS] Showing all inactive films" << "\n"
+                         << " " << "----------------------------------------------------" << "\n"
+                         << endl;
 
                     int numFilms = inactiveFilms.size();
 
@@ -1475,31 +1472,31 @@ void reactivateFilms (int& menuSelector, vector<Film>& inactiveFilms) {
 
                             if (realRef < 9) {
 
-                                cout << "0" << filmRef << "] Title  : " << inactiveFilms[realRef].getTitle() << "\n"
-                                << " " << "     Status : Inactive                                 " << "\n"
-                                << " " << "----------------------------------------------------" << "\n"
-                                << " " << "     Film Title    : " << inactiveFilms[realRef].getTitle() << "\n"
-                                << " " << "     Film Director : " << inactiveFilms[realRef].getDirector() << "\n"
-                                << " " << "     Year Released : " << inactiveFilms[realRef].getYear() << "\n"
-                                << " " << "     Ticket Price  : " << inactiveFilms[realRef].getPrice() << "\n"
-                                << " " << "     Seats Alloted : " << inactiveFilms[realRef].getSeats() << "\n"
-                                << " " << "----------------------------------------------------" << "\n"
-                                << endl;
+                                cout << "0" << filmRef << "] Title         : " << inactiveFilms[realRef].getTitle() << "\n"
+                                     << " " << "     Status        : Inactive                                 " << "\n"
+                                     << " " << "----------------------------------------------------" << "\n"
+                                     << " " << "     Film Title    : " << inactiveFilms[realRef].getTitle() << "\n"
+                                     << " " << "     Film Director : " << inactiveFilms[realRef].getDirector() << "\n"
+                                     << " " << "     Year Released : " << inactiveFilms[realRef].getYear() << "\n"
+                                     << " " << "     Ticket Price  : " << inactiveFilms[realRef].getPrice() << "\n"
+                                     << " " << "     Seats Alloted : " << inactiveFilms[realRef].getSeats() << "\n"
+                                     << " " << "----------------------------------------------------" << "\n"
+                                     << endl;
 
                             }
 
                             else {
 
                                 cout << filmRef << "] Title  : " << inactiveFilms[realRef].getTitle() << "\n"
-                                    << " " << "     Status : Inactive                              " << "\n"
-                                    << " " << "----------------------------------------------------" << "\n"
-                                    << " " << "     Film Title    : " << inactiveFilms[realRef].getTitle() << "\n"
-                                    << " " << "     Film Director : " << inactiveFilms[realRef].getDirector() << "\n"
-                                    << " " << "     Year Released : " << inactiveFilms[realRef].getYear() << "\n"
-                                    << " " << "     Ticket Price  : " << inactiveFilms[realRef].getPrice() << "\n"
-                                    << " " << "     Seats Alloted : " << inactiveFilms[realRef].getSeats() << "\n"
-                                    << " " << "----------------------------------------------------" << "\n"
-                                    << endl;
+                                     << " " << "     Status        : Inactive                              " << "\n"
+                                     << " " << "----------------------------------------------------" << "\n"
+                                     << " " << "     Film Title    : " << inactiveFilms[realRef].getTitle() << "\n"
+                                     << " " << "     Film Director : " << inactiveFilms[realRef].getDirector() << "\n"
+                                     << " " << "     Year Released : " << inactiveFilms[realRef].getYear() << "\n"
+                                     << " " << "     Ticket Price  : " << inactiveFilms[realRef].getPrice() << "\n"
+                                     << " " << "     Seats Alloted : " << inactiveFilms[realRef].getSeats() << "\n"
+                                     << " " << "----------------------------------------------------" << "\n"
+                                     << endl;
 
                             }
 
@@ -1552,7 +1549,7 @@ void reactivateFilms (int& menuSelector, vector<Film>& inactiveFilms) {
 
                     menuSelector = 315;
                     break;
-                    
+
                 }
 
             }
@@ -1576,3 +1573,185 @@ void reactivateFilms (int& menuSelector, vector<Film>& inactiveFilms) {
     } // else statement
 
 } // function
+
+void deleteFilms (int& menuSelector, vector<Film>& availableFilms) {
+
+    if (availableFilms.empty()) {
+
+        mainProgHeader ();
+
+        cout << " " << "HOME >> ADMIN MODE >> MANAGE FILMS >> DELETE FILMS" << "\n";
+
+        cout << " " << "====================================================" << "\n"
+             << " " << "                    DELETE FILMS                    " << "\n"
+             << " " << "====================================================" << "\n"
+             << " " << "[ERR] No films to delete                            " << "\n"
+             << " " << "====================================================" << "\n"
+             << endl;
+
+        progStop();
+        clrscreen();
+        menuSelector = 31;
+
+    }
+
+    else {
+
+        mainProgHeader();
+
+        cout << " " << "HOME >> ADMIN MODE >> MANAGE FILMS >> DELETE FILMS" << "\n";
+
+        cout << " " << "====================================================" << "\n"
+             << " " << "                    DELETE FILMS                    " << "\n"
+             << " " << "====================================================" << "\n"
+             << " " << "[1] Delete Film                                     " << "\n"
+             << " " << "[0] Manage Films                                    " << "\n"             
+             << " " << "====================================================" << "\n"
+             << endl;
+        
+        while (1) {
+        
+            int usersChoice;
+
+            cout << " " << "[INP] Select Option: ";
+            cin >> usersChoice;
+            while (cin.fail()){
+                cinError();
+                inpErr;
+                cout << " " << "[INP] Select Option: ";
+                cin >> usersChoice;             
+            }
+
+            if (usersChoice == 1) {
+
+                clrscreen();
+
+                mainProgHeader();
+
+                cout << " " << "HOME >> ADMIN MODE >> MANAGE FILMS >> DELETE FILMS" << "\n";
+
+                cout << " " << "====================================================" << "\n"
+                     << " " << "                    DELETE FILMS                    " << "\n"
+                     << " " << "====================================================" << "\n"
+                     << endl;
+
+                cout << " " << "----------------------------------------------------" << "\n"
+                     << " " << "[SYS] Showing all films available for deletion      " << "\n"
+                     << " " << "----------------------------------------------------" << "\n"
+                     << endl;
+
+                int numFilms = availableFilms.size();
+
+                for (int realRef = 0; realRef < numFilms; realRef++) {
+                    
+                    int filmRef = realRef + 1;
+
+                    if (realRef < 9) {
+                        
+                        cout << " " << "----------------------------------------------------" << "\n"
+                             << " " << "[0" << filmRef << "] Title         : " << availableFilms[realRef].getTitle() << "\n";
+
+                        if (availableFilms[realRef].getStatus()) {
+                            cout << " " << "     Status        : Active" <<"\n";
+                        }
+                        else {
+                            cout << " " << "     Status        : Inactive" <<"\n";
+                        }
+                        cout << " " << "----------------------------------------------------" << "\n"
+                             << " " << "     Film Title    : " << availableFilms[realRef].getTitle() << "\n"
+                             << " " << "     Film Director : " << availableFilms[realRef].getDirector() << "\n"
+                             << " " << "     Year Released : " << availableFilms[realRef].getYear() << "\n"
+                             << " " << "     Ticket Price  : " << availableFilms[realRef].getPrice() << "\n"
+                             << " " << "     Alloted Seats : " << availableFilms[realRef].getSeats() << "\n"
+                             << " " << "----------------------------------------------------" << "\n"
+                             << endl;
+
+                    }
+
+                    else {
+
+                        cout << " " << "----------------------------------------------------" << "\n"
+                             << " " << "[" << filmRef << "] Title         : " << availableFilms[realRef].getTitle() << "\n";
+
+                        if (availableFilms[realRef].getStatus()) {
+                            cout << " " << "     Status        : Active" <<"\n";
+                        }
+                        else {
+                            cout << " " << "     Status        : Inactive" <<"\n";
+                        }
+                        cout << " " << "----------------------------------------------------" << "\n"
+                             << " " << "     Film Title    : " << availableFilms[realRef].getTitle() << "\n"
+                             << " " << "     Film Director : " << availableFilms[realRef].getDirector() << "\n"
+                             << " " << "     Year Released : " << availableFilms[realRef].getYear() << "\n"
+                             << " " << "     Ticket Price  : " << availableFilms[realRef].getPrice() << "\n"
+                             << " " << "     Alloted Seats : " << availableFilms[realRef].getSeats() << "\n"
+                             << " " << "----------------------------------------------------" << "\n"
+                             << endl;
+
+                    }
+
+                }
+                
+                cout << " " << "====================================================" << "\n"
+                     << endl;
+
+                while (1) {
+                    
+                    int usersChoice;
+
+                    cout << " " << "[INP] Select a Film for Deletion: ";
+                    cin >> usersChoice;
+                    while (cin.fail()) {
+                        cinError();
+                        inpErr();
+                        cout << " " << "[INP] Select a Film for Deletion: ";
+                        cin >> usersChoice;                        
+                    }
+
+                    int realRef = usersChoice - 1;
+
+                    if ((usersChoice > 0) && (usersChoice <= availableFilms.size())) {
+                        
+                        cout << " " << "[INF] The Film \"" << availableFilms[realRef].getTitle() << " has been selected" << "\n"
+                             << "\n"
+                             << " " << "====================================================" << "\n"
+                             << "\n"
+                             << " " << "[SYS] The Film \"" << availableFilms[realRef].getTitle() << " has been successfully deleted" << "\n"
+                             << endl;
+
+                        availableFilms.erase(availableFilms.begin() + realRef);
+
+                        progStop();
+                        clrscreen();
+
+                        break;
+                    }
+
+                    else {
+                        inpErr();
+                    }
+
+                }
+
+                menuSelector = 316;
+                break;
+            }
+
+            else if (usersChoice == 0) {
+
+                clrscreen();
+                menuSelector = 31;
+                break;
+            }
+
+            else {
+
+                inpErr();
+
+            }
+
+        }
+
+    }
+
+}
