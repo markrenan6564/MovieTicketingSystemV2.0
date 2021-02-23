@@ -6,6 +6,7 @@
 
 #include "Film.h"
 
+
 using namespace std;
 
 static vector<Film> SavedFilms;
@@ -33,6 +34,8 @@ void adminMenu (int&);
 void manageFilms (int&);
 
 void addFilms (int&, vector<Film>&);
+
+void viewFilms (int&, vector<Film>&);
 
 int main() {
 
@@ -76,6 +79,11 @@ int main() {
 
         else if (menuSelector == 311) {
             addFilms (menuSelector, SavedFilms);
+        }
+
+        else if (menuSelector == 312) {
+
+            viewFilms (menuSelector, SavedFilms);
         }
 
         else {
@@ -434,7 +442,7 @@ void manageFilms (int& menuSelector) {
 
     while(1) {
         int userInput;
-        cout << " " << "[INPUT] Select Options: ";
+        cout << " " << "[INPUT] Select Option: ";
         cin >> userInput;
             while(cin.fail()) {
                 cin.clear();
@@ -521,7 +529,7 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
     string title;
     string director;
     int year;
-    double price;
+    int price;
     int seats;
 
         for (int i = 1; i <= usernum; i++) {
@@ -554,13 +562,13 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
                     cin >> year;
                 }
             cout << " " << "Ticket Price   : ";
-            cin >> year;
+            cin >> price;
                 while (cin.fail()) {
                     cin.clear();
                     cin.ignore(numeric_limits<streamsize>::max(), '\n');
                     inpError();
                     cout << " " << "Ticket Price   : ";
-                    cin >> year;
+                    cin >> price;
                 }
             cout << " " << "Available Seats: ";
             cin >> seats;
@@ -577,7 +585,7 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
 
             cout << " " << "----------------------------------------------------" << "\n"
                  << "\n"
-                 << " " << "=====================================================" << "\n"
+                 << " " << "====================================================" << "\n"
                  << "\n"
                  << " " << "----------------------------------------------------" << "\n"
                  << " " << "[INFO] Entry No. " << i << " has been successfully saved" << "\n"
@@ -605,3 +613,216 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
         menuSelector = 31;
 }
 
+void viewFilms (int& menuSelector, vector<Film>& addedFilms) {
+
+    if (addedFilms.empty()) {
+
+        mainProgHeader ();
+
+        cout << " " << "HOME >> MODE SELECTION >> ADMIN MODE >> MANAGE FILMS >> VIEW FILMS" << "\n"
+             << endl;
+
+        cout << " " << "====================================================" << "\n"
+             << " " << "                     VIEW FILMS                     " << "\n"
+             << " " << "====================================================" << "\n"
+             << " " << "[ERROR] Unable to view. No films are added yet.     " << "\n"
+             << " " << "====================================================" << "\n"
+             << endl;
+
+        progStop();
+        clrscreen();
+        menuSelector = 31;
+    }
+
+    else {
+
+        mainProgHeader ();
+
+        cout << " " << "HOME >> MODE SELECTION >> ADMIN MODE >> MANAGE FILMS >> VIEW FILMS" << "\n"
+             << endl;
+
+        cout << " " << "====================================================" << "\n"
+             << " " << "                     VIEW FILMS                     " << "\n"
+             << " " << "====================================================" << "\n"
+             << " " << "[1] View All                                        " << "\n"
+             << " " << "[2] View Specific                                   " << "\n"
+             << " " << "[0] Manage Films                                    " << "\n"
+             << " " << "====================================================" << "\n"
+             << endl;
+
+        while (1) {
+
+            int userInput;
+            cout << " " << "[INPUT] Select Option: ";
+            cin >> userInput;
+                while (cin.fail()) {
+                    cin.clear();
+                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    inpErr();
+                    cout << " " << "[INPUT] Select Option: ";
+                    cin >> userInput;
+                }
+
+            if (userInput == 1) {
+
+                clrscreen();
+                mainProgHeader ();
+
+                cout << " " << "HOME >> MODE SELECTION >> ADMIN MODE >> MANAGE FILMS >> VIEW FILMS >> VIEW ALL" << "\n"
+                     << endl;
+
+                cout << " " << "====================================================" << "\n"
+                      << " " << "                     VIEW FILMS                     " << "\n"
+                      << " " << "====================================================" << "\n"
+                      << "\n"
+                      << " " << "----------------------------------------------------" << "\n"
+                      << " " << "[INFO] Showing all saved films                     " << "\n"
+                      << " " << "----------------------------------------------------" << "\n"
+                       << endl;
+
+                int vectorSize = addedFilms.size();
+
+                for (int i = 0; i < vectorSize ; i++) {
+
+                    int filmctr = i + 1;
+
+                    cout << " " << "----------------------------------------------------" << "\n"
+                         << " " << "[" << filmctr << "] Title : " << addedFilms[i].getTitle() << "\n";
+                    if (addedFilms[i].getStatus()) {
+                         cout << " " << "    Status: Active" << "\n";
+                    }
+                    else {
+                        cout << " " << "    Status: Inactive" << "\n";
+                    }
+                    cout << " " << "----------------------------------------------------" << "\n"
+                         << " " << "Film Title    : " << addedFilms[i].getTitle() << "\n"
+                         << " " << "Film Director : " << addedFilms[i].getDirector() << "\n"
+                         << " " << "Year Released : " << addedFilms[i].getYear() << "\n"
+                         << " " << "Ticket Price  : " << addedFilms[i].getPrice() << "\n"
+                         << " " << "Seats Alloted : " << addedFilms[i].getSeats() << "\n"
+                         << " " << "----------------------------------------------------" << "\n"
+                         << endl;
+                }
+
+                cout << " " << "====================================================" << "\n"
+                     << endl;
+
+                progStop();
+                clrscreen();
+                menuSelector = 31;
+                break;
+
+            }
+
+            else if (userInput == 2) {
+
+                clrscreen();
+                mainProgHeader ();
+
+                cout << " " << "HOME >> MODE SELECTION >> ADMIN MODE >> MANAGE FILMS >> VIEW FILMS >> VIEW SPECIFIC" << "\n"
+                     << endl;
+
+                cout << " " << "====================================================" << "\n"
+                     << " " << "                     VIEW FILMS                     " << "\n"
+                     << " " << "====================================================" << "\n"
+                     << "\n"
+                     << " " << "----------------------------------------------------" << "\n"
+                     << " " << "[INFO] Showing all film titles" << "\n"
+                     << " " << "----------------------------------------------------" << "\n"
+                     << endl;
+
+                int vectorSize = addedFilms.size();
+
+                for (int i = 0; i < vectorSize; i++) {
+
+                    int filmctr = i + 1;
+
+                    cout << " " << "----------------------------------------------------" << "\n"
+                         << " " << "[" << filmctr << "] Title: " << addedFilms[i].getTitle() << "\n";
+                    if (addedFilms[i].getStatus()) {
+                        cout << " " << "    Status: Active" << "\n";
+                    }
+                    else {
+                        cout << " " << "    Status: Inactive" << "\n";
+                    }
+                    cout << " " << "----------------------------------------------------" << "\n"
+                         << endl;
+                }
+
+                cout << " " << "====================================================" << "\n"
+                     << endl;
+
+                while (1) {
+
+                    int choice;
+                    cout << " " << "[INPUT] Select film using reference number: ";
+                    cin >> choice;
+                    while (cin.fail()) {
+                        cin.clear();
+                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        inpErr();
+                        cout << " " << "[INPUT] Select film using reference number: ";
+                        cin >> choice;
+                    }
+
+                    int movienum = choice - 1;
+
+                    if ((0 < choice) && (movienum < addedFilms.size())) {
+
+                        cout << "\n"
+                             << " " << "====================================================" << "\n"
+                             << endl;
+
+                        cout << " " << "----------------------------------------------------" << "\n";
+                        cout << " " << "[" << choice << "] Title: " << addedFilms[movienum].getTitle() << "\n";
+                        if (addedFilms[movienum].getStatus()) {
+                            cout << " " << "    Status: Active" << "\n";
+                        }
+                        else {
+                            cout << " " << "    Status: Inactive" << "\n";
+                        }
+                        cout << " " << "----------------------------------------------------" << "\n"
+                             << " " << "Film Title    : " << addedFilms[movienum].getTitle() << "\n"
+                             << " " << "Film Director : " << addedFilms[movienum].getDirector() << "\n"
+                             << " " << "Year Released : " << addedFilms[movienum].getYear() << "\n"
+                             << " " << "Ticket Price  : " << addedFilms[movienum].getPrice() << "\n"
+                             << " " << "Seats Alloted : " << addedFilms[movienum].getSeats() << "\n"
+                             << " " << "----------------------------------------------------" << "\n"
+                             << "\n"
+                             << " " << "====================================================" << "\n"
+                             << endl;
+
+
+                        progStop ();
+                        menuSelector = 31;
+                        clrscreen ();
+                        break;
+
+                    }
+                        else {
+
+                            inpErr();
+
+                        }
+
+                }
+
+                break;
+
+            }
+
+
+            else if (userInput == 0) {
+
+                menuSelector = 31;
+                clrscreen ();
+                break;
+
+            }
+
+            else {
+                inpErr();
+            }
+        }
+    }
+}

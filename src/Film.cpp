@@ -9,7 +9,7 @@ Film::~Film(){
 
 }
 
-Film::Film(string newTitle, string newDirector, int newYear, double newPrice, int newSeats){
+Film::Film(string newTitle, string newDirector, int newYear, int newPrice, int newSeats){
     StoredTitle = newTitle;
     StoredDirector = newDirector;
     StoredYear = newYear;
@@ -32,7 +32,7 @@ int Film::getYear() const{
     return StoredYear;
 }
 
-double Film::getPrice() const{
+int Film::getPrice() const{
     return StoredPrice;
 }
 
@@ -59,7 +59,7 @@ void Film::setYear(int newYear){
     StoredYear = newYear;
 }
 
-void Film::setPrice(double newPrice){
+void Film::setPrice(int newPrice){
     StoredPrice = newPrice;
 }
 
