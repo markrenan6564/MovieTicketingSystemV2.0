@@ -74,6 +74,8 @@ int main() {
 
     while (1) {
 
+        system("color 0e");
+
         if (menuSelector == -1) {
             programTerminator (menuSelector);
         }
@@ -123,6 +125,7 @@ int main() {
         }
 
         else {
+            
             parentMenu (menuSelector);
         }
 
@@ -230,6 +233,8 @@ void parentMenu (int& menuSelector) {
 }
 
 void programTerminator (int& menuSelector) {
+
+    system ("color 0c");
 
     mainProgHeader();
 
@@ -364,7 +369,7 @@ void adminLogin (int& menuSelector) {
 
                 if ((username == "admin") && (password == "password")) {
 
-
+                    system ("color 0b");
                     cout << " " << "[SYS] Login Successful" << endl;
 
                     progStop();
@@ -373,6 +378,7 @@ void adminLogin (int& menuSelector) {
                 }
                 else {
 
+                    system ("color 0c");
                     cout << " " << "[ERR] Login Unsuccessful | Wrong Credentials" << endl;
 
                     progStop ();
