@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <limits>
 #include <string>
+#include <conio.h>
 
 #include "Film.h"
 
@@ -125,7 +126,7 @@ int main() {
         }
 
         else {
-            
+
             parentMenu (menuSelector);
         }
 
@@ -146,6 +147,7 @@ void inpErr () {
 
     cout << " " << "[ERR] Invalid input. Please enter a valid value" << "\n"
          << endl;
+
 }
 
 void inpError () {
@@ -354,7 +356,8 @@ void adminLogin (int& menuSelector) {
                  << " " << "                    ADMIN LOGIN                     " << "\n"
                  << " " << "====================================================" << "\n";
 
-            string username, password;
+            string username;
+            char password [8];
 
             cin.clear();
             fflush(stdin);
@@ -362,14 +365,19 @@ void adminLogin (int& menuSelector) {
             cout << " " << "USERNAME: ";
             getline(cin, username);
             cout << " " << "PASSWORD: ";
-            getline (cin, password);
+            for(int i = 0 ; i < 8 ; i++) {
+                password[i]= getch();
+                printf("*");
+            }
+
+            cout << endl;
 
             cout << " " << "====================================================" << "\n"
                  << endl;
 
-                if ((username == "admin") && (password == "password")) {
+                if ((username == "admin") && (password[0] = 'p') && (password[1] = 'a') && (password[2] = 's') && (password[3] = 's') && (password[4] = 'w') && (password[5] = 'o') && (password[6] = 'r') && (password[7] = 'd')) {
 
-                    system ("color 0b");
+                    system ("color 0a");
                     cout << " " << "[SYS] Login Successful" << endl;
 
                     progStop();
@@ -549,7 +557,7 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
          << " " << "====================================================" << "\n"
          << " " << "[1] Add Film                                        " << "\n"
          << " " << "[0] Manage Films                                    " << "\n"
-         << " " << "====================================================" << "\n"         
+         << " " << "====================================================" << "\n"
          << endl;
 
     while (1) {
@@ -562,7 +570,7 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
             cinError();
             inpErr();
             cout << " " << "[INP] Select Option: ";
-            cin >> usersChoice;            
+            cin >> usersChoice;
         }
 
         if (usersChoice == 1) {
@@ -578,8 +586,8 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
 
             while (1) {
 
-                int desiredNum; 
-                
+                int desiredNum;
+
                 cout << " " << "[INP] Specify Number of Films to Add: ";
                 cin >> desiredNum;
                 while (cin.fail()) {
@@ -590,17 +598,17 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
                 }
 
                 if (desiredNum > 0) {
-                    
+
                     cout << " " << "[INF] You want to add " << desiredNum << "\n"
                          << " " << "====================================================" << "\n"
                          << "\n"
                          << " " << "[SYS] " << desiredNum << " films will be added" << "\n";
-                    
+
                     progStop();
                     clrscreen();
 
                     for (int ite = 0; ite < desiredNum; ite++) {
-                        
+
                         int displayRef = ite + 1;
 
                         string title, director;
@@ -663,14 +671,14 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
                             }
 
                         Film films(title, director, year, price, seats);
-                        CurrentFilms.push_back(films); 
+                        CurrentFilms.push_back(films);
 
                         cout << " " << "----------------------------------------------------" << "\n"
                              << "\n"
                              << " " << "====================================================" << "\n"
                              << "\n"
                              << " " << "[SYS] Current entry has been successfully saved" << endl;
-                             
+
                              progStop();
                              clrscreen();
                     }
@@ -682,7 +690,8 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
                     cout << " " << "====================================================" << "\n"
                          << " " << "                      ADD FILMS                     " << "\n"
                          << " " << "====================================================" << "\n"
-                         << " " << "[INF] " << desiredNum << " films has been successfully added" << "\n"
+                         << " " << "[INF] " << desiredNum
+                          << " films has been successfully added" << "\n"
                          << " " << "[SYS] Add sequence completed successfully" << "\n"
                          << " " << "====================================================" << "\n"
                          << endl;
@@ -699,13 +708,13 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
                         progStop();
                         break;
                 }
-                
+
                 else {
 
                     inpErr();
 
                 }
- 
+
             }
             clrscreen();
             menuSelector = 311;
@@ -714,7 +723,7 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
 
         else if (usersChoice == 0) {
 
-            clrscreen(); 
+            clrscreen();
             menuSelector = 31;
             break;
         }
@@ -898,22 +907,31 @@ void viewFilms (int& menuSelector, vector<Film>& addedFilms) {
 
                     if ((0 < choice) && (movienum < addedFilms.size())) {
 
-                        cout << "\n"
-                             << " " << "====================================================" << "\n"
-                             << endl;
+                        clrscreen();
+                        mainProgHeader();
+
+                        cout << " " << "HOME >> ADMIN MODE >> MANAGE FILMS >> VIEW FILMS >> VIEW SPECIFIC" << "\n";
+
+                        cout << " " << "====================================================" << "\n"
+                         << " " << "                     VIEW FILMS                     " << "\n"
+                         << " " << "====================================================" << "\n"
+                         << "\n"
+                         << " " << "----------------------------------------------------" << "\n"
+                         << " " << "[SYS] Showing Film \"" << addedFilms[movienum].getTitle() <<  "\"" << "\n"
+                         << " " << "----------------------------------------------------" << "\n";
 
                         cout << " " << "----------------------------------------------------" << "\n";
 
                         if (choice < 10) {
                             cout << " " << "[0" << choice << "] Title         : " << addedFilms[movienum].getTitle() << "\n";
-                        }                                       
+                        }
                         else {
                             cout << " " << "[" << choice << "] Title         : " << addedFilms[movienum].getTitle() << "\n";
                         }
-                        
+
                         if (addedFilms[movienum].getStatus()) {
                             cout << " " << "     Status        : Active" << "\n";
-                        }                      
+                        }
                         else {
                             cout << " " << "     Status        : Inactive" << "\n";
                         }
@@ -1687,12 +1705,12 @@ void deleteFilms (int& menuSelector, vector<Film>& availableFilms) {
              << " " << "                    DELETE FILMS                    " << "\n"
              << " " << "====================================================" << "\n"
              << " " << "[1] Delete Film                                     " << "\n"
-             << " " << "[0] Manage Films                                    " << "\n"             
+             << " " << "[0] Manage Films                                    " << "\n"
              << " " << "====================================================" << "\n"
              << endl;
-        
+
         while (1) {
-        
+
             int usersChoice;
 
             cout << " " << "[INP] Select Option: ";
@@ -1701,7 +1719,7 @@ void deleteFilms (int& menuSelector, vector<Film>& availableFilms) {
                 cinError();
                 inpErr;
                 cout << " " << "[INP] Select Option: ";
-                cin >> usersChoice;             
+                cin >> usersChoice;
             }
 
             if (usersChoice == 1) {
@@ -1725,11 +1743,11 @@ void deleteFilms (int& menuSelector, vector<Film>& availableFilms) {
                 int numFilms = availableFilms.size();
 
                 for (int realRef = 0; realRef < numFilms; realRef++) {
-                    
+
                     int filmRef = realRef + 1;
 
                     if (realRef < 9) {
-                        
+
                         cout << " " << "----------------------------------------------------" << "\n"
                              << " " << "[0" << filmRef << "] Title         : " << availableFilms[realRef].getTitle() << "\n";
 
@@ -1773,12 +1791,12 @@ void deleteFilms (int& menuSelector, vector<Film>& availableFilms) {
                     }
 
                 }
-                
+
                 cout << " " << "====================================================" << "\n"
                      << endl;
 
                 while (1) {
-                    
+
                     int usersChoice;
 
                     cout << " " << "[INP] Select a Film for Deletion: ";
@@ -1787,13 +1805,13 @@ void deleteFilms (int& menuSelector, vector<Film>& availableFilms) {
                         cinError();
                         inpErr();
                         cout << " " << "[INP] Select a Film for Deletion: ";
-                        cin >> usersChoice;                        
+                        cin >> usersChoice;
                     }
 
                     int realRef = usersChoice - 1;
 
                     if ((usersChoice > 0) && (usersChoice <= availableFilms.size())) {
-                        
+
                         cout << " " << "[INF] The Film \"" << availableFilms[realRef].getTitle() << "\" has been selected" << "\n"
                              << "\n"
                              << " " << "====================================================" << "\n"
