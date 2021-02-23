@@ -46,7 +46,6 @@ int main() {
                 Book Ticket = 11
                 Buy Movie Snacks = 12
 
-
             Admin Login = 2 | Page before going to Admin
 
                 Admin Mode = 3
@@ -767,8 +766,7 @@ void viewFilms (int& menuSelector, vector<Film>& addedFilms) {
             cout << " " << "[INP] Select Option: ";
             cin >> userInput;
                 while (cin.fail()) {
-                    cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                    cinError();
                     inpErr();
                     cout << " " << "[INP] Select Option: ";
                     cin >> userInput;
@@ -786,7 +784,7 @@ void viewFilms (int& menuSelector, vector<Film>& addedFilms) {
                       << " " << "====================================================" << "\n"
                       << "\n"
                       << " " << "----------------------------------------------------" << "\n"
-                      << " " << "[INF] Showing all saved films                     " << "\n"
+                      << " " << "[SYS] Showing all saved films                     " << "\n"
                       << " " << "----------------------------------------------------" << "\n"
                        << endl;
 
@@ -796,23 +794,28 @@ void viewFilms (int& menuSelector, vector<Film>& addedFilms) {
 
                     int filmctr = i + 1;
 
-                    cout << " " << "----------------------------------------------------" << "\n"
-                         << " " << "[" << filmctr << "] Title : " << addedFilms[i].getTitle() << "\n";
+                    cout << " " << "----------------------------------------------------" << "\n";
+
+                    if (i < 9) {
+                        cout << " " << "[0" << filmctr << "] Title         : " << addedFilms[i].getTitle() << "\n";
+                    }
+                    else {
+                        cout << " " << "[" << filmctr << "] Title         : " << addedFilms[i].getTitle() << "\n";
+                    }
 
                     if (addedFilms[i].getStatus()) {
-                         cout << " " << "    Status: Active" << "\n";
+                        cout << " " << "     Status        : Active" << "\n";
                     }
-
                     else {
-                        cout << " " << "    Status: Inactive" << "\n";
+                        cout << " " << "     Status        : Inactive" << "\n";
                     }
 
                     cout << " " << "----------------------------------------------------" << "\n"
-                         << " " << "Film Title    : " << addedFilms[i].getTitle() << "\n"
-                         << " " << "Film Director : " << addedFilms[i].getDirector() << "\n"
-                         << " " << "Year Released : " << addedFilms[i].getYear() << "\n"
-                         << " " << "Ticket Price  : " << addedFilms[i].getPrice() << "\n"
-                         << " " << "Seats Alloted : " << addedFilms[i].getSeats() << "\n"
+                         << " " << "     Film Title    : " << addedFilms[i].getTitle() << "\n"
+                         << " " << "     Film Director : " << addedFilms[i].getDirector() << "\n"
+                         << " " << "     Year Released : " << addedFilms[i].getYear() << "\n"
+                         << " " << "     Ticket Price  : " << addedFilms[i].getPrice() << "\n"
+                         << " " << "     Seats Alloted : " << addedFilms[i].getSeats() << "\n"
                          << " " << "----------------------------------------------------" << "\n"
                          << endl;
 
@@ -840,7 +843,7 @@ void viewFilms (int& menuSelector, vector<Film>& addedFilms) {
                      << " " << "====================================================" << "\n"
                      << "\n"
                      << " " << "----------------------------------------------------" << "\n"
-                     << " " << "[INF] Showing all film titles" << "\n"
+                     << " " << "[SYS] Showing all film titles" << "\n"
                      << " " << "----------------------------------------------------" << "\n"
                      << endl;
 
@@ -850,13 +853,21 @@ void viewFilms (int& menuSelector, vector<Film>& addedFilms) {
 
                     int filmctr = i + 1;
 
-                    cout << " " << "----------------------------------------------------" << "\n"
-                         << " " << "[" << filmctr << "] Title: " << addedFilms[i].getTitle() << "\n";
+                    cout << " " << "----------------------------------------------------" << "\n";
+
+                    if (i < 9) {
+                        cout << " " << "[0" << filmctr << "] Title         : " << addedFilms[i].getTitle() << "\n";
+                    }
+
+                    else {
+                        cout << " " << "[" << filmctr << "] Title         : " << addedFilms[i].getTitle() << "\n";
+                    }
+
                     if (addedFilms[i].getStatus()) {
-                        cout << " " << "    Status: Active" << "\n";
+                        cout << " " << "     Status        : Active" << "\n";
                     }
                     else {
-                        cout << " " << "    Status: Inactive" << "\n";
+                        cout << " " << "     Status        : Inactive" << "\n";
                     }
                     cout << " " << "----------------------------------------------------" << "\n"
                          << endl;
@@ -868,13 +879,12 @@ void viewFilms (int& menuSelector, vector<Film>& addedFilms) {
                 while (1) {
 
                     int choice;
-                    cout << " " << "[INP] Select film using reference number: ";
+                    cout << " " << "[INP] Select Film to View: ";
                     cin >> choice;
                     while (cin.fail()) {
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        cinError();
                         inpErr();
-                        cout << " " << "[INP] Select film using reference number: ";
+                        cout << " " << "[INP] Select Film to View: ";
                         cin >> choice;
                     }
 
@@ -887,19 +897,27 @@ void viewFilms (int& menuSelector, vector<Film>& addedFilms) {
                              << endl;
 
                         cout << " " << "----------------------------------------------------" << "\n";
-                        cout << " " << "[" << choice << "] Title: " << addedFilms[movienum].getTitle() << "\n";
-                        if (addedFilms[movienum].getStatus()) {
-                            cout << " " << "    Status: Active" << "\n";
-                        }
+
+                        if (choice < 10) {
+                            cout << " " << "[0" << choice << "] Title         : " << addedFilms[movienum].getTitle() << "\n";
+                        }                                       
                         else {
-                            cout << " " << "    Status: Inactive" << "\n";
+                            cout << " " << "[" << choice << "] Title         : " << addedFilms[movienum].getTitle() << "\n";
                         }
+                        
+                        if (addedFilms[movienum].getStatus()) {
+                            cout << " " << "     Status        : Active" << "\n";
+                        }                      
+                        else {
+                            cout << " " << "     Status        : Inactive" << "\n";
+                        }
+
                         cout << " " << "----------------------------------------------------" << "\n"
-                             << " " << "Film Title    : " << addedFilms[movienum].getTitle() << "\n"
-                             << " " << "Film Director : " << addedFilms[movienum].getDirector() << "\n"
-                             << " " << "Year Released : " << addedFilms[movienum].getYear() << "\n"
-                             << " " << "Ticket Price  : " << addedFilms[movienum].getPrice() << "\n"
-                             << " " << "Seats Alloted : " << addedFilms[movienum].getSeats() << "\n"
+                             << " " << "     Film Title    : " << addedFilms[movienum].getTitle() << "\n"
+                             << " " << "     Film Director : " << addedFilms[movienum].getDirector() << "\n"
+                             << " " << "     Year Released : " << addedFilms[movienum].getYear() << "\n"
+                             << " " << "     Ticket Price  : " << addedFilms[movienum].getPrice() << "\n"
+                             << " " << "     Seats Alloted : " << addedFilms[movienum].getSeats() << "\n"
                              << " " << "----------------------------------------------------" << "\n"
                              << "\n"
                              << " " << "====================================================" << "\n"
@@ -986,8 +1004,7 @@ void editFilms (int& menuSelector, vector<Film>& currentFilms) {
 
         while (cin.fail()) {
 
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cinError();
             inpErr();
             cout << " " << "[INP] Select Option: ";
             cin >> userChoice;
@@ -1049,8 +1066,7 @@ void editFilms (int& menuSelector, vector<Film>& currentFilms) {
                     cin >> userChoice;
 
                     while (cin.fail()) {
-                        cin.clear();
-                        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                        cinError();
                         inpErr();
                         cout << " " << "[INP] Select film to edit: ";
                         cin >> userChoice;
@@ -1134,8 +1150,7 @@ void editFilms (int& menuSelector, vector<Film>& currentFilms) {
                         cout << " " << "Ticket Price  : ";
                         cin >> price;
                             while (cin.fail()) {
-                                cin.clear();
-                                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                                cinError();
                                 inpError();
                                 cout << " " << "Ticket Price  : ";
                                 cin >> price;
@@ -1145,8 +1160,7 @@ void editFilms (int& menuSelector, vector<Film>& currentFilms) {
                         cout << " " << "Alloted Seats : ";
                         cin >> seats;
                             while (cin.fail()) {
-                                cin.clear();
-                                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                                cinError();
                                 inpError();
                                 cout << " " << "Alloted Seats : ";
                                 cin >> seats;
@@ -1270,7 +1284,7 @@ void deactivateFilms (int& menuSelector, vector<Film>& activeFilms) {
                             cout << " " << "====================================================" << "\n"
                                  << " " << "                  DEACTIVATE FILMS                  " << "\n"
                                  << " " << "====================================================" << "\n"
-                                 << " " << "[ERR] No films to deactivate" << "\n"
+                                 << " " << "[ERR] All films are deactivated" << "\n"
                                  << " " << "====================================================" << "\n"
                                  << endl;
 
@@ -1488,7 +1502,7 @@ void reactivateFilms (int& menuSelector, vector<Film>& inactiveFilms) {
                             cout << " " << "====================================================" << "\n"
                                  << " " << "                  REACTIVATE FILMS                  " << "\n"
                                  << " " << "====================================================" << "\n"
-                                 << " " << "[ERR] No films to reactivate" << "\n"
+                                 << " " << "[ERR] All films are activated" << "\n"
                                  << " " << "====================================================" << "\n"
                                  << endl;
 
