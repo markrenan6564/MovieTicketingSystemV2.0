@@ -70,5 +70,3 @@ void Film::setStatus(bool newStatus){
 void Film::setSeats(int newSeats){
     StoredSeats = newSeats;
 }
-
-
