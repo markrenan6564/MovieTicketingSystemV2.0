@@ -128,6 +128,7 @@ int main() {
         }
 
     }
+
 }
 
 void mainProgHeader () {
@@ -194,8 +195,7 @@ void parentMenu (int& menuSelector) {
         cout << " " << "[INP] Select Mode: ";
         cin >> input;
         while (cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cinError();
             inpErr();
             cout << " " << "[INP] Select Mode: ";
             cin >> input;
@@ -250,8 +250,7 @@ void programTerminator (int& menuSelector) {
         cout << " " << "[INP] Select Option: ";
         cin >> userinput;
             while (cin.fail()){
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cinError();
                 inpErr();
                 cout << " " << "[INP] Select Option: ";
                 cin >> userinput;
@@ -265,8 +264,11 @@ void programTerminator (int& menuSelector) {
             menuSelector = 0;
             break;
         }
+
         else{
+
             inpErr();
+
         }
 
     }
@@ -292,9 +294,8 @@ void mainMenu (int& menuSelector) {
         cout << " " << "[INP] Select Option: ";
         cin >> userInput;
         while (cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
-            inpErr ();
+            cinError();
+            inpErr();
             cout << " " << "[INP] Select Option: ";
             cin >> userInput;
         }
@@ -306,7 +307,9 @@ void mainMenu (int& menuSelector) {
 
         }
         else {
+
             inpErr();
+
         }
     }
 }
@@ -330,8 +333,7 @@ void adminLogin (int& menuSelector) {
         cout << " " << "[INP] Select Option: ";
         cin >> userInput;
             while (cin.fail()) {
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cinError();
                 inpErr();
                 cout << " " << "[INP] Select Option: ";
                 cin >> userInput;
@@ -364,10 +366,7 @@ void adminLogin (int& menuSelector) {
                 if ((username == "admin") && (password == "password")) {
 
 
-                    cout << " " << "----------------------------------------------------" << "\n"
-                         << " " << "[INF] Login Successful" << "\n"
-                         << " " << "----------------------------------------------------" << "\n"
-                         << endl;
+                    cout << " " << "[SYS] Login Successful" << endl;
 
                     progStop();
                     clrscreen ();
@@ -375,10 +374,7 @@ void adminLogin (int& menuSelector) {
                 }
                 else {
 
-                    cout << " " << "----------------------------------------------------" << "\n"
-                         << " " << "[ERR] Login Unsuccessful | Wrong Credentials" << "\n"
-                         << " " << "----------------------------------------------------" << "\n"
-                         << endl;
+                    cout << " " << "[ERR] Login Unsuccessful | Wrong Credentials" << endl;
 
                     progStop ();
                     clrscreen();
@@ -421,8 +417,7 @@ void adminMenu (int& menuSelector) {
         cout << " " << "[INP] Select Option: ";
         cin >> userInput;
         while (cin.fail()) {
-            cin.clear();
-            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cinError();
             inpErr();
             cout << " " << "[INP] Select Option: ";
             cin >> userInput;
@@ -485,8 +480,7 @@ void manageFilms (int& menuSelector) {
         cout << " " << "[INP] Select Option: ";
         cin >> userInput;
             while(cin.fail()) {
-                cin.clear();
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                cinError ();
                 inpErr ();
                 cout << " " << "[INP] Select Option: ";
                 cin >> userInput;
@@ -548,120 +542,188 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
     cout << " " << "====================================================" << "\n"
          << " " << "                      ADD FILMS                     " << "\n"
          << " " << "====================================================" << "\n"
+         << " " << "[1] Add Film                                        " << "\n"
+         << " " << "[0] Manage Films                                    " << "\n"
+         << " " << "====================================================" << "\n"         
          << endl;
 
-    int usernum;
-    cout << " " << "[INP] Specify number of films to add: ";
-    cin >> usernum;
+    while (1) {
 
-    while (cin.fail()) {
-        cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(),'\n');
-        inpErr();
-        cout << " " << "[INP] Specify number of films to add: ";
-        cin >> usernum;
+        int usersChoice;
+
+        cout << " " << "[INP] Select Option: ";
+        cin >> usersChoice;
+        while (cin.fail()) {
+            cinError();
+            inpErr();
+            cout << " " << "[INP] Select Option: ";
+            cin >> usersChoice;            
         }
 
-    cout << "\n"
-         << " " << "----------------------------------------------------" << "\n"
-         << " " << "[INF] You requested to add " << usernum << " films" << "\n"
-         << " " << "----------------------------------------------------" << "\n"
-         << "\n"
-         << " " << "====================================================" << "\n"
-         << endl;
+        if (usersChoice == 1) {
 
-    progStop();
-    clrscreen();
-
-    string title;
-    string director;
-    int year;
-    int price;
-    int seats;
-
-        for (int i = 1; i <= usernum; i++) {
-
+            clrscreen();
             mainProgHeader();
 
             cout << " " << "HOME >> ADMIN MODE >> MANAGE FILMS >> ADD FILMS" << "\n";
 
             cout << " " << "====================================================" << "\n"
                  << " " << "                      ADD FILMS                     " << "\n"
-                 << " " << "====================================================" << "\n"
-                 << endl;
+                 << " " << "====================================================" << endl;
 
-            cout << " " << "----------------------------------------------------" << "\n"
-                 << " " << "[INP] Adding " << i << " out of " << usernum << " films" << "\n"
-                 << " " << "----------------------------------------------------" << endl;
+            while (1) {
 
-            cout << " " << "Film Title     : ";
-            getline(cin, title);
-            cout << " " << "Film Director  : ";
-            getline (cin, director);
-            cout << " " << "Year Released  : ";
-            cin >> year;
-                while(cin.fail()) {
-                    cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                    inpError();
-                    cout << " " << "Year Released  : ";
-                    cin >> year;
-                }
-            cout << " " << "Ticket Price   : ";
-            cin >> price;
+                int desiredNum; 
+                
+                cout << " " << "[INP] Specify Number of Films to Add: ";
+                cin >> desiredNum;
                 while (cin.fail()) {
-                    cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                    inpError();
-                    cout << " " << "Ticket Price   : ";
-                    cin >> price;
-                }
-            cout << " " << "Alloted Seats  : ";
-            cin >> seats;
-                while (cin.fail()) {
-                    cin.clear();
-                    cin.ignore(numeric_limits<streamsize>::max(), '\n');
-                    inpError();
-                    cout << " " << "Available Seats: ";
-                    cin >> seats;
+                    cinError();
+                    inpErr();
+                    cout << " " << "[INP] Specify Number of Films to Add: ";
+                    cin >> desiredNum;
                 }
 
-            Film films(title, director, year, price, seats);
-            CurrentFilms.push_back(films);
+                if (desiredNum > 0) {
+                    
+                    cout << " " << "[INF] You want to add " << desiredNum << "\n"
+                         << " " << "====================================================" << "\n"
+                         << "\n"
+                         << " " << "[SYS] " << desiredNum << " films will be added" << "\n";
+                    
+                    progStop();
+                    clrscreen();
 
-            cout << " " << "----------------------------------------------------" << "\n"
-                 << "\n"
-                 << " " << "====================================================" << "\n"
-                 << "\n"
-                 << " " << "----------------------------------------------------" << "\n"
-                 << " " << "[INF] Entry No. " << i << " has been successfully saved" << "\n"
-                 << " " << "----------------------------------------------------" << "\n"
-                 << endl;
+                    for (int ite = 0; ite < desiredNum; ite++) {
+                        
+                        int displayRef = ite + 1;
 
-            progStop ();
-            clrscreen ();
+                        string title, director;
+                        int year, price, seats;
+
+                        mainProgHeader();
+
+                        cout << " " << "HOME >> ADMIN MODE >> MANAGE FILMS >> ADD FILMS" << "\n";
+
+                        cout << " " << "====================================================" << "\n"
+                             << " " << "                      ADD FILMS                     " << "\n"
+                             << " " << "====================================================" << "\n"
+                             << "\n"
+                             << " " << "[SYS] Adding films..." << "\n"
+                             << " " << "      " << displayRef << " of " << desiredNum << "\n"
+                             << endl;
+
+                        if (ite < 9) {
+                            cout << " " << "----------------------------------------------------" << "\n"
+                                 << " " << "[0" << displayRef << "] Enter film data" << "\n"
+                                 << " " << "----------------------------------------------------" << "\n";
+                        }
+                        else {
+                            cout << " " << "----------------------------------------------------" << "\n"
+                                 << " " << "[" << displayRef << "] Enter film data" << "\n"
+                                 << " " << "----------------------------------------------------" << "\n";
+
+                        }
+
+                        cout << " " << "     Film Title     : ";
+                        getline(cin, title);
+                        cout << " " << "     Film Director  : ";
+                        getline (cin, director);
+                        cout << " " << "     Year Released  : ";
+                        cin >> year;
+                            while(cin.fail()) {
+                                cinError();
+                                cout << "     ";
+                                inpError();
+                                cout << " " << "     Year Released  : ";
+                                cin >> year;
+                            }
+                        cout << " " << "     Ticket Price   : ";
+                        cin >> price;
+                            while (cin.fail()) {
+                                cinError();
+                                cout << "     ";
+                                inpError();
+                                cout << " " << "     Ticket Price   : ";
+                                cin >> price;
+                            }
+                        cout << " " << "     Alloted Seats  : ";
+                        cin >> seats;
+                            while (cin.fail()) {
+                                cinError();
+                                cout << "     ";
+                                inpError();
+                                cout << " " << "     Available Seats: ";
+                                cin >> seats;
+                            }
+
+                        Film films(title, director, year, price, seats);
+                        CurrentFilms.push_back(films); 
+
+                        cout << " " << "----------------------------------------------------" << "\n"
+                             << "\n"
+                             << " " << "====================================================" << "\n"
+                             << "\n"
+                             << " " << "[SYS] Current entry has been successfully saved" << endl;
+                             
+                             progStop();
+                             clrscreen();
+                    }
+
+                    mainProgHeader();
+
+                    cout << " " << "HOME >> ADMIN MODE >> MANAGE FILMS >> ADD FILMS" << "\n";
+
+                    cout << " " << "====================================================" << "\n"
+                         << " " << "                      ADD FILMS                     " << "\n"
+                         << " " << "====================================================" << "\n"
+                         << " " << "[INF] " << desiredNum << " films has been successfully added" << "\n"
+                         << " " << "[SYS] Add sequence completed successfully" << "\n"
+                         << " " << "====================================================" << "\n"
+                         << endl;
+
+                    progStop();
+                    break;
+                }
+
+                else if (desiredNum == 0) {
+                    cout << " " << "[ERR] 0 entered" << "\n"
+                         << " " << "====================================================" << "\n"
+                         << "\n"
+                         << " " << "[SYS] Cancelling add sequence" << endl;
+                        progStop();
+                        break;
+                }
+                
+                else {
+
+                    inpErr();
+
+                }
+ 
+            }
+            clrscreen();
+            menuSelector = 311;
+            break;
+        }
+
+        else if (usersChoice == 0) {
+
+            clrscreen(); 
+            menuSelector = 31;
+            break;
+        }
+
+        else {
+
+            inpErr();
 
         }
 
-        mainProgHeader();
+    }
 
-        cout << " " << "HOME >> ADMIN MODE >> MANAGE FILMS >> ADD FILMS" << "\n";
-
-        cout << " " << "====================================================" << "\n"
-             << " " << "                      ADD FILMS                     " << "\n"
-             << " " << "====================================================" << "\n"
-             << "\n"
-             << " " << "----------------------------------------------------" << "\n"
-             << " " << "[INF] Successfuly added " << usernum << " films" << "\n"
-             << " " << "----------------------------------------------------" << "\n"
-             << "\n"
-             << " " << "====================================================" << "\n"
-             << endl;
-
-        progStop();
-        clrscreen();
-        menuSelector = 31;
 }
+
 
 void viewFilms (int& menuSelector, vector<Film>& addedFilms) {
 
@@ -1712,12 +1774,11 @@ void deleteFilms (int& menuSelector, vector<Film>& availableFilms) {
 
                     if ((usersChoice > 0) && (usersChoice <= availableFilms.size())) {
                         
-                        cout << " " << "[INF] The Film \"" << availableFilms[realRef].getTitle() << " has been selected" << "\n"
+                        cout << " " << "[INF] The Film \"" << availableFilms[realRef].getTitle() << "\" has been selected" << "\n"
                              << "\n"
                              << " " << "====================================================" << "\n"
                              << "\n"
-                             << " " << "[SYS] The Film \"" << availableFilms[realRef].getTitle() << " has been successfully deleted" << "\n"
-                             << endl;
+                             << " " << "[SYS] The Film \"" << availableFilms[realRef].getTitle() << "\" has been successfully deleted" << endl;
 
                         availableFilms.erase(availableFilms.begin() + realRef);
 
