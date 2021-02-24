@@ -2263,10 +2263,10 @@ void viewSnacks (int& menuSelector, vector<Snack>& storedSnacks) {
                     cout << " " << "----------------------------------------------------" << "\n";
 
                     if (i < 9) {
-                        cout << " " << "[0" << prdctr << "] Product Name  : " << storedSnacks[i].getName() << "\n";
+                        cout << " " << "[0" << prdctr << "] Product Name  : " << storedSnacks[i].getName() << " - " << storedSnacks[i].getSize() << "\n";
                     }
                     else {
-                        cout << " " << "[" << prdctr << "] Product Name  : " << storedSnacks[i].getName() << "\n";
+                        cout << " " << "[" << prdctr << "] Product Name  : " << storedSnacks[i].getName() << " - " << storedSnacks[i].getSize() << "\n";
                     }
 
                     if (storedSnacks[i].getStatus()) {
@@ -2322,11 +2322,11 @@ void viewSnacks (int& menuSelector, vector<Snack>& storedSnacks) {
                     cout << " " << "----------------------------------------------------" << "\n";
 
                     if (i < 9) {
-                        cout << " " << "[0" << prdctr << "] Product Name  : " << storedSnacks[i].getName() << "\n";
+                        cout << " " << "[0" << prdctr << "] Product Name  : " << storedSnacks[i].getName() << " - " << storedSnacks[i].getSize() << "\n";
                     }
 
                     else {
-                        cout << " " << "[" << prdctr << "] Product Name  : " << storedSnacks[i].getName() << "\n";
+                        cout << " " << "[" << prdctr << "] Product Name  : " << storedSnacks[i].getName() << " - " << storedSnacks[i].getSize() << "\n";
                     }
 
                     if (storedSnacks[i].getStatus()) {
@@ -2375,17 +2375,17 @@ void viewSnacks (int& menuSelector, vector<Snack>& storedSnacks) {
                              << " " << "====================================================" << "\n"
                              << "\n"
                              << " " << "----------------------------------------------------" << "\n"
-                             << " " << "[SYS] Showing Snack \"" << storedSnacks[snacknum].getName() <<  "\"" << "\n"
+                             << " " << "[SYS] Showing Snack \"" << storedSnacks[snacknum].getName() << " - " << storedSnacks[snacknum].getSize() <<  "\"" << "\n"
                              << " " << "----------------------------------------------------" << "\n"
                              << endl;
 
                         cout << " " << "----------------------------------------------------" << "\n";
 
                         if (choice < 10) {
-                            cout << " " << "[0" << choice << "] Product Name  : " << storedSnacks[snacknum].getName() << "\n";
+                            cout << " " << "[0" << choice << "] Product Name  : " << storedSnacks[snacknum].getName() << " - " << storedSnacks[snacknum].getSize() << "\n";
                         }
                         else {
-                            cout << " " << "[" << choice << "] Product Name  : " << storedSnacks[snacknum].getName() << "\n";
+                            cout << " " << "[" << choice << "] Product Name  : " << storedSnacks[snacknum].getName() << " - " << storedSnacks[snacknum].getSize() << "\n";
                         }
 
                         if (storedSnacks[snacknum].getStatus()) {
@@ -2520,10 +2520,10 @@ void editSnacks (int& menuSelector, vector<Snack>& savedSnacks) {
                     cout << " " << "----------------------------------------------------" << "\n";
 
                     if (i < 9) {
-                        cout << " " << "[0" << refnumber << "] Product Name  : " << savedSnacks[i].getName() << "\n";
+                        cout << " " << "[0" << refnumber << "] Product Name  : " << savedSnacks[i].getName() << " - " << savedSnacks[i].getSize() << "\n";
                     }
                     else {
-                        cout << " " << "[" << refnumber << "] Product Name  : " << savedSnacks[i].getName() << "\n";
+                        cout << " " << "[" << refnumber << "] Product Name  : " << savedSnacks[i].getName() << " - " << savedSnacks[i].getSize() << "\n";
                     }
 
                     if (savedSnacks[i].getStatus()) {
@@ -2565,7 +2565,7 @@ void editSnacks (int& menuSelector, vector<Snack>& savedSnacks) {
 
                         int realref = userChoice - 1;
 
-                        cout << " " << "[INF] You selected snack \"" << savedSnacks[realref].getName() << "\"" << "\n"
+                        cout << " " << "[INF] You selected snack \"" << savedSnacks[realref].getName() << " - " << savedSnacks[realref].getSize() << "\"" << "\n"
                              << "\n"
                              << " " "====================================================" << "\n"
                              << "\n"
@@ -2595,11 +2595,11 @@ void editSnacks (int& menuSelector, vector<Snack>& savedSnacks) {
                              << " " << "----------------------------------------------------" << endl;
 
                         if (userChoice < 10) {
-                        cout << " " << "[0" << userChoice << "] Product Name  : " << savedSnacks[realref].getName() << "\n";
+                        cout << " " << "[0" << userChoice << "] Product Name  : " << savedSnacks[realref].getName() << " - " << savedSnacks[realref].getSize() << "\n";
                         }
 
                         else {
-                        cout << " " << "[" << userChoice << "] Product Name  : " << savedSnacks[realref].getName() << "\n";
+                        cout << " " << "[" << userChoice << "] Product Name  : " << savedSnacks[realref].getName() << " - " << savedSnacks[realref].getSize() << "\n";
                         }
 
                         if (savedSnacks[realref].getStatus()) {
@@ -2623,11 +2623,11 @@ void editSnacks (int& menuSelector, vector<Snack>& savedSnacks) {
                              << " " << "----------------------------------------------------" << endl;
 
                         if (userChoice < 10) {
-                            cout << " " << "[0" << userChoice << "] Product Name  : " << savedSnacks[realref].getName() << "\n";
+                            cout << " " << "[0" << userChoice << "] Product Name  : " << savedSnacks[realref].getName() << " - " << savedSnacks[realref].getSize() << "\n";
                         }
 
                         else {
-                            cout << " " << "[" << userChoice << "] Product Name  : " << savedSnacks[realref].getName() << "\n";
+                            cout << " " << "[" << userChoice << "] Product Name  : " << savedSnacks[realref].getName() << " - " << savedSnacks[realref].getSize() << "\n";
                         }
 
                         if (savedSnacks[realref].getStatus()) {
