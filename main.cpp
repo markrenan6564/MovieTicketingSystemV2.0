@@ -5,6 +5,7 @@
 #include <string>
 
 #include "Film.h"
+#include "Snack.h"
 
 
 using namespace std;
@@ -902,7 +903,7 @@ void viewFilms (int& menuSelector, vector<Film>& addedFilms) {
                         cin >> choice;
                     }
 
-                    
+
 
                     int movienum = choice - 1;
 
@@ -1072,7 +1073,7 @@ void editFilms (int& menuSelector, vector<Film>& currentFilms) {
 
                     if (i < 9) {
                         cout << " " << "[0" << refnumber << "] Title         : " << currentFilms[i].getTitle() << "\n";
-                    }                                          
+                    }
                     else {
                         cout << " " << "[" << refnumber << "] Title          : " << currentFilms[i].getTitle() << "\n";
                     }
@@ -1116,7 +1117,7 @@ void editFilms (int& menuSelector, vector<Film>& currentFilms) {
                     if ((userChoice > 0) && (userChoice <= currentFilms.size())) {
 
                         int realref = userChoice - 1;
-                        
+
                         cout << " " << "[INF] You selected the film \"" << currentFilms[realref].getTitle() << "\"" << "\n"
                              << "\n"
                              << " " "====================================================" << "\n"
@@ -1132,7 +1133,7 @@ void editFilms (int& menuSelector, vector<Film>& currentFilms) {
                         cout << " " << "====================================================" << "\n"
                              << " " << "                     EDIT FILMS                     " << "\n"
                              << " " << "====================================================" << "\n"
-                             << endl;                       
+                             << endl;
 
                         string title, director;
                         int year, price, seats;
