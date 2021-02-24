@@ -36,9 +36,11 @@
 		</Compiler>
 		<Unit filename="include/Film.h" />
 		<Unit filename="include/Snack.h" />
+		<Unit filename="include/Transaction.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Film.cpp" />
 		<Unit filename="src/Snack.cpp" />
+		<Unit filename="src/Transaction.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>

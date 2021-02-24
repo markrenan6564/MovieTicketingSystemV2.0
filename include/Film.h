@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -41,6 +42,7 @@ class Film
         int     StoredPrice;
         bool    StoredStatus;
         int     StoredSeats;
+
 };
 
 #endif // FILM_H

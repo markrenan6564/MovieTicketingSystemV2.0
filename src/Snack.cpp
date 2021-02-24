@@ -17,7 +17,9 @@ Snack::Snack(string newName, string newSize, int newPrice, int newQuantity){
     StoredStatus = true;
 }
 
-
+string Snack::getProduct () const {
+    return StoredName + " - " + StoredSize;
+}
 
 string Snack::getName() const{
     return StoredName;

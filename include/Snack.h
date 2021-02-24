@@ -21,6 +21,7 @@ class Snack
         //Accessor Functions
         string  getName() const;
         string  getSize() const;
+        string  getProduct() const;
         int     getPrice() const;
         int     getQuantity() const;
         bool    getStatus() const;

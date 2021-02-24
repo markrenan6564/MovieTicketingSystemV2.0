@@ -6,12 +6,14 @@
 
 #include "Film.h"
 #include "Snack.h"
+#include "Transaction.h"
 
 
 using namespace std;
 
 static vector<Film> SavedFilms;
 static vector<Snack> SavedSnacks;
+static vector<Transaction> transactionTracker;
 
 static vector<string> adminCredentials;
 
@@ -29,6 +31,9 @@ static vector<string> adminCredentials;
     void programTerminator (int&);
 
     void mainMenu (int&);
+
+    void bookMovie (int&, vector<Film>&, vector<Transaction>&);
+    void buySnacks (int&, vector<Snack>&, vector<Transaction>&);
 
     void adminLogin (int&, vector<string>&);
     void adminMenu (int&);
@@ -50,6 +55,8 @@ static vector<string> adminCredentials;
     void deactivateSnacks (int&, vector<Snack>&);
     void reactivateSnacks (int&, vector<Snack>&);
     void deleteSnacks (int&, vector<Snack>&);
+
+    void viewSales (int&, vector<int>&);
 
     void accountSettings (int&, vector<string>&);
 
@@ -87,7 +94,7 @@ int main() {
                         Reactivate Snacks = 325
                         Delete Snacks = 326
 
-                    Sales = 33
+                    View Sales = 33
                         View Sales = 331
 
                     Account Settings = 34
@@ -178,6 +185,10 @@ int main() {
 
         else if (menuSelector == 34) {
             accountSettings (menuSelector, adminCredentials);
+        }
+
+        else if (menuSelector == 12) {
+            buySnacks (menuSelector, SavedSnacks, transactionTracker);
         }
 
         else {
@@ -347,7 +358,8 @@ void mainMenu (int& menuSelector) {
     cout << " " << "====================================================" << "\n"
          << " " << "                      MAIN MODE                     " << "\n"
          << " " << "====================================================" << "\n"
-         << " " << "[ERR] Program under development. :<               " << "\n"
+         << " " << "[1] Book Movie                                      " << "\n"
+         << " " << "[2] Buy Movie Snacks                                " << "\n"
          << " " << "[0] Mode Selection                                  " << "\n"
          << " " << "====================================================" << "\n"
          << endl;
@@ -370,6 +382,23 @@ void mainMenu (int& menuSelector) {
             break;
 
         }
+        
+        else if (userInput == 1) {
+
+            clrscreen();
+            menuSelector = 11;
+            break;
+
+        }
+
+        else if (userInput == 2) {
+
+            clrscreen();
+            menuSelector = 12;
+            break;
+
+        }
+        
         else {
 
             inpErr();
@@ -474,7 +503,7 @@ void adminMenu (int& menuSelector) {
          << " " << "====================================================" << "\n"
          << " " << "[1] Manage Films                                    " << "\n"
          << " " << "[2] Manage Snacks                                   " << "\n"
-         << " " << "[3] Sales                                           " << "\n"
+         << " " << "[3] Manage Sales                                    " << "\n"
          << " " << "[4] Account Settings                                " << "\n"
          << " " << "[0] Mode Selection                                  " << "\n"
          << " " << "====================================================" << "\n"
@@ -490,7 +519,7 @@ void adminMenu (int& menuSelector) {
             cout << " " << "[INP] Select Option: ";
             cin >> userInput;
         }
-        
+
         if (userInput == 1){
 
             clrscreen();
@@ -605,6 +634,7 @@ void manageFilms (int& menuSelector) {
             menuSelector = 3;
             break;
         }
+        
         else {
             inpErr();
         }
@@ -3245,7 +3275,7 @@ void deleteSnacks (int& menuSelector, vector<Snack>& savedSnacks) {
                     else {
                         cout << " " << "[" << snacksRef << "] Snack         : " << savedSnacks[realRef].getName() << " - " << savedSnacks[realRef].getSize() << "\n";
                     }
-                                           
+
                     if (savedSnacks[realRef].getStatus()) {
                         cout << " " << "     Status        : Active" <<"\n";
                     }
@@ -3325,6 +3355,10 @@ void deleteSnacks (int& menuSelector, vector<Snack>& savedSnacks) {
 
 }
 
+void viewSales (int& menuSelector, vector<int>& salesCounter) {
+
+}
+
 void accountSettings (int& menuSelector, vector<string>& adminCredentials) {
 
     mainProgHeader();
@@ -3344,12 +3378,12 @@ void accountSettings (int& menuSelector, vector<string>& adminCredentials) {
     getline (cin, pass);
 
     if ((user == adminCredentials[0]) && (pass == adminCredentials[1])) {
-        
+
         system ("color 0a");
         cout << " " << "====================================================" << "\n"
              << "\n"
              << " " << "[SYS] Login Successful" << endl;
-        
+
         progStop();
 
         clrscreen();
@@ -3363,7 +3397,7 @@ void accountSettings (int& menuSelector, vector<string>& adminCredentials) {
              << " " << "[0] Admin Mode                                      " << "\n"
              << " " << "====================================================" << "\n"
              << endl;
-        
+
         while (1) {
 
             int usersChoice;
@@ -3398,21 +3432,21 @@ void accountSettings (int& menuSelector, vector<string>& adminCredentials) {
                 getline (cin, repnewUser);
 
                 if (newUser == repnewUser) {
-                    
+
                     cout << " " << "====================================================" << "\n"
                          << endl;
-                    
+
                     cout << " " << "[SYS] Username successfully changed" << endl;
 
                     adminCredentials[0] = newUser;
-                
+
                 }
 
                 else {
 
                     cout << " " << "====================================================" << "\n"
                          << endl;
-                    
+
                     cout << " " << "[ERR] Process unsuccessful" << endl;
 
                 }
@@ -3446,21 +3480,21 @@ void accountSettings (int& menuSelector, vector<string>& adminCredentials) {
                 getline (cin, repnewPass);
 
                 if (newPass == repnewPass) {
-                    
+
                     cout << " " << "====================================================" << "\n"
                          << endl;
-                    
+
                     cout << " " << "[SYS] Password successfully changed" << endl;
 
                     adminCredentials[1] = newPass;
-                
+
                 }
 
                 else {
 
                     cout << " " << "====================================================" << "\n"
                          << endl;
-                    
+
                     cout << " " << "[ERR] Process unsuccessful" << endl;
 
                 }
@@ -3475,7 +3509,7 @@ void accountSettings (int& menuSelector, vector<string>& adminCredentials) {
             }
 
             else if (usersChoice == 0) {
-                
+
                 clrscreen();
                 menuSelector = 3;
                 break;
@@ -3483,7 +3517,7 @@ void accountSettings (int& menuSelector, vector<string>& adminCredentials) {
             }
 
             else {
-                
+
                 inpErr();
 
             }
@@ -3498,13 +3532,314 @@ void accountSettings (int& menuSelector, vector<string>& adminCredentials) {
         cout << " " << "====================================================" << "\n"
              << "\n"
              << " " << "[ERR] Login Unsuccessful | Wrong Credentials" << endl;
-        
+
         progStop();
         clrscreen();
         menuSelector = 3;
 
     }
-       
+
 }
 
+void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transaction>& salesCounter) {
 
+    if (savedSnacks.empty()) {
+
+        mainProgHeader();
+
+        cout << " " << "HOME >> MAIN MODE >> BUY MOVIE SNACKS" << "\n"
+             << " " << "====================================================" << "\n"
+             << " " << "                    MOVIE SNACKS                    " << "\n"
+             << " " << "====================================================" << "\n"
+             << " " << "[ERR] No snacks available for selling               " << "\n"
+             << " " << "====================================================" << "\n"
+             << endl;
+        
+        progStop();
+        clrscreen();
+        menuSelector = 1;
+
+    }
+
+    else {
+
+        mainProgHeader();
+
+        cout << " " << "HOME >> MAIN MODE >> BUY MOVIE SNACKS" << "\n"
+             << " " << "====================================================" << "\n"
+             << " " << "                    MOVIE SNACKS                    " << "\n"
+             << " " << "====================================================" << "\n"
+             << " " << "[1] Buy Snacks                                      " << "\n"
+             << " " << "[0] Main Mode                                       " << "\n"
+             << " " << "====================================================" << "\n"
+             << endl;
+        
+        while (1) {
+
+            int menuChoice;
+
+            cout << " " << "[INP] Select Option: ";
+            cin >> menuChoice;
+            while (cin.fail()) {
+                cinError();
+                inpErr();
+            cout << " " << "[INP] Select Option: ";
+            cin >> menuChoice;                
+            }
+
+            if (menuChoice == 1) {
+                
+                int numSnacks = savedSnacks.size();
+                int verifier = 0;
+                int displayRef = 1;
+
+                for (int i = 0; i < numSnacks; i++) {
+
+                    if ((savedSnacks[i].getStatus()) && (savedSnacks[i].getQuantity() > 0)) {
+                        verifier = verifier + 1;
+                    }
+
+                }
+
+                if (verifier == 0) {
+
+                    clrscreen();
+
+                    mainProgHeader();
+
+                    cout << " " << "HOME >> MAIN MODE >> BUY MOVIE SNACKS" << "\n"
+                        << " " << "====================================================" << "\n"
+                        << " " << "                    MOVIE SNACKS                    " << "\n"
+                        << " " << "====================================================" << "\n"
+                        << " " << "[ERR] No snacks available for selling               " << "\n"
+                        << " " << "====================================================" << "\n"
+                        << endl;
+
+                        progStop();
+
+                }
+
+                else {
+
+                    clrscreen();
+
+                    mainProgHeader();
+
+                    cout << " " << "HOME >> MAIN MODE >> BUY MOVIE SNACKS" << "\n"
+                         << " " << "====================================================" << "\n"
+                         << " " << "                    MOVIE SNACKS                    " << "\n"
+                         << " " << "====================================================" << "\n"
+                         << "\n"
+                         << " " << "----------------------------------------------------" << "\n"
+                         << " " << "[SYS] Showing all snacks available                  " << "\n"
+                         << " " << "----------------------------------------------------" << "\n"
+                         << endl;
+                    
+                    displayRef = 0;
+                    
+                    for (int i = 0; i < numSnacks; i++) {
+                        
+                        displayRef = displayRef + 1;
+
+
+                        if (!savedSnacks[i].getStatus()) {
+                            cout << " " << "----------------------------------------------------" << "\n";
+                            if (displayRef < 10) {
+                            cout << " " << "[0" << displayRef << "] Product       : " << savedSnacks[i].getProduct() << "\n";
+                            }                                       
+                            else {
+                            cout << " " << "[" <<  displayRef << "] Product       : " << savedSnacks[i].getProduct() << "\n";    
+                            }                    
+                            cout << " " << "     Status        : Not Available                  " << "\n";
+                            cout << " " << "----------------------------------------------------" << "\n";
+                            cout << endl;
+                        }
+
+                        else if (savedSnacks[i].getQuantity() <= 0) {
+                            cout << " " << "----------------------------------------------------" << "\n";
+                            if (displayRef < 10) {
+                            cout << " " << "[0" << displayRef << "] Product       : " << savedSnacks[i].getProduct() << "\n";
+                            }
+                            else {
+                            cout << " " << "[" <<  displayRef << "] Product       : " << savedSnacks[i].getProduct() << "\n";    
+                            }
+                            cout << " " << "     Status        : Out of Stock                   " << "\n";
+                            cout << " " << "----------------------------------------------------" << "\n";
+                            cout << endl;
+                        }
+
+                        else {
+
+                           cout << " " << "----------------------------------------------------" << "\n";
+                            if (displayRef < 10) {
+                            cout << " " << "[0" << displayRef << "] Product       : " << savedSnacks[i].getProduct() << "\n";
+                            }
+                            else {
+                            cout << " " << "[" <<  displayRef << "] Product       : " << savedSnacks[i].getProduct() << "\n";    
+                            }
+                            cout << " " << "     Status        : Available                      " << "\n";
+                            cout << " " << "----------------------------------------------------" << "\n";
+                            cout << " " << "     Product Name  : " << savedSnacks[i].getName() << "\n"
+                                 << " " << "     Product Size  : " << savedSnacks[i].getSize() << "\n"
+                                 << " " << "     Product Price : " << savedSnacks[i].getPrice() << "\n"
+                                 << " " << "     Quantity      : " << savedSnacks[i].getQuantity() << "\n"
+                                 << " " << "----------------------------------------------------" << "\n"
+                                 << endl;
+
+                        }
+
+                    }
+
+                    cout << " " << "====================================================" << "\n"
+                         << endl;
+                    
+                    while (1) {
+
+                        int usersChosen;
+                        cout << " " << "[INP] Select a Snack to Buy: ";
+                        cin >> usersChosen;
+                        while (cin.fail()){
+                            cinError();
+                            inpErr();
+                            cout << " " << "[INP] Select a Snack to Buy: ";
+                            cin >> usersChosen;
+                        }
+
+                        int realRef = usersChosen - 1;
+
+                        if ((savedSnacks[realRef].getStatus()) && (savedSnacks[realRef].getQuantity() > 0)) {
+                            
+                            cout << " " << "[INF] You selected " << savedSnacks[realRef].getProduct() << "\n"
+                                 << "\n"
+                                 << " " << "====================================================" << "\n"
+                                 << "\n"
+                                 << " " << "[SYS] Buying sequence initialized" << "\n";
+
+                                progStop();
+                                clrscreen();
+                                mainProgHeader();
+
+                                cout << " " << "HOME >> MAIN MODE >> BUY MOVIE SNACKS" << "\n"
+                                     << " " << "====================================================" << "\n"
+                                     << " " << "                    MOVIE SNACKS                    " << "\n"
+                                     << " " << "====================================================" << "\n"
+                                     << "\n"
+                                     << " " << "[SYS] Buying Product " << savedSnacks[realRef].getProduct() << "\n"
+                                     << endl;
+
+                                cout << " " << "----------------------------------------------------" << "\n";
+                                    if (displayRef < 10) {
+                                    cout << " " << "[0" << displayRef << "] Product       : " << savedSnacks[realRef].getProduct() << "\n";
+                                    }
+                                    else {
+                                    cout << " " << "[" <<  displayRef << "] Product       : " << savedSnacks[realRef].getProduct() << "\n";    
+                                    }
+                                cout << " " << "     Status        : Available                      " << "\n";
+                                cout << " " << "----------------------------------------------------" << "\n";
+                                cout << " " << "     Product Name  : " << savedSnacks[realRef].getName() << "\n"
+                                     << " " << "     Product Size  : " << savedSnacks[realRef].getSize() << "\n"
+                                     << " " << "     Product Price : " << savedSnacks[realRef].getPrice() << "\n"
+                                     << " " << "     Quantity      : " << savedSnacks[realRef].getQuantity() << "\n"
+                                     << " " << "----------------------------------------------------" << "\n"
+                                     << "\n"
+                                     << " " << "====================================================" << "\n"
+                                     << endl;
+
+                                     while (1) {
+
+                                        int quantity;
+
+                                        cout << " " << "[INP] Enter how many " << savedSnacks[realRef].getProduct() << " you want to Buy: ";
+                                        cin >> quantity;
+                                        while (cin.fail()) {
+                                            cinError();
+                                            inpErr();
+                                        cout << " " << "[INP] Enter how many " << savedSnacks[realRef].getProduct() << " you want to Buy: ";
+                                        cin >> quantity;                                            
+                                        }
+
+                                        if (quantity <= savedSnacks[realRef].getQuantity() && (quantity >=0)) {
+
+
+                                            cout << " " << "[INF] You want to buy " << quantity << "\n"
+                                                 << "\n"
+                                                 << " " << "====================================================" << "\n"
+                                                 << "\n"
+                                                 << " " << "[SYS] Buying..." << "\n"
+                                                 << " " << "[SYS] Purchase complete " << "\n"
+                                                 << "\n"
+                                                 << " " << "====================================================" << "\n"
+                                                 << endl;
+                                                
+                                            int total = savedSnacks[realRef].getPrice() * quantity;
+
+                                            cout << " " << "----------------------------------------------------" << "\n"
+                                                 << " " << "[SYS] Receipt" << "\n"
+                                                 << " " << "----------------------------------------------------" << "\n"
+                                                 << " " << "      Product      : " << savedSnacks[realRef].getProduct() << "\n"
+                                                 << " " << "      Price        : " << savedSnacks[realRef].getPrice() << "\n"
+                                                 << " " << "      Quantity     : " << quantity << "\n"
+                                                 << " " << "      Total Amount : " << total << "\n"
+                                                 << " " << "----------------------------------------------------" << "\n"
+                                                 << "\n"
+                                                 << " " << "====================================================" << "\n"
+                                                 << "\n"
+                                                 << " " << "[SYS] Buy Sequence Completed " << endl;
+
+                                                savedSnacks[realRef].setQuantity(savedSnacks[realRef].getQuantity() - quantity);
+
+                                                Transaction transaction("Snack", savedSnacks[realRef].getProduct(), quantity, total);
+                                                transactionTracker.push_back(transaction);
+
+                                                progStop();
+
+                                            break;
+
+                                        }
+                                        
+                                        else {
+
+                                            inpErr();
+
+                                        }
+
+                                    }                                     
+
+                            break;
+                        }
+
+                        else {
+
+                            inpErr();
+
+                        }
+
+                    }
+
+                }
+
+                clrscreen();
+                menuSelector = 12;
+                break;
+
+            }
+
+            else if (menuChoice == 0) {
+
+                clrscreen();
+                menuSelector = 1;
+                break;
+
+            }
+
+            else {
+
+                inpErr();
+
+            }
+
+        }
+
+    }
+
+}
