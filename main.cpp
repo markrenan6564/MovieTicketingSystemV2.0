@@ -13,6 +13,8 @@ using namespace std;
 static vector<Film> SavedFilms;
 static vector<Snack> SavedSnacks;
 
+static vector<string> adminCredentials;
+
 // Funtion Declarations
 
     void mainProgHeader ();
@@ -28,8 +30,10 @@ static vector<Snack> SavedSnacks;
 
     void mainMenu (int&);
 
-    void adminLogin (int&);
+    void adminLogin (int&, vector<string>&);
     void adminMenu (int&);
+
+    void accountSettings (int&, vector<string>&);
 
     void manageFilms (int&);
     void addFilms (int&, vector<Film>&);
@@ -47,6 +51,8 @@ static vector<Snack> SavedSnacks;
     void reactivateSnacks (int&, vector<Snack>&);
     void deleteSnacks (int&, vector<Snack>&);
 
+    void accountSettings (int&, vector<string>&);
+
 
 int main() {
 
@@ -55,9 +61,9 @@ int main() {
     INDEX for Menu Selector
     A comprehensive guide by Mark Renan
 
-        Program Terminator = -1
+        Program Terminator = -2
 
-        ParentMenu = 0
+        ParentMenu = -1
             Main Mode = 1
                 Book Ticket = 11
                 Buy Movie Snacks = 12
@@ -84,6 +90,8 @@ int main() {
                     Sales = 33
                         View Sales = 331
 
+                    Account Settings = 34
+
 */
 
     int menuSelector;
@@ -92,11 +100,11 @@ int main() {
 
         system("color 0e");
 
-        if (menuSelector == -1) {
+        if (menuSelector == -2) {
             programTerminator (menuSelector);
         }
 
-        else if (menuSelector == 0) {
+        else if (menuSelector == -1) {
             parentMenu (menuSelector);
         }
 
@@ -105,7 +113,7 @@ int main() {
         }
 
         else if (menuSelector == 2) {
-            adminLogin (menuSelector);
+            adminLogin (menuSelector, adminCredentials);
         }
 
         else if (menuSelector == 3) {
@@ -168,7 +176,15 @@ int main() {
             deleteSnacks (menuSelector, SavedSnacks);
         }
 
+        else if (menuSelector == 34) {
+            accountSettings (menuSelector, adminCredentials);
+        }
+
         else {
+
+            adminCredentials.push_back("admin");
+            adminCredentials.push_back("password");
+
             parentMenu (menuSelector);
         }
 
@@ -264,7 +280,7 @@ void parentMenu (int& menuSelector) {
         else if (input == 0) {
 
             clrscreen ();
-            menuSelector = -1;
+            menuSelector = -2;
             break;
         }
 
@@ -309,7 +325,7 @@ void programTerminator (int& menuSelector) {
         if (userinput == 0) {
 
             clrscreen();
-            menuSelector = 0;
+            menuSelector = -1;
             break;
         }
 
@@ -350,7 +366,7 @@ void mainMenu (int& menuSelector) {
         if (userInput == 0) {
 
             clrscreen();
-            menuSelector = 0;
+            menuSelector = -1;
             break;
 
         }
@@ -362,7 +378,7 @@ void mainMenu (int& menuSelector) {
     }
 }
 
-void adminLogin (int& menuSelector) {
+void adminLogin (int& menuSelector, vector<string>& adminCredentials) {
 
     mainProgHeader ();
 
@@ -404,15 +420,15 @@ void adminLogin (int& menuSelector) {
             cin.clear();
             fflush(stdin);
 
-            cout << " " << "USERNAME: ";
+            cout << " " << "USERNAME : ";
             getline(cin, username);
-            cout << " " << "PASSWORD: ";
+            cout << " " << "PASSWORD : ";
             getline(cin, password);
 
             cout << " " << "====================================================" << "\n"
                  << endl;
 
-                if ((username == "admin") && (password == "password")) {
+                if ((username == adminCredentials[0]) && (password == adminCredentials[1])) {
 
                     system ("color 0a");
                     cout << " " << "[SYS] Login Successful" << endl;
@@ -437,7 +453,7 @@ void adminLogin (int& menuSelector) {
         else if (userInput == 0) {
 
             clrscreen();
-            menuSelector = 0;
+            menuSelector = -1;
             break;
         }
 
@@ -459,6 +475,7 @@ void adminMenu (int& menuSelector) {
          << " " << "[1] Manage Films                                    " << "\n"
          << " " << "[2] Manage Snacks                                   " << "\n"
          << " " << "[3] Sales                                           " << "\n"
+         << " " << "[4] Account Settings                                " << "\n"
          << " " << "[0] Mode Selection                                  " << "\n"
          << " " << "====================================================" << "\n"
          << endl;
@@ -473,22 +490,32 @@ void adminMenu (int& menuSelector) {
             cout << " " << "[INP] Select Option: ";
             cin >> userInput;
         }
+        
         if (userInput == 1){
 
             clrscreen();
             menuSelector = 31;
             break;
         }
+
         else if (userInput == 2) {
 
             clrscreen();
             menuSelector = 32;
             break;
         }
+
         else if (userInput == 3) {
 
             clrscreen();
             menuSelector = 33;
+            break;
+        }
+
+        else if (userInput == 4) {
+
+            clrscreen();
+            menuSelector = 34;
             break;
         }
 
@@ -668,7 +695,7 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
                              << " " << "      " << displayRef << " of " << desiredNum << "\n"
                              << endl;
 
-                        if (accumulated < 9) {
+                        if (accumulated < 10) {
                             cout << " " << "----------------------------------------------------" << "\n"
                                  << " " << "[0" << accumulated << "] Enter film data" << "\n"
                                  << " " << "----------------------------------------------------" << "\n";
@@ -2102,7 +2129,7 @@ void addSnacks (int& menuSelector, vector<Snack>& currentSnacks) {
                              << " " << "      " << displayRef << " of " << desiredNum << "\n"
                              << endl;
 
-                        if (accumulated < 9) {
+                        if (accumulated < 10) {
                             cout << " " << "----------------------------------------------------" << "\n"
                                  << " " << "[0" << accumulated << "] Enter snack data" << "\n"
                                  << " " << "----------------------------------------------------" << "\n";
@@ -3296,6 +3323,188 @@ void deleteSnacks (int& menuSelector, vector<Snack>& savedSnacks) {
 
     }
 
+}
+
+void accountSettings (int& menuSelector, vector<string>& adminCredentials) {
+
+    mainProgHeader();
+
+    cout << " " << "HOME >> ADMIN MODE >> ACCOUNT SETTINGS" << "\n"
+         << " " << "====================================================" << endl;
+
+    string user, pass;
+
+    cin.clear();
+    fflush(stdin);
+
+    cout << " " << "USERNAME : ";
+    getline (cin, user);
+
+    cout << " " << "PASSWORD : ";
+    getline (cin, pass);
+
+    if ((user == adminCredentials[0]) && (pass == adminCredentials[1])) {
+        
+        system ("color 0a");
+        cout << " " << "====================================================" << "\n"
+             << "\n"
+             << " " << "[SYS] Login Successful" << endl;
+        
+        progStop();
+
+        clrscreen();
+        system("color 0e");
+
+        mainProgHeader();
+        cout << " " << "HOME >> ADMIN MODE >> ACCOUNT SETTINGS" << "\n"
+             << " " << "====================================================" << "\n"
+             << " " << "[1] Change Username                                 " << "\n"
+             << " " << "[2] Change Password                                 " << "\n"
+             << " " << "[0] Admin Mode                                      " << "\n"
+             << " " << "====================================================" << "\n"
+             << endl;
+        
+        while (1) {
+
+            int usersChoice;
+
+            cout << " " << "Select Option: ";
+            cin >> usersChoice;
+            while (cin.fail()) {
+                cinError();
+                inpErr();
+                cout << " " << "Select Option: ";
+                cin >> usersChoice;
+            }
+
+            if (usersChoice == 1) {
+
+                clrscreen();
+
+                mainProgHeader();
+
+                cout << " " << "HOME >> ADMIN MODE >> ACCOUNT SETTINGS >> CHANGE USERNAME" << "\n"
+                     << " " << "====================================================" << endl;
+
+                string newUser, repnewUser;
+
+                cin.clear();
+                fflush(stdin);
+
+                cout << " " << "[INP] New Username     : ";
+                getline (cin, newUser);
+
+                cout << " " << "[INP] Confirm Username : ";
+                getline (cin, repnewUser);
+
+                if (newUser == repnewUser) {
+                    
+                    cout << " " << "====================================================" << "\n"
+                         << endl;
+                    
+                    cout << " " << "[SYS] Username successfully changed" << endl;
+
+                    adminCredentials[0] = newUser;
+                
+                }
+
+                else {
+
+                    cout << " " << "====================================================" << "\n"
+                         << endl;
+                    
+                    cout << " " << "[ERR] Process unsuccessful" << endl;
+
+                }
+
+                progStop();
+                clrscreen();
+
+                menuSelector = 3;
+
+                break;
+            }
+
+            else if (usersChoice == 2) {
+
+                clrscreen();
+
+                mainProgHeader();
+
+                cout << " " << "HOME >> ADMIN MODE >> ACCOUNT SETTINGS >> CHANGE PASSWORD" << "\n"
+                     << " " << "====================================================" << endl;
+
+                string newPass, repnewPass;
+
+                cin.clear();
+                fflush(stdin);
+
+                cout << " " << "[INP] New Password     : ";
+                getline (cin, newPass);
+
+                cout << " " << "[INP] Confirm Password : ";
+                getline (cin, repnewPass);
+
+                if (newPass == repnewPass) {
+                    
+                    cout << " " << "====================================================" << "\n"
+                         << endl;
+                    
+                    cout << " " << "[SYS] Password successfully changed" << endl;
+
+                    adminCredentials[1] = newPass;
+                
+                }
+
+                else {
+
+                    cout << " " << "====================================================" << "\n"
+                         << endl;
+                    
+                    cout << " " << "[ERR] Process unsuccessful" << endl;
+
+                }
+
+                progStop();
+                clrscreen();
+
+                menuSelector = 3;
+
+                break;
+
+            }
+
+            else if (usersChoice == 0) {
+                
+                clrscreen();
+                menuSelector = 3;
+                break;
+
+            }
+
+            else {
+                
+                inpErr();
+
+            }
+
+        }
+
+    }
+
+    else {
+
+        system ("color 0c");
+        cout << " " << "====================================================" << "\n"
+             << "\n"
+             << " " << "[ERR] Login Unsuccessful | Wrong Credentials" << endl;
+        
+        progStop();
+        clrscreen();
+        menuSelector = 3;
+
+    }
+       
 }
 
 
