@@ -35,8 +35,10 @@
 			<Add option="-fexceptions" />
 		</Compiler>
 		<Unit filename="include/Film.h" />
+		<Unit filename="include/Snack.h" />
 		<Unit filename="main.cpp" />
 		<Unit filename="src/Film.cpp" />
+		<Unit filename="src/Snack.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
 		</Extensions>
