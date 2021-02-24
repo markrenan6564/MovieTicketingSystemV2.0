@@ -45,6 +45,7 @@ static vector<Snack> SavedSnacks;
     void editSnacks (int&, vector<Snack>&);
     void deactivateSnacks (int&, vector<Snack>&);
     void reactivateSnacks (int&, vector<Snack>&);
+    void deleteSnacks (int&, vector<Snack>&);
 
 
 int main() {
@@ -163,8 +164,11 @@ int main() {
             reactivateSnacks (menuSelector, SavedSnacks);
         }
 
-        else {
+        else if (menuSelector == 326) {
+            deleteSnacks (menuSelector, SavedSnacks);
+        }
 
+        else {
             parentMenu (menuSelector);
         }
 
@@ -3088,7 +3092,7 @@ void reactivateSnacks (int& menuSelector, vector<Snack>& savedSnacks) {
                                  << " " << "====================================================" << "\n"
                                  << endl;
 
-                            savedSnacks[realRef].setStatus(false);
+                            savedSnacks[realRef].setStatus(true);
 
                             cout << " " << "[SYS] The Snack \"" << savedSnacks[realRef].getName() << " - " << savedSnacks[realRef].getSize() << "\" has been reactivated" << "\n";
 
@@ -3132,3 +3136,166 @@ void reactivateSnacks (int& menuSelector, vector<Snack>& savedSnacks) {
     } // else statement
 
 }
+
+void deleteSnacks (int& menuSelector, vector<Snack>& savedSnacks) {
+
+
+    if (savedSnacks.empty()) {
+
+        mainProgHeader ();
+
+        cout << " " << "HOME >> ADMIN MODE >> MANAGE SNACKS >> DELETE SNACKS" << "\n";
+
+        cout << " " << "====================================================" << "\n"
+             << " " << "                   DELETE SNACKS                    " << "\n"
+             << " " << "====================================================" << "\n"
+             << " " << "[ERR] No snacks to delete                            " << "\n"
+             << " " << "====================================================" << "\n"
+             << endl;
+
+        progStop();
+        clrscreen();
+        menuSelector = 32;
+
+    }
+
+    else {
+
+        mainProgHeader();
+
+        cout << " " << "HOME >> ADMIN MODE >> MANAGE SNACKS >> DELETE SNACKS" << "\n";
+
+        cout << " " << "====================================================" << "\n"
+             << " " << "                   DELETE SNACKS                    " << "\n"
+             << " " << "====================================================" << "\n"
+             << " " << "[1] Delete Snack                                    " << "\n"
+             << " " << "[0] Manage Snacks                                   " << "\n"
+             << " " << "====================================================" << "\n"
+             << endl;
+
+        while (1) {
+
+            int usersChoice;
+
+            cout << " " << "[INP] Select Option: ";
+            cin >> usersChoice;
+            while (cin.fail()){
+                cinError();
+                inpErr;
+                cout << " " << "[INP] Select Option: ";
+                cin >> usersChoice;
+            }
+
+            if (usersChoice == 1) {
+
+                clrscreen();
+
+                mainProgHeader();
+
+                cout << " " << "HOME >> ADMIN MODE >> MANAGE SNACKS >> DELETE SNACKS" << "\n";
+
+                cout << " " << "====================================================" << "\n"
+                     << " " << "                   DELETE SNACKS                    " << "\n"
+                     << " " << "====================================================" << "\n"
+                     << endl;
+
+                cout << " " << "----------------------------------------------------" << "\n"
+                     << " " << "[SYS] Showing all snacks available for deletion      " << "\n"
+                     << " " << "----------------------------------------------------" << "\n"
+                     << endl;
+
+                int numSnacks = savedSnacks.size();
+
+                for (int realRef = 0; realRef < numSnacks; realRef++) {
+
+                    int snacksRef = realRef + 1;
+
+                    cout << " " << "----------------------------------------------------" << "\n";
+
+                    if (realRef < 9) {
+                        cout << " " << "[0" << snacksRef << "] Snack         : " << savedSnacks[realRef].getName() << " - " << savedSnacks[realRef].getSize() << "\n";
+                    }
+                    else {
+                        cout << " " << "[" << snacksRef << "] Snack         : " << savedSnacks[realRef].getName() << " - " << savedSnacks[realRef].getSize() << "\n";
+                    }
+                                           
+                    if (savedSnacks[realRef].getStatus()) {
+                        cout << " " << "     Status        : Active" <<"\n";
+                    }
+                    else {
+                        cout << " " << "     Status        : Inactive" <<"\n";
+                    }
+                        cout << " " << "----------------------------------------------------" << "\n"
+                                << " " << "     Product Name  : " << savedSnacks[realRef].getName() << "\n"
+                                << " " << "     Product Size  : " << savedSnacks[realRef].getSize() << "\n"
+                                << " " << "     Product Price : " << savedSnacks[realRef].getPrice() << "\n"
+                                << " " << "     Quantity      : " << savedSnacks[realRef].getQuantity() << "\n"
+                                << " " << "----------------------------------------------------" << "\n"
+                                << endl;
+
+                }
+
+                cout << " " << "====================================================" << "\n"
+                     << endl;
+
+                while (1) {
+
+                    int usersChoice;
+
+                    cout << " " << "[INP] Select a Snack for Deletion: ";
+                    cin >> usersChoice;
+                    while (cin.fail()) {
+                        cinError();
+                        inpErr();
+                        cout << " " << "[INP] Select a Snack for Deletion: ";
+                        cin >> usersChoice;
+                    }
+
+                    int realRef = usersChoice - 1;
+
+                    if ((usersChoice > 0) && (usersChoice <= savedSnacks.size())) {
+
+                        cout << " " << "[INF] The Snack \"" << savedSnacks[realRef].getName() << " - " << savedSnacks[realRef].getSize() << "\" has been selected" << "\n"
+                             << "\n"
+                             << " " << "====================================================" << "\n"
+                             << "\n"
+                             << " " << "[SYS] The Snack \"" << savedSnacks[realRef].getName() << " - " << savedSnacks[realRef].getSize() <<  "\" has been successfully deleted" << endl;
+
+                        savedSnacks.erase(savedSnacks.begin() + realRef);
+
+                        progStop();
+                        clrscreen();
+
+                        break;
+                    }
+
+                    else {
+                        inpErr();
+                    }
+
+                }
+
+                menuSelector = 326;
+                break;
+            }
+
+            else if (usersChoice == 0) {
+
+                clrscreen();
+                menuSelector = 32;
+                break;
+            }
+
+            else {
+
+                inpErr();
+
+            }
+
+        }
+
+    }
+
+}
+
+
