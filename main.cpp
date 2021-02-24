@@ -40,6 +40,7 @@ static vector<Snack> SavedSnacks;
     void deleteFilms (int&, vector<Film>&);
 
     void manageSnacks(int&);
+    void addSnacks (int&, vector<Snack>&);
 
 
 int main() {
@@ -136,6 +137,10 @@ int main() {
 
         else if (menuSelector == 32) {
             manageSnacks (menuSelector);
+        }
+
+        else if (menuSelector == 321) {
+            addSnacks (menuSelector, SavedSnacks);
         }
 
         else {
@@ -1987,5 +1992,191 @@ void manageSnacks (int& menuSelector) {
             inpErr();
         }
     }
+}
+
+void addSnacks (int& menuSelector, vector<Snack>& currentSnacks) {
+
+    mainProgHeader();
+
+    cout << " " << "HOME >> ADMIN MODE >> MANAGE SNACKS >> ADD SNACKS" << "\n";
+
+    cout << " " << "====================================================" << "\n"
+         << " " << "                     ADD SNACKS                     " << "\n"
+         << " " << "====================================================" << "\n"
+         << " " << "[1] Add Snacks                                      " << "\n"
+         << " " << "[0] Manage Snacks                                   " << "\n"
+         << " " << "====================================================" << "\n"
+         << endl;
+
+    while (1) {
+
+        int usersChoice;
+
+        cout << " " << "[INP] Select Option: ";
+        cin >> usersChoice;
+        while (cin.fail()) {
+            cinError();
+            inpErr();
+            cout << " " << "[INP] Select Option: ";
+            cin >> usersChoice;
+        }
+
+        if (usersChoice == 1) {
+
+            clrscreen();
+            mainProgHeader();
+
+            cout << " " << "HOME >> ADMIN MODE >> MANAGE SNACKS >> ADD SNACKS" << "\n";
+
+            cout << " " << "====================================================" << "\n"
+                 << " " << "                     ADD SNACKS                     " << "\n"
+                 << " " << "====================================================" << endl;
+
+            while (1) {
+
+                int desiredNum;
+
+                cout << " " << "[INP] Specify Number of Snacks to Add: ";
+                cin >> desiredNum;
+                while (cin.fail()) {
+                    cinError();
+                    inpError();
+                    cout << " " << "[INP] Specify Number of Snacks to Add: ";
+                    cin >> desiredNum;
+                }
+
+                if (desiredNum > 0) {
+
+                    cout << " " << "[INF] You want to add " << desiredNum << "\n"
+                         << " " << "====================================================" << "\n"
+                         << "\n"
+                         << " " << "[SYS] " << desiredNum << " snack(s) will be added" << "\n";
+
+                    unsigned int accumulated = currentSnacks.size();
+
+                    progStop();
+                    clrscreen();
+
+                    for (int ite = 0; ite < desiredNum; ite++) {
+
+                        int displayRef = ite + 1;
+
+                        accumulated = accumulated + 1;
+
+                        string name, size;
+                        int price, quantity;
+
+                        mainProgHeader();
+
+                        cout << " " << "HOME >> ADMIN MODE >> MANAGE SNACKS >> ADD SNACKS" << "\n";
+
+                        cout << " " << "====================================================" << "\n"
+                             << " " << "                     ADD SNACKS                     " << "\n"
+                             << " " << "====================================================" << "\n"
+                             << "\n"
+                             << " " << "[SYS] Adding snacks..." << "\n"
+                             << " " << "      " << displayRef << " of " << desiredNum << "\n"
+                             << endl;
+
+                        if (accumulated < 9) {
+                            cout << " " << "----------------------------------------------------" << "\n"
+                                 << " " << "[0" << accumulated << "] Enter snack data" << "\n"
+                                 << " " << "----------------------------------------------------" << "\n";
+                        }
+                        else {
+                            cout << " " << "----------------------------------------------------" << "\n"
+                                 << " " << "[" << accumulated << "] Enter snack data" << "\n"
+                                 << " " << "----------------------------------------------------" << "\n";
+
+                        }
+
+                        cout << " " << "     Product Name   : ";
+                        getline(cin, name);
+                        cout << " " << "     Product Size   : ";
+                        getline (cin, size);
+                        cout << " " << "     Product Price  : ";
+                        cin >> price;
+                            while(cin.fail()) {
+                                cinError();
+                                cout << "     ";
+                                inpError();
+                                cout << " " << "     Product Price  : ";
+                                cin >> price;
+                            }
+                        cout << " " << "     Quantity       : ";
+                        cin >> quantity;
+                            while (cin.fail()) {
+                                cinError();
+                                cout << "     ";
+                                inpError();
+                                cout << " " << "     Quantity       : ";
+                                cin >> quantity;
+                            }
+
+                        Snack snacks(name, size, price, quantity);
+                        currentSnacks.push_back(snacks);
+
+                        cout << " " << "----------------------------------------------------" << "\n"
+                             << "\n"
+                             << " " << "====================================================" << "\n"
+                             << "\n"
+                             << " " << "[SYS] Current entry has been successfully saved" << endl;
+
+                             progStop();
+                             clrscreen();
+                    }
+
+                    mainProgHeader();
+
+                    cout << " " << "HOME >> ADMIN MODE >> MANAGE SNACKS >> ADD SNACKS" << "\n";
+
+                    cout << " " << "====================================================" << "\n"
+                         << " " << "                     ADD SNACKS                     " << "\n"
+                         << " " << "====================================================" << "\n"
+                         << " " << "[INF] " << desiredNum << " snack(s) has been successfully added" << "\n"
+                         << " " << "[SYS] Add sequence completed successfully" << "\n"
+                         << " " << "====================================================" << "\n"
+                         << endl;
+
+                    progStop();
+                    break;
+                }
+
+                else if (desiredNum == 0) {
+                    cout << " " << "[ERR] 0 entered" << "\n"
+                         << " " << "====================================================" << "\n"
+                         << "\n"
+                         << " " << "[SYS] Cancelling add sequence" << endl;
+                        progStop();
+                        break;
+                }
+
+                else {
+
+                    inpError();
+
+                }
+
+            }
+            clrscreen();
+            menuSelector = 321;
+            break;
+        }
+
+        else if (usersChoice == 0) {
+
+            clrscreen();
+            menuSelector = 32;
+            break;
+        }
+
+        else {
+
+            inpErr();
+
+        }
+
+    }
+
 
 }
