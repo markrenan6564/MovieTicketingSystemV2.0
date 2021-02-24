@@ -41,6 +41,7 @@ static vector<Snack> SavedSnacks;
 
     void manageSnacks(int&);
     void addSnacks (int&, vector<Snack>&);
+    void viewSnacks (int&, vector<Snack>&);
 
 
 int main() {
@@ -141,6 +142,10 @@ int main() {
 
         else if (menuSelector == 321) {
             addSnacks (menuSelector, SavedSnacks);
+        }
+
+        else if (menuSelector == 322) {
+            viewSnacks (menuSelector, SavedSnacks);
         }
 
         else {
@@ -2178,5 +2183,258 @@ void addSnacks (int& menuSelector, vector<Snack>& currentSnacks) {
 
     }
 
+}
+
+void viewSnacks (int& menuSelector, vector<Snack>& storedSnacks) {
+
+    if (storedSnacks.empty()) {
+
+        mainProgHeader ();
+
+        cout << " " << "HOME >> ADMIN MODE >> MANAGE SNACKS >> VIEW SNACKS" << "\n";
+
+        cout << " " << "====================================================" << "\n"
+             << " " << "                    VIEW SNACKS                     " << "\n"
+             << " " << "====================================================" << "\n"
+             << " " << "[ERR] No snacks to view                              " << "\n"
+             << " " << "====================================================" << "\n"
+             << endl;
+
+        progStop();
+        clrscreen();
+        menuSelector = 32;
+
+    }
+
+    else {
+
+        mainProgHeader ();
+
+        cout << " " << "HOME >> ADMIN MODE >> MANAGE SNACKS >> VIEW SNACKS" << "\n";
+
+        cout << " " << "====================================================" << "\n"
+             << " " << "                    VIEW SNACKS                     " << "\n"
+             << " " << "====================================================" << "\n"
+             << " " << "[1] View All                                        " << "\n"
+             << " " << "[2] View Specific                                   " << "\n"
+             << " " << "[0] Manage Snacks                                   " << "\n"
+             << " " << "====================================================" << "\n"
+             << endl;
+
+        while (1) {
+
+            int userInput;
+            cout << " " << "[INP] Select Option: ";
+            cin >> userInput;
+                while (cin.fail()) {
+                    cinError();
+                    inpErr();
+                    cout << " " << "[INP] Select Option: ";
+                    cin >> userInput;
+                }
+
+            if (userInput == 1) {
+
+                clrscreen();
+                mainProgHeader ();
+
+                cout << " " << "HOME >> ADMIN MODE >> MANAGE SNACKS >> VIEW SNACKS >> VIEW ALL" << "\n";
+
+                cout << " " << "====================================================" << "\n"
+                      << " " << "                    VIEW SNACKS                     " << "\n"
+                      << " " << "====================================================" << "\n"
+                      << "\n"
+                      << " " << "----------------------------------------------------" << "\n"
+                      << " " << "[SYS] Showing all saved snacks                      " << "\n"
+                      << " " << "----------------------------------------------------" << "\n"
+                       << endl;
+
+                int vectorSize = storedSnacks.size();
+
+                for (int i = 0; i < vectorSize ; i++) {
+
+                    int prdctr = i + 1;
+
+                    cout << " " << "----------------------------------------------------" << "\n";
+
+                    if (i < 9) {
+                        cout << " " << "[0" << prdctr << "] Product Name  : " << storedSnacks[i].getName() << "\n";
+                    }
+                    else {
+                        cout << " " << "[" << prdctr << "] Product Name  : " << storedSnacks[i].getName() << "\n";
+                    }
+
+                    if (storedSnacks[i].getStatus()) {
+                        cout << " " << "     Status        : Active" << "\n";
+                    }
+                    else {
+                        cout << " " << "     Status        : Inactive" << "\n";
+                    }
+
+                    cout << " " << "----------------------------------------------------" << "\n"
+                         << " " << "     Product Name  : " << storedSnacks[i].getName() << "\n"
+                         << " " << "     Product Size  : " << storedSnacks[i].getSize() << "\n"
+                         << " " << "     Prodcut Price : " << storedSnacks[i].getPrice() << "\n"
+                         << " " << "     Quantity      : " << storedSnacks[i].getQuantity() << "\n"
+                         << " " << "----------------------------------------------------" << "\n"
+                         << endl;
+
+                }
+
+                cout << " " << "====================================================" << "\n"
+                     << "\n"
+                     << " " << "[SYS] Showed all saved snacks" << "\n";
+
+                progStop();
+                clrscreen();
+                menuSelector = 322;
+                break;
+
+            }
+
+            else if (userInput == 2) {
+
+                clrscreen();
+                mainProgHeader ();
+
+                cout << " " << "HOME >> ADMIN MODE >> MANAGE SNACKS >> VIEW SNACKS >> VIEW SPECIFIC" << "\n";
+
+                cout << " " << "====================================================" << "\n"
+                     << " " << "                    VIEW SNACKS                     " << "\n"
+                     << " " << "====================================================" << "\n"
+                     << "\n"
+                     << " " << "----------------------------------------------------" << "\n"
+                     << " " << "[SYS] Showing all prodcut names                     " << "\n"
+                     << " " << "----------------------------------------------------" << "\n"
+                     << endl;
+
+                int vectorSize = storedSnacks.size();
+
+                for (int i = 0; i < vectorSize; i++) {
+
+                    int prdctr = i + 1;
+
+                    cout << " " << "----------------------------------------------------" << "\n";
+
+                    if (i < 9) {
+                        cout << " " << "[0" << prdctr << "] Product Name  : " << storedSnacks[i].getName() << "\n";
+                    }
+
+                    else {
+                        cout << " " << "[" << prdctr << "] Product Name  : " << storedSnacks[i].getName() << "\n";
+                    }
+
+                    if (storedSnacks[i].getStatus()) {
+                        cout << " " << "     Status        : Active" << "\n";
+                    }
+                    else {
+                        cout << " " << "     Status        : Inactive" << "\n";
+                    }
+                    cout << " " << "----------------------------------------------------" << "\n"
+                         << endl;
+                }
+
+                cout << " " << "====================================================" << "\n"
+                     << endl;
+
+                while (1) {
+
+                    int choice;
+                    cout << " " << "[INP] Select a Snack to View: ";
+                    cin >> choice;
+                    while (cin.fail()) {
+                        cinError();
+                        inpErr();
+                        cout << " " << "[INP] Select a Snack to View: ";
+                        cin >> choice;
+                    }
+
+                    int snacknum = choice - 1;
+
+                    if ((0 < choice) && (snacknum < storedSnacks.size())) {
+
+                        cout << " " << "[INF] Snack number " << choice << " has been selected" << "\n"
+                             << "\n"
+                             << " " << "====================================================" << "\n"
+                             << endl;
+
+                        progStop();
+
+                        clrscreen();
+                        mainProgHeader();
+
+                        cout << " " << "HOME >> ADMIN MODE >> MANAGE SNACKS >> VIEW SNACKS >> VIEW SPECIFIC" << "\n";
+
+                        cout << " " << "====================================================" << "\n"
+                             << " " << "                    VIEW SNACKS                     " << "\n"
+                             << " " << "====================================================" << "\n"
+                             << "\n"
+                             << " " << "----------------------------------------------------" << "\n"
+                             << " " << "[SYS] Showing Snack \"" << storedSnacks[snacknum].getName() <<  "\"" << "\n"
+                             << " " << "----------------------------------------------------" << "\n"
+                             << endl;
+
+                        cout << " " << "----------------------------------------------------" << "\n";
+
+                        if (choice < 10) {
+                            cout << " " << "[0" << choice << "] Product Name  : " << storedSnacks[snacknum].getName() << "\n";
+                        }
+                        else {
+                            cout << " " << "[" << choice << "] Product Name  : " << storedSnacks[snacknum].getName() << "\n";
+                        }
+
+                        if (storedSnacks[snacknum].getStatus()) {
+                            cout << " " << "     Status        : Active" << "\n";
+                        }
+                        else {
+                            cout << " " << "     Status        : Inactive" << "\n";
+                        }
+
+                        cout << " " << "----------------------------------------------------" << "\n"
+                             << " " << "     Product Name  : " << storedSnacks[snacknum].getName() << "\n"
+                             << " " << "     Product Size  : " << storedSnacks[snacknum].getSize() << "\n"
+                             << " " << "     Product Price : " << storedSnacks[snacknum].getPrice() << "\n"
+                             << " " << "     Quantity      : " << storedSnacks[snacknum].getQuantity() << "\n"
+                             << " " << "----------------------------------------------------" << "\n"
+                             << "\n"
+                             << " " << "====================================================" << "\n"
+                             << endl;
+
+
+                        progStop ();
+                        menuSelector = 322;
+                        clrscreen ();
+                        break;
+
+                    }
+                        else {
+
+                            inpErr();
+
+                        }
+
+                }
+
+                break;
+
+            }
+
+            else if (userInput == 0) {
+
+                menuSelector = 32;
+                clrscreen ();
+                break;
+
+            }
+
+            else {
+
+                inpErr();
+
+            }
+
+        }
+
+    }
 
 }
