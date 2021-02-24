@@ -11,20 +11,26 @@
 using namespace std;
 
 static vector<Film> SavedFilms;
+static vector<Snack> SavedSnacks;
 
 // Funtion Declarations
 
     void mainProgHeader ();
+
     void inpErr();
     void inpError();
     void progStop ();
     void clrscreen();
     void cinError();
+
     void parentMenu (int&);
     void programTerminator (int&);
+
     void mainMenu (int&);
+
     void adminLogin (int&);
     void adminMenu (int&);
+
     void manageFilms (int&);
     void addFilms (int&, vector<Film>&);
     void viewFilms (int&, vector<Film>&);
@@ -32,6 +38,9 @@ static vector<Film> SavedFilms;
     void deactivateFilms (int&, vector<Film>&);
     void reactivateFilms (int&, vector<Film>&);
     void deleteFilms (int&, vector<Film>&);
+
+    void manageSnacks(int&);
+
 
 int main() {
 
@@ -123,6 +132,10 @@ int main() {
 
         else if (menuSelector == 316) {
             deleteFilms (menuSelector, SavedFilms);
+        }
+
+        else if (menuSelector == 32) {
+            manageSnacks (menuSelector);
         }
 
         else {
@@ -1895,6 +1908,84 @@ void deleteFilms (int& menuSelector, vector<Film>& availableFilms) {
 
         }
 
+    }
+
+}
+
+void manageSnacks (int& menuSelector) {
+
+    mainProgHeader();
+
+    cout << " " << "HOME >> ADMIN MODE >> MANAGE SNACKS" << "\n";
+
+    cout << " " << "====================================================" << "\n"
+         << " " << "                   MANAGE SNACKS                    " << "\n"
+         << " " << "====================================================" << "\n"
+         << " " << "[1] Add Snacks                                       " << "\n"
+         << " " << "[2] View Snacks                                      " << "\n"
+         << " " << "[3] Edit Snacks                                      " << "\n"
+         << " " << "[4] Deactivate Snacks                                " << "\n"
+         << " " << "[5] Reactivate Snacks                                " << "\n"
+         << " " << "[6] Delete Snacks                                    " << "\n"
+         << " " << "[0] Admin Mode                                      " << "\n"
+         << " " << "====================================================" << "\n"
+         << endl;
+
+    while(1) {
+        int userInput;
+        cout << " " << "[INP] Select Option: ";
+        cin >> userInput;
+            while(cin.fail()) {
+                cinError ();
+                inpErr ();
+                cout << " " << "[INP] Select Option: ";
+                cin >> userInput;
+            }
+        if (userInput == 1) {
+
+            clrscreen();
+            menuSelector = 321;
+            break;
+        }
+        else if (userInput == 2) {
+
+            clrscreen();
+            menuSelector = 322;
+            break;
+        }
+        else if (userInput == 3) {
+
+            clrscreen();
+            menuSelector = 323;
+            break;
+        }
+        else if (userInput == 4) {
+
+            clrscreen();
+            menuSelector = 324;
+            break;
+        }
+        else if (userInput == 5) {
+
+            clrscreen();
+            menuSelector = 325;
+            break;
+        }
+        else if (userInput == 6) {
+
+            clrscreen();
+            menuSelector = 326;
+            break;
+        }
+        else if (userInput == 0) {
+
+            clrscreen();
+            menuSelector = 3;
+            break;
+        }
+        else {
+            inpErr();
+        }
     }
 
 }
