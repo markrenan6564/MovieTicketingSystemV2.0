@@ -4088,6 +4088,8 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                 << " " << "-------------------------------------------------------------------------------------------------------" << "\n"
                                 << " " << "[SYS] Generating Seats Visual" << "\n"
                                 << " " << "-------------------------------------------------------------------------------------------------------" << "\n"
+                                << "\n"
+                                << " " << "[***] = occupied" << "\n"
                                 << endl;
 
                             int availableSeats = savedFilms[realRef].availableSeats.size();
