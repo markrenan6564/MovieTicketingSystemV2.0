@@ -197,6 +197,10 @@ int main() {
             accountSettings (menuSelector, adminCredentials);
         }
 
+        else if (menuSelector == 11) {
+            bookMovie (menuSelector, SavedFilms, transactionTracker);
+        }
+
         else if (menuSelector == 12) {
             buySnacks (menuSelector, SavedSnacks, transactionTracker);
         }
@@ -2148,6 +2152,7 @@ void resetReservation (int& menuSelector, vector<Film>& savedFilms) {
                              << " " << "====================================================" << "\n"
                              << endl;
 
+                        savedFilms[realRef].availableSeats.clear();
                         savedFilms[realRef].initialReservation(savedFilms[realRef].getSeats());
 
                         cout << " " << "[SYS] Reset Successful" << endl;
@@ -3646,7 +3651,6 @@ void viewSales (int& menuSelector, vector<Transaction>& transactionTracker) {
                          << " " << "----------------------------------------------------" << "\n"
                          << " " << "      Transaction Type : " << transactionTracker[realRef].getType() << "\n"
                          << " " << "      Transaction Name : " << transactionTracker[realRef].getName() << "\n"
-                         << " " << "      Schedule         : " << transactionTracker[realRef].getSchedule() << "\n"
                          << " " << "      Price            : Php " << transactionTracker[realRef].getPrice() << "\n"
                          << " " << "      Quantity         : " << transactionTracker[realRef].getQuantity() << "\n"
                          << " " << "      Earnings         : Php " << transactionTracker[realRef].getEarnings() << "\n"
@@ -3888,7 +3892,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
 
         cout << " " << "HOME >> MAIN MODE >> BOOK MOVIE" << "\n"
              << " " << "====================================================" << "\n"
-             << " " << "                       MOVIES                       " << "\n"
+             << " " << "                     BOOK MOVIE                     " << "\n"
              << " " << "====================================================" << "\n"
              << " " << "[ERR] No movies are available                       " << "\n"
              << " " << "====================================================" << "\n"
@@ -3900,7 +3904,860 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
 
     }
 
+    else {
+
+        mainProgHeader();
+
+        cout << " " << "HOME >> MAIN MODE >> BOOK MOVIE" << "\n"
+             << " " << "====================================================" << "\n"
+             << " " << "                     BOOK MOVIE                     " << "\n"
+             << " " << "====================================================" << "\n"
+             << " " << "[1] Book Movie                                      " << "\n"
+             << " " << "[0] Main Mode                                       " << "\n"
+             << " " << "====================================================" << "\n"
+             << endl;
+
+        while (1) {
+
+            int usersMenu;
+
+            cout << " " << "[INP] Select Option: ";
+            cin >> usersMenu;
+            while (cin.fail()) {
+                cinError();
+                inpErr();
+                cout << " " << "[INP] Select Option: ";
+                cin >> usersMenu;
+            }
+
+            if (usersMenu == 1) {
+
+                int numFilms = savedFilms.size();
+                int verifier = 0;
+                int displayRef = 1;
+
+                for (int i = 0; i < numFilms; i++) {
+
+                    if ((savedFilms[i].getStatus()) && (!savedFilms[i].availableSeats.empty())) {
+                        verifier = verifier + 1;
+                    }
+
+                }
+
+                if (verifier == 0) {
+
+                    clrscreen();
+
+                    mainProgHeader();
+
+                    cout << " " << "HOME >> MAIN MODE >> BOOK MOVIE" << "\n"
+                        << " " << "====================================================" << "\n"
+                        << " " << "                     BOOK MOVIE                     " << "\n"
+                        << " " << "====================================================" << "\n"
+                        << " " << "[ERR] No snacks are available                       " << "\n"
+                        << " " << "====================================================" << "\n"
+                        << endl;
+
+                        progStop();
+
+                }
+
+                else {
+
+                    clrscreen();
+
+                    mainProgHeader();
+
+                    cout << " " << "HOME >> MAIN MODE >> BOOK MOVIE" << "\n"
+                         << " " << "====================================================" << "\n"
+                         << " " << "                     BOOK MOVIE                     " << "\n"
+                         << " " << "====================================================" << "\n"
+                         << "\n"
+                         << " " << "----------------------------------------------------" << "\n"
+                         << " " << "[SYS] Showing all available snacks                  " << "\n"
+                         << " " << "----------------------------------------------------" << "\n"
+                         << endl;
+
+                    displayRef = 0;
+
+                    for (int i = 0; i < numFilms; i++) {
+
+                        displayRef = displayRef + 1;
+
+
+                        if (!savedFilms[i].getStatus()) {
+                            cout << " " << "----------------------------------------------------" << "\n";
+                            if (displayRef < 10) {
+                            cout << " " << "[0" << displayRef << "] Movie         : " << savedFilms[i].getTitle() << " (" << savedFilms[i].getYear() << ")" << "\n";
+                            }
+                            else {
+                            cout << " " << "[" <<  displayRef << "] Movie         : " << savedFilms[i].getTitle() << " (" << savedFilms[i].getYear() << ")" << "\n";
+                            }
+                            cout << " " << "     Status        : Currently Not Showing          " << "\n";
+                            cout << " " << "----------------------------------------------------" << "\n";
+                            cout << endl;
+                        }
+
+                        else if (savedFilms[i].availableSeats.empty()) {
+                            cout << " " << "----------------------------------------------------" << "\n";
+                            if (displayRef < 10) {
+                            cout << " " << "[0" << displayRef << "] Movie         : " << savedFilms[i].getTitle() << " (" << savedFilms[i].getYear() << ")" << "\n";
+                            }
+                            else {
+                            cout << " " << "[" <<  displayRef << "] Movie         : " << savedFilms[i].getTitle() << " (" << savedFilms[i].getYear() << ")" << "\n";
+                            }                                       
+                            cout << " " << "     Status        : Fully Booked                   " << "\n";
+                            cout << " " << "----------------------------------------------------" << "\n";
+                            cout << endl;
+                        }
+
+                        else {
+
+                           cout << " " << "----------------------------------------------------" << "\n";
+                            if (displayRef < 10) {
+                            cout << " " << "[0" << displayRef << "] Movie         : " << savedFilms[i].getTitle() << " (" << savedFilms[i].getYear() << ")" << "\n";
+                            }
+                            else {
+                            cout << " " << "[" <<  displayRef << "] Product       : " << savedFilms[i].getTitle() << " (" << savedFilms[i].getYear() << ")" << "\n";
+                            }
+                            cout << " " << "     Status        : " << savedFilms[i].availableSeats.size() << " seat(s) Available" << "\n";
+                            cout << " " << "----------------------------------------------------" << "\n";
+                            cout << " " << "     Film Title    : " << savedFilms[i].getTitle() << "\n"
+                                 << " " << "     Film Director : " << savedFilms[i].getDirector() << "\n"
+                                 << " " << "     Released Date : " << savedFilms[i].getYear() << "\n"
+                                 << " " << "     Ticket Price  : Php " << savedFilms[i].getPrice() << "\n"
+                                 << " " << "----------------------------------------------------" << "\n"
+                                 << endl;
+
+                        }
+
+                    }
+                    
+                    cout << " " << "====================================================" << "\n"
+                         << endl;
+                    
+                    while (1) {
+
+                        int chosenFilm;
+
+                        cout << " " << "[INP] Choose Movie: ";
+                        cin >> chosenFilm;
+                        while (cin.fail()){
+                            cinError();
+                            inpErr();
+                            cout << " " << "[INP] Choose Movie: ";
+                            cin >> chosenFilm;                            
+                        }
+
+                        int realRef = chosenFilm - 1;
+
+                        if ((savedFilms[realRef].getStatus()) && (!savedFilms[realRef].availableSeats.empty())) {
+
+                            cout << " " << "[INF] You selected " << savedFilms[realRef].getTitle() << " (" << savedFilms[realRef].getYear() << ")" << "\n"
+                                 << "\n"
+                                 << " " << "====================================================" << "\n"
+                                 << "\n"
+                                 << " " << "[SYS] Book sequence initiated" << endl;
+                            
+                            progStop();
+
+                            clrscreen();
+
+                            mainProgHeader();
+
+                            cout << " " << "HOME >> MAIN MODE >> BOOK MOVIE" << "\n"
+                                << " " << "=======================================================================================================" << "\n"
+                                << " " << "                                              BOOK MOVIE                                               " << "\n"
+                                << " " << "=======================================================================================================" << "\n"
+                                << "\n"
+                                << " " << "-------------------------------------------------------------------------------------------------------" << "\n"
+                                << " " << "[SYS] Generating Seats Visual" << "\n"
+                                << " " << "-------------------------------------------------------------------------------------------------------" << "\n"
+                                << endl;
+
+                            int availableSeats = savedFilms[realRef].availableSeats.size();
+
+                            int vectorite = 0;
+
+                            for (int Seats = 1; Seats <= savedFilms[realRef].getSeats(); Seats++) {
+                                
+                                
+
+                                if (Seats < 10) {
+
+                                    if (Seats == 1) {
+                                        cout << " ";
+                                    }
+                                
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[00" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                }
+                                    
+                                else if (Seats == 10) {
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[0" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    cout << "   ";
+                                }
+
+                                else if (Seats >= 11 && Seats <= 20) {
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[0" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 20) {
+                                        cout << endl;
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 21 && Seats <= 30) {
+
+                                    if (Seats == 21) {
+                                        cout << " ";
+                                    }
+
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[0" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 30) {
+                                        cout << "   ";
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 31 && Seats <= 40) {
+
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[0" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 40) {
+                                        cout << endl;
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 41 && Seats <= 50) {
+
+                                    if (Seats == 41) {
+                                        cout << " ";
+                                    }
+
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[0" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 50) {
+                                        cout << "   ";
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 51 && Seats <= 60) {
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[0" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 60) {
+                                        cout << endl;
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 61 && Seats <= 70) {
+
+                                    if (Seats == 61) {
+                                        cout << " ";
+                                    }
+
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[0" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 70) {
+                                        cout << "   ";
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 71 && Seats <= 80) {
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[0" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 80) {
+                                        cout << endl;
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 81 && Seats <= 90) {
+
+
+                                    if (Seats == 81) {
+                                        cout << " ";
+                                    }
+
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[0" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 90) {
+                                        cout << "   ";
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 91 && Seats <= 99) {
+
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[0" << Seats << "]";
+                                        vectorite++;
+                                    }
+                                    
+                                }
+
+                                else if (Seats == 100) {
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    cout << endl << endl;
+
+                                }
+
+                                else if (Seats >= 101 && Seats <= 110) {
+
+                                    if (Seats == 101) {
+                                        cout << " ";
+                                    }
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 110) {
+                                        cout << "   ";
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 111 && Seats <= 120) {
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 120) {
+                                        cout << endl;
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 121 && Seats <= 130) {
+
+                                    if (Seats == 121) {
+                                        cout << " ";
+                                    }
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 130) {
+                                        cout << "   ";
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 131 && Seats <= 140) {
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 140) {
+                                        cout << endl;
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 141 && Seats <= 150) {
+
+                                    if (Seats == 141) {
+                                        cout << " ";
+                                    }
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 150) {
+                                        cout << "   ";
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 151 && Seats <= 160) {
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 160) {
+                                        cout << endl;
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 161 && Seats <= 170) {
+
+                                    if (Seats == 161) {
+                                        cout << " ";
+                                    }
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 170) {
+                                        cout << "   ";
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 171 && Seats <= 180) {
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 180) {
+                                        cout << endl;
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 181 && Seats <= 190) {
+
+                                    if (Seats == 181) {
+                                        cout << " ";
+                                    }
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 190) {
+                                        cout << "   ";
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 191 && Seats <= 200) {
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 200) {
+                                        cout << endl << endl;
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 201 && Seats <= 210) {
+
+                                    if (Seats == 201) {
+                                        cout << " ";
+                                    }
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 210) {
+                                        cout << "   ";
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 211 && Seats <= 220) {
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 220) {
+                                        cout << endl;
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 221 && Seats <= 230) {
+
+                                    if (Seats == 221) {
+                                        cout << " ";
+                                    }
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 230) {
+                                        cout << "   ";
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 231 && Seats <= 240) {
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 240) {
+                                        cout << endl;
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 241 && Seats <= 250) {
+
+                                    if (Seats == 241) {
+                                        cout << " ";
+                                    }
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 250) {
+                                        cout << "   ";
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 251 && Seats <= 260) {
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 260) {
+                                        cout << endl;
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 261 && Seats <= 270) {
+
+                                    if (Seats == 261) {
+                                        cout << " ";
+                                    }
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 270) {
+                                        cout << "   ";
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 271 && Seats <= 280) {
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 280) {
+                                        cout << endl;
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 281 && Seats <= 290) {
+
+                                    if (Seats == 281) {
+                                        cout << " ";
+                                    }
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    if (Seats == 290) {
+                                        cout << "   ";
+                                    }
+                                    
+                                }
+
+                                else if (Seats >= 291 && Seats <= 300) {
+
+                                    if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
+                                        cout << "[***]";
+                                    }
+                                    else {
+                                        cout << "[" << Seats << "]";
+                                        vectorite++;
+                                    }
+
+                                    
+                                }
+
+                            }
+
+
+                            cout << endl << endl;
+                            cout << " " << "-------------------------------------------------------------------------------------------------------" << "\n"
+                                 << endl;
+
+                            while (10) {
+
+                                int chosenSeat;
+
+                                cout << " " << "[INP] Select Seat : ";
+                                cin >> chosenSeat;
+                                while(cin.fail()) {
+                                    cinError();
+                                    inpErr();
+                                cout << " " << "[INP] Select Seat : ";
+                                cin >> chosenSeat;
+                                }
+
+                                int verification = 0;
+
+                                for (int i = 0; i < savedFilms[realRef].availableSeats.size(); i++) {
+
+                                    if (savedFilms[realRef].availableSeats[i] == chosenSeat) {
+                                        verification = verification + 1;
+                                    }
+
+                                }
+
+                                if (verification == 1) {
+
+                                    cout << " " << "[INF] You selected seat number " << chosenSeat << "\n"
+                                         << "\n"
+                                         << " " << "=======================================================================================================" << "\n"
+                                         << "\n"
+                                         << " " << "-------------------------------------------------------------------------------------------------------" << "\n"
+                                         << " " << "[SYS] Generating Receipt" << "\n"
+                                         << " " << "-------------------------------------------------------------------------------------------------------" << "\n"
+                                         << " " << "      Film Title    : " << savedFilms[realRef].getTitle() << "\n"
+                                         << " " << "      Film Director : " << savedFilms[realRef].getDirector() << "\n"
+                                         << " " << "      Year Released : " << savedFilms[realRef].getYear() << "\n"
+                                         << " " << "      Ticket Price  : Php " << savedFilms[realRef].getYear() << "\n"
+                                         << " " << "      Quantity      : 1" << "\n"
+                                         << " " << "      Total         : Php" << savedFilms[realRef].getPrice() << "\n"
+                                         << " " << "-------------------------------------------------------------------------------------------------------" << "\n"
+                                         << "\n"
+                                         << " " << "=======================================================================================================" << "\n"
+                                         << "\n"
+                                         << " " << "[SYS] Purchasing... " << "\n"
+                                         << " " << "[SYS] Purchased Successful" << "\n";
+
+
+                                    Transaction transaction("Movie", savedFilms[realRef].getTitle(), savedFilms[realRef].getPrice(), 1, savedFilms[realRef].getPrice());
+                                    transactionTracker.push_back(transaction);
+
+                                    for (int i = 0; i < savedFilms[realRef].availableSeats.size(); i++) {
+
+                                        if (savedFilms[realRef].availableSeats[i] == chosenSeat) {
+                                            savedFilms[realRef].availableSeats.erase(savedFilms[realRef].availableSeats.begin() + i);
+                                        }
+
+                                    }
+
+                                    progStop();
+                                    break;
+
+                                }
+
+                                else {
+
+                                    inpErr();
+
+                                }
+
+                            }
+
+
+                            break;
+
+                        }
+
+                        else {
+
+                            inpErr();
+
+                        }
+
+                    }
+                    
+                }
+
+                clrscreen();
+                menuSelector = 11;
+                break;
+
+            }
+
+            else if (usersMenu == 0) {
+
+                clrscreen();
+                menuSelector = 1;
+                break;
+
+            }
+
+        }
+
+    }
+
 }
+
 
 
 void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transaction>& salesCounter) {
@@ -3945,8 +4802,8 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
             while (cin.fail()) {
                 cinError();
                 inpErr();
-            cout << " " << "[INP] Select Option: ";
-            cin >> menuChoice;
+                cout << " " << "[INP] Select Option: ";
+                cin >> menuChoice;
             }
 
             if (menuChoice == 1) {
@@ -4120,7 +4977,7 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
                                         cin >> quantity;
                                         }
 
-                                        if (quantity <= savedSnacks[realRef].getQuantity() && (quantity >=0)) {
+                                        if ((quantity <= savedSnacks[realRef].getQuantity()) && (quantity >=0)) {
 
 
                                             cout << " " << "[INF] You want to buy " << quantity << " " << savedSnacks[realRef].getProduct() << "\n"

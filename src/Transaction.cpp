@@ -14,22 +14,11 @@ Transaction::~Transaction () {
 
 }
 
-Transaction::Transaction (string type, string name, string schedule,int price, int quantity, int earnings) {
-
-    storedType = type;
-    storedName = name;
-    storedSchedule = schedule;
-    storedPrice = price;
-    storedQuantity = quantity;
-    storedEarnings = earnings;
-
-}
 
 Transaction::Transaction (string type, string name, int price, int quantity, int earnings) {
 
     storedType = type;
     storedName = name;
-    storedSchedule = "N/A";
     storedPrice = price;
     storedQuantity = quantity;
     storedEarnings = earnings;

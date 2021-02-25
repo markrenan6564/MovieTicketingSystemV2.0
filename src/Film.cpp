@@ -71,8 +71,8 @@ void Film::setStatus(bool newStatus){
 }
 
 void Film::setSeats(int newSeats){
+    availableSeats.clear();
     StoredSeats = newSeats;
-    
     initialReservation (StoredSeats);
 }
 
