@@ -4701,15 +4701,16 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                          << " " << "      Film Title    : " << savedFilms[realRef].getTitle() << "\n"
                                          << " " << "      Film Director : " << savedFilms[realRef].getDirector() << "\n"
                                          << " " << "      Year Released : " << savedFilms[realRef].getYear() << "\n"
-                                         << " " << "      Ticket Price  : Php " << savedFilms[realRef].getYear() << "\n"
+                                         << " " << "      Ticket Price  : Php " << savedFilms[realRef].getPrice() << "\n"
                                          << " " << "      Quantity      : 1" << "\n"
                                          << " " << "      Total         : Php " << savedFilms[realRef].getPrice() << "\n"
+                                         << " " << "      Seat Number   : " << chosenSeat << "\n"
                                          << " " << "-------------------------------------------------------------------------------------------------------" << "\n"
                                          << "\n"
                                          << " " << "=======================================================================================================" << "\n"
                                          << "\n"
                                          << " " << "[SYS] Purchasing... " << "\n"
-                                         << " " << "[SYS] Purchased Successful" << "\n";
+                                         << " " << "[SYS] Purchase Successful" << "\n";
 
 
                                     Transaction transaction("Movie", savedFilms[realRef].getTitle(), savedFilms[realRef].getPrice(), 1, savedFilms[realRef].getPrice());
