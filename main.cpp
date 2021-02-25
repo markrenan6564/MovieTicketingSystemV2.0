@@ -4066,7 +4066,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
 
                         int realRef = chosenFilm - 1;
 
-                        if ((savedFilms[realRef].getStatus()) && (!savedFilms[realRef].availableSeats.empty())) {
+                        if ((savedFilms[realRef].getStatus()) && (!savedFilms[realRef].availableSeats.empty()) && (chosenFilm > 0) && (realRef < savedFilms.size())) {
 
                             cout << " " << "[INF] You selected " << savedFilms[realRef].getTitle() << " (" << savedFilms[realRef].getYear() << ")" << "\n"
                                  << "\n"
@@ -4710,7 +4710,8 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                          << " " << "=======================================================================================================" << "\n"
                                          << "\n"
                                          << " " << "[SYS] Purchasing... " << "\n"
-                                         << " " << "[SYS] Purchase Successful" << "\n";
+                                         << " " << "[SYS] Purchase Successful" << "\n"
+                                         << endl;
 
 
                                     Transaction transaction("Movie", savedFilms[realRef].getTitle(), savedFilms[realRef].getPrice(), 1, savedFilms[realRef].getPrice());
@@ -4941,7 +4942,7 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
 
                         int realRef = usersChosen - 1;
 
-                        if ((savedSnacks[realRef].getStatus()) && (savedSnacks[realRef].getQuantity() > 0)) {
+                        if ((savedSnacks[realRef].getStatus()) && (savedSnacks[realRef].getQuantity() > 0) && (usersChosen > 0) && (usersChosen < savedSnacks.size())) {
 
                             cout << " " << "[INF] You selected " << savedSnacks[realRef].getProduct() << "\n"
                                  << "\n"
