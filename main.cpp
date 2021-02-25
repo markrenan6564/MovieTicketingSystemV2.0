@@ -3708,7 +3708,10 @@ void accountSettings (int& menuSelector, vector<string>& adminCredentials) {
     mainProgHeader();
 
     cout << " " << "HOME >> ADMIN MODE >> ACCOUNT SETTINGS" << "\n"
-         << " " << "====================================================" << endl;
+         << " " << "====================================================" << "\n" 
+         << " " << "                  ACCOUNT SETTINGS                  " << "\n"
+         << " " << "====================================================" << "\n" 
+         << endl;
 
     string user, pass;
 
@@ -3735,7 +3738,9 @@ void accountSettings (int& menuSelector, vector<string>& adminCredentials) {
 
         mainProgHeader();
         cout << " " << "HOME >> ADMIN MODE >> ACCOUNT SETTINGS" << "\n"
-             << " " << "====================================================" << "\n"
+             << " " << "====================================================" << "\n" 
+             << " " << "                  ACCOUNT SETTINGS                  " << "\n"
+             << " " << "====================================================" << "\n" 
              << " " << "[1] Change Username                                 " << "\n"
              << " " << "[2] Change Password                                 " << "\n"
              << " " << "[0] Admin Mode                                      " << "\n"
