@@ -3559,6 +3559,8 @@ void viewSales (int& menuSelector, vector<Transaction>& transactionTracker) {
 
         cout << " " << "HOME >> ADMIN MODE >> MANAGE SALES" << "\n";
         cout << " " << "====================================================" << "\n"
+             << " " << "                    MANAGE SALES                    " << "\n"
+             << " " << "====================================================" << "\n"
              << " " << "[ERR] No recent transactions recorded               " << "\n"
              << " " << "====================================================" << "\n"
              << endl;
@@ -3575,6 +3577,8 @@ void viewSales (int& menuSelector, vector<Transaction>& transactionTracker) {
 
         cout << " " << "HOME >> ADMIN MODE >> MANAGE SALES" << "\n";
         cout << " " << "====================================================" << "\n"
+             << " " << "                    MANAGE SALES                    " << "\n"
+             << " " << "====================================================" << "\n"
              << " " << "[1] View Sales                                      " << "\n"
              << " " << "[2] View All Transactions                           " << "\n"
              << " " << "[0] Admin Mode                                      " << "\n"
@@ -3612,6 +3616,8 @@ void viewSales (int& menuSelector, vector<Transaction>& transactionTracker) {
                 cout << " " << "HOME >> ADMIN MODE >> MANAGE SALES >> VIEW SALES" << "\n";
 
                 cout << " " << "====================================================" << "\n"
+                     << " " << "                     VIEW SALES                     " << "\n"
+                     << " " << "====================================================" << "\n"
                      << " " << "Transaction(s) : " << transactionTracker.size() << "\n"
                      << " " << "Total Sales    : Php " << totalSales << "\n"
                      << " " << "====================================================" << "\n"
@@ -3634,6 +3640,8 @@ void viewSales (int& menuSelector, vector<Transaction>& transactionTracker) {
                 cout << " " << "HOME >> ADMIN MODE >> MANAGE SALES >> VIEW SALES" << "\n";
 
                 cout << " " << "====================================================" << "\n"
+                     << " " << "                  VIEW TRANSACTIONS                 " << "\n"
+                     << " " << "====================================================" << "\n"
                      << "\n"
                      << " " << "----------------------------------------------------" << "\n"
                      << " " << "[SYS] Showing all transactions                      " << "\n"
@@ -3710,8 +3718,7 @@ void accountSettings (int& menuSelector, vector<string>& adminCredentials) {
     cout << " " << "HOME >> ADMIN MODE >> ACCOUNT SETTINGS" << "\n"
          << " " << "====================================================" << "\n" 
          << " " << "                  ACCOUNT SETTINGS                  " << "\n"
-         << " " << "====================================================" << "\n" 
-         << endl;
+         << " " << "====================================================" << endl;
 
     string user, pass;
 
@@ -3767,7 +3774,9 @@ void accountSettings (int& menuSelector, vector<string>& adminCredentials) {
                 mainProgHeader();
 
                 cout << " " << "HOME >> ADMIN MODE >> ACCOUNT SETTINGS >> CHANGE USERNAME" << "\n"
-                     << " " << "====================================================" << endl;
+                     << " " << "====================================================" << "\n" 
+                     << " " << "                  ACCOUNT SETTINGS                  " << "\n"
+                     << " " << "====================================================" << "\n";
 
                 string newUser, repnewUser;
 
@@ -3815,7 +3824,9 @@ void accountSettings (int& menuSelector, vector<string>& adminCredentials) {
                 mainProgHeader();
 
                 cout << " " << "HOME >> ADMIN MODE >> ACCOUNT SETTINGS >> CHANGE PASSWORD" << "\n"
-                     << " " << "====================================================" << endl;
+                     << " " << "====================================================" << "\n" 
+                     << " " << "                  ACCOUNT SETTINGS                  " << "\n"
+                     << " " << "====================================================" << "\n"; 
 
                 string newPass, repnewPass;
 
