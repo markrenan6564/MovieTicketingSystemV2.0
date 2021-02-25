@@ -4066,7 +4066,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
 
                         int realRef = chosenFilm - 1;
 
-                        if ((savedFilms[realRef].getStatus()) && (!savedFilms[realRef].availableSeats.empty()) && (chosenFilm > 0) && (realRef < savedFilms.size())) {
+                        if ((chosenFilm > 0) && (chosenFilm <= savedFilms.size()) && (savedFilms[realRef].getStatus()) && (!savedFilms[realRef].availableSeats.empty())) {
 
                             cout << " " << "[INF] You selected " << savedFilms[realRef].getTitle() << " (" << savedFilms[realRef].getYear() << ")" << "\n"
                                  << "\n"
