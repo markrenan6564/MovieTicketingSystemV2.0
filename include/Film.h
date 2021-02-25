@@ -26,6 +26,7 @@ class Film
         int     getPrice() const;
         bool    getStatus() const;
         int     getSeats() const;
+        int     getmainSeats() const;
 
         //Mutator Functions
         void    setTitle(string);
@@ -34,11 +35,15 @@ class Film
         void    setPrice (int);
         void    setStatus (bool);
         void    setSeats (int);
+        void    setmainSeats(int);
 
         vector<int> availableSeats;
 
         void    initialReservation (int);
 
+
+
+        
 
     private:
         string  StoredTitle;
@@ -47,6 +52,7 @@ class Film
         int     StoredPrice;
         bool    StoredStatus;
         int     StoredSeats;
+        int     mainSeats;
 
 };
 

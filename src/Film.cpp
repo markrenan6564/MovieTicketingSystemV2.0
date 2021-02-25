@@ -16,10 +16,11 @@ Film::Film(string newTitle, string newDirector, int newYear, int newPrice, int n
     StoredPrice = newPrice;
     StoredSeats = newSeats;
     StoredStatus = true;
-
+    mainSeats = newSeats;
     initialReservation (StoredSeats);
-
 }
+
+
 
 
 
@@ -47,8 +48,13 @@ int Film::getSeats() const{
     return StoredSeats;
 }
 
+int Film::getmainSeats() const{
+    return mainSeats;
+}
 
-
+void Film::setmainSeats (int seat) {
+    mainSeats = seat;
+}
 
 void Film::setTitle(string newTitle){
     StoredTitle = newTitle;
@@ -71,10 +77,12 @@ void Film::setStatus(bool newStatus){
 }
 
 void Film::setSeats(int newSeats){
-    availableSeats.clear();
     StoredSeats = newSeats;
-    initialReservation (StoredSeats);
+    availableSeats.clear();
+    initialReservation (newSeats);
 }
+
+
 
 void Film::initialReservation (int seats) {
 
@@ -83,3 +91,4 @@ void Film::initialReservation (int seats) {
     }
 
 }
+

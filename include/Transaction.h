@@ -14,7 +14,6 @@ class Transaction
         Transaction();
 
         //Overload Constructor
-        Transaction(string, string, string, int, int, int);
         Transaction(string, string, int, int, int);
 
         //Deconstructor

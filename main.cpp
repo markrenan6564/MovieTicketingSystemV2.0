@@ -2129,7 +2129,8 @@ void resetReservation (int& menuSelector, vector<Film>& savedFilms) {
 
                 }
 
-                cout << " " << "====================================================" << "\n";
+                cout << " " << "====================================================" << "\n"
+                     << endl;
 
                 while (1) {
 
@@ -2152,12 +2153,12 @@ void resetReservation (int& menuSelector, vector<Film>& savedFilms) {
                              << " " << "====================================================" << "\n"
                              << endl;
 
-                        savedFilms[realRef].availableSeats.clear();
-                        savedFilms[realRef].initialReservation(savedFilms[realRef].getSeats());
+                        savedFilms[realRef].setSeats(savedFilms[realRef].getSeats());
 
                         cout << " " << "[SYS] Reset Successful" << endl;
 
                         progStop();
+                        clrscreen();
                         break;
 
                     }
@@ -4032,9 +4033,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                         }
 
                     }
-                    
-                    cout << " " << "====================================================" << "\n"
-                         << endl;
+            
                     
                     while (1) {
 
@@ -4680,8 +4679,6 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
 
                                     cout << " " << "[INF] You selected seat number " << chosenSeat << "\n"
                                          << "\n"
-                                         << " " << "=======================================================================================================" << "\n"
-                                         << "\n"
                                          << " " << "-------------------------------------------------------------------------------------------------------" << "\n"
                                          << " " << "[SYS] Generating Receipt" << "\n"
                                          << " " << "-------------------------------------------------------------------------------------------------------" << "\n"
@@ -4690,7 +4687,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                          << " " << "      Year Released : " << savedFilms[realRef].getYear() << "\n"
                                          << " " << "      Ticket Price  : Php " << savedFilms[realRef].getYear() << "\n"
                                          << " " << "      Quantity      : 1" << "\n"
-                                         << " " << "      Total         : Php" << savedFilms[realRef].getPrice() << "\n"
+                                         << " " << "      Total         : Php " << savedFilms[realRef].getPrice() << "\n"
                                          << " " << "-------------------------------------------------------------------------------------------------------" << "\n"
                                          << "\n"
                                          << " " << "=======================================================================================================" << "\n"
@@ -4701,6 +4698,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
 
                                     Transaction transaction("Movie", savedFilms[realRef].getTitle(), savedFilms[realRef].getPrice(), 1, savedFilms[realRef].getPrice());
                                     transactionTracker.push_back(transaction);
+
 
                                     for (int i = 0; i < savedFilms[realRef].availableSeats.size(); i++) {
 
@@ -5062,4 +5060,3 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
     }
 
 }
-
