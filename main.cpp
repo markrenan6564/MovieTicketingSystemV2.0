@@ -4942,7 +4942,7 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
 
                         int realRef = usersChosen - 1;
 
-                        if ((savedSnacks[realRef].getStatus()) && (savedSnacks[realRef].getQuantity() > 0) && (usersChosen > 0) && (usersChosen < savedSnacks.size())) {
+                        if ((savedSnacks[realRef].getStatus()) && (savedSnacks[realRef].getQuantity() > 0) && (usersChosen > 0) && (realRef < savedSnacks.size())) {
 
                             cout << " " << "[INF] You selected " << savedSnacks[realRef].getProduct() << "\n"
                                  << "\n"
