@@ -3895,7 +3895,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
              << " " << "====================================================" << "\n"
              << " " << "                     BOOK MOVIE                     " << "\n"
              << " " << "====================================================" << "\n"
-             << " " << "[ERR] No movies are available                       " << "\n"
+             << " " << "[ERR] No movies available                       " << "\n"
              << " " << "====================================================" << "\n"
              << endl;
 
@@ -4768,7 +4768,7 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
              << " " << "====================================================" << "\n"
              << " " << "                    MOVIE SNACKS                    " << "\n"
              << " " << "====================================================" << "\n"
-             << " " << "[ERR] No snacks are available                       " << "\n"
+             << " " << "[ERR] No snacks available                       " << "\n"
              << " " << "====================================================" << "\n"
              << endl;
 
