@@ -3960,7 +3960,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                         << " " << "====================================================" << "\n"
                         << " " << "                     BOOK MOVIE                     " << "\n"
                         << " " << "====================================================" << "\n"
-                        << " " << "[ERR] No snacks are available                       " << "\n"
+                        << " " << "[ERR] No movies are available                       " << "\n"
                         << " " << "====================================================" << "\n"
                         << endl;
 
@@ -3980,7 +3980,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                          << " " << "====================================================" << "\n"
                          << "\n"
                          << " " << "----------------------------------------------------" << "\n"
-                         << " " << "[SYS] Showing all available snacks                  " << "\n"
+                         << " " << "[SYS] Showing all available movies                  " << "\n"
                          << " " << "----------------------------------------------------" << "\n"
                          << endl;
 
