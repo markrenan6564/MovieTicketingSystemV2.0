@@ -56,7 +56,7 @@ static vector<string> adminCredentials;
     void reactivateSnacks (int&, vector<Snack>&);
     void deleteSnacks (int&, vector<Snack>&);
 
-    void viewSales (int&, vector<int>&);
+    void viewSales (int&, vector<Transaction>&);
 
     void accountSettings (int&, vector<string>&);
 
@@ -95,8 +95,7 @@ int main() {
                         Delete Snacks = 326
 
                     View Sales = 33
-                        View Sales = 331
-
+                    
                     Account Settings = 34
 
 */
@@ -181,6 +180,10 @@ int main() {
 
         else if (menuSelector == 326) {
             deleteSnacks (menuSelector, SavedSnacks);
+        }
+
+        else if (menuSelector == 33) {
+            viewSales (menuSelector, transactionTracker);
         }
 
         else if (menuSelector == 34) {
@@ -3283,12 +3286,12 @@ void deleteSnacks (int& menuSelector, vector<Snack>& savedSnacks) {
                         cout << " " << "     Status        : Inactive" <<"\n";
                     }
                         cout << " " << "----------------------------------------------------" << "\n"
-                                << " " << "     Product Name  : " << savedSnacks[realRef].getName() << "\n"
-                                << " " << "     Product Size  : " << savedSnacks[realRef].getSize() << "\n"
-                                << " " << "     Product Price : " << savedSnacks[realRef].getPrice() << "\n"
-                                << " " << "     Quantity      : " << savedSnacks[realRef].getQuantity() << "\n"
-                                << " " << "----------------------------------------------------" << "\n"
-                                << endl;
+                             << " " << "     Product Name  : " << savedSnacks[realRef].getName() << "\n"
+                             << " " << "     Product Size  : " << savedSnacks[realRef].getSize() << "\n"
+                             << " " << "     Product Price : " << savedSnacks[realRef].getPrice() << "\n"
+                             << " " << "     Quantity      : " << savedSnacks[realRef].getQuantity() << "\n"
+                             << " " << "----------------------------------------------------" << "\n"
+                             << endl;
 
                 }
 
@@ -3355,7 +3358,155 @@ void deleteSnacks (int& menuSelector, vector<Snack>& savedSnacks) {
 
 }
 
-void viewSales (int& menuSelector, vector<int>& salesCounter) {
+void viewSales (int& menuSelector, vector<Transaction>& transactionTracker) {
+
+    if (transactionTracker.empty()) {
+
+        mainProgHeader();
+
+        cout << " " << "HOME >> ADMIN MODE >> MANAGE SALES" << "\n";
+        cout << " " << "====================================================" << "\n"
+             << " " << "[ERR] No recent transactions recorded               " << "\n"
+             << " " << "====================================================" << "\n"
+             << endl;
+
+        progStop();
+        menuSelector = 3;
+        clrscreen();
+
+    }
+
+    else {
+
+        mainProgHeader();
+
+        cout << " " << "HOME >> ADMIN MODE >> MANAGE SALES" << "\n";
+        cout << " " << "====================================================" << "\n"
+             << " " << "[1] View Sales                                      " << "\n"
+             << " " << "[2] View All Transactions                           " << "\n"
+             << " " << "[0] Admin Mode                                      " << "\n"
+             << " " << "====================================================" << "\n"
+             << endl;
+        
+        while (1) {
+
+            int usersMenu;
+            cout << " " << "[INP] Select Option: ";
+            cin >> usersMenu;
+            while (cin.fail()) {
+                cinError();
+                inpErr();
+                cout << " " << "[INP] Select Option: ";
+                cin >> usersMenu;                
+            }
+
+            if (usersMenu == 1) {
+
+                clrscreen();
+
+                unsigned int transactions = transactionTracker.size();
+
+                int totalSales;
+
+                for (unsigned int realRef = 0; realRef < transactions; realRef++) {
+
+                    totalSales = totalSales + transactionTracker[realRef].getEarnings();
+
+                }
+
+                mainProgHeader();
+
+                cout << " " << "HOME >> ADMIN MODE >> MANAGE SALES >> VIEW SALES" << "\n";
+
+                cout << " " << "====================================================" << "\n"
+                     << " " << "Total Sales    : Php " << totalSales << "\n"
+                     << " " << "Transaction(s) : " << transactionTracker.size() << "\n"
+                     << " " << "====================================================" << "\n"
+                     << "\n"
+                     << " " << "[SYS] Showing Sales Statistics" << "\n";
+                
+                progStop();
+                clrscreen();
+                menuSelector = 33;
+                break;
+
+            }
+
+            else if (usersMenu == 2) {
+
+                clrscreen();
+
+                mainProgHeader();
+
+                cout << " " << "HOME >> ADMIN MODE >> MANAGE SALES >> VIEW SALES" << "\n";
+
+                cout << " " << "====================================================" << "\n"
+                     << "\n"
+                     << " " << "----------------------------------------------------" << "\n"
+                     << " " << "[SYS] Showing all transactions                      " << "\n"
+                     << " " << "----------------------------------------------------" << "\n"
+                     << endl;
+                
+                unsigned int transactions = transactionTracker.size();
+                int displayRef = 0;
+
+                for (unsigned int realRef = 0; realRef < transactions; realRef++) {
+                    
+                    displayRef = displayRef + 1;
+
+                    cout << " " << "----------------------------------------------------" << "\n"
+                         << " " << "[INF] Transaction No.  : " << displayRef << "\n"
+                         << " " << "----------------------------------------------------" << "\n"
+                         << " " << "      Transaction Type : " << transactionTracker[realRef].getType() << "\n"
+                         << " " << "      Transaction Name : " << transactionTracker[realRef].getName() << "\n"
+                         << " " << "      Schedule         : " << transactionTracker[realRef].getSchedule() << "\n"
+                         << " " << "      Quantity         : " << transactionTracker[realRef].getQuantity() << "\n"
+                         << " " << "      Earnings         : Php " << transactionTracker[realRef].getEarnings() << "\n"
+                         << " " << "----------------------------------------------------" << "\n"
+                         << endl;
+
+                }
+
+
+                int totalSales;
+
+                for (unsigned int realRef = 0; realRef < transactions; realRef++) {
+
+                    totalSales = totalSales + transactionTracker[realRef].getEarnings();
+
+                }
+
+                cout << " " << "====================================================" << "\n"
+                     << " " << "Total Sales    : Php " << totalSales << "\n"
+                     << " " << "Transaction(s) : " << transactionTracker.size() << "\n"
+                     << " " << "====================================================" << "\n"
+                     << "\n"
+                     << " " << "[SYS] Showing Sales Statistics" << "\n";
+                
+                progStop();
+                clrscreen();
+                menuSelector = 33;
+                break;
+
+            }
+
+            else if (usersMenu ==0) {
+
+                clrscreen();
+                menuSelector = 3;
+                break;
+
+            }
+
+            else {
+
+                inpErr();
+
+            }
+
+        }
+
+    }
 
 }
 
@@ -3690,8 +3841,7 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
 
                     }
 
-                    cout << " " << "====================================================" << "\n"
-                         << endl;
+                    cout << " " << "====================================================" << "\n";
 
                     while (1) {
 
@@ -3710,7 +3860,6 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
                         if ((savedSnacks[realRef].getStatus()) && (savedSnacks[realRef].getQuantity() > 0)) {
 
                             cout << " " << "[INF] You selected " << savedSnacks[realRef].getProduct() << "\n"
-                                 << "\n"
                                  << " " << "====================================================" << "\n"
                                  << "\n"
                                  << " " << "[SYS] Buying sequence initialized" << "\n";
@@ -3764,17 +3913,17 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
                                             cout << " " << "[INF] You want to buy " << quantity << " " << savedSnacks[realRef].getProduct() << "\n"
                                                  << "\n"
                                                  << " " << "====================================================" << "\n"
-                                                 << "\n"
+                                                 << "\n" 
                                                  << " " << "[SYS] Buying..." << "\n"
-                                                 << " " << "[SYS] Purchase complete " << "\n"
-                                                 << "\n"
+                                                 << " " << "[INF] Purchase complete " << "\n"
+                                                << "\n"
                                                  << " " << "====================================================" << "\n"
                                                  << endl;
 
                                             int total = savedSnacks[realRef].getPrice() * quantity;
 
                                             cout << " " << "----------------------------------------------------" << "\n"
-                                                 << " " << "[SYS] Receipt" << "\n"
+                                                 << " " << "[SYS] Transaction Receipt" << "\n"
                                                  << " " << "----------------------------------------------------" << "\n"
                                                  << " " << "      Product      : " << savedSnacks[realRef].getProduct() << "\n"
                                                  << " " << "      Price        : " << savedSnacks[realRef].getPrice() << "\n"
