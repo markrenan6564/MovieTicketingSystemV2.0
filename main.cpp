@@ -3419,8 +3419,8 @@ void viewSales (int& menuSelector, vector<Transaction>& transactionTracker) {
                 cout << " " << "HOME >> ADMIN MODE >> MANAGE SALES >> VIEW SALES" << "\n";
 
                 cout << " " << "====================================================" << "\n"
-                     << " " << "Total Sales    : Php " << totalSales << "\n"
                      << " " << "Transaction(s) : " << transactionTracker.size() << "\n"
+                     << " " << "Total Sales    : Php " << totalSales << "\n"
                      << " " << "====================================================" << "\n"
                      << "\n"
                      << " " << "[SYS] Showing Sales Statistics" << "\n";
@@ -3477,8 +3477,8 @@ void viewSales (int& menuSelector, vector<Transaction>& transactionTracker) {
                 }
 
                 cout << " " << "====================================================" << "\n"
-                     << " " << "Total Sales    : Php " << totalSales << "\n"
                      << " " << "Transaction(s) : " << transactionTracker.size() << "\n"
+                     << " " << "Total Sales    : Php " << totalSales << "\n"
                      << " " << "====================================================" << "\n"
                      << "\n"
                      << " " << "[SYS] Showing Sales Statistics" << "\n";
@@ -3841,7 +3841,8 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
 
                     }
 
-                    cout << " " << "====================================================" << "\n";
+                    cout << " " << "====================================================" << "\n"
+                         << endl;
 
                     while (1) {
 
@@ -3860,6 +3861,7 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
                         if ((savedSnacks[realRef].getStatus()) && (savedSnacks[realRef].getQuantity() > 0)) {
 
                             cout << " " << "[INF] You selected " << savedSnacks[realRef].getProduct() << "\n"
+                                 << "\n"
                                  << " " << "====================================================" << "\n"
                                  << "\n"
                                  << " " << "[SYS] Buying sequence initialized" << "\n";
