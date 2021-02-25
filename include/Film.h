@@ -35,6 +35,11 @@ class Film
         void    setStatus (bool);
         void    setSeats (int);
 
+        vector<int> availableSeats;
+
+        void    initialReservation (int);
+
+
     private:
         string  StoredTitle;
         string  StoredDirector;

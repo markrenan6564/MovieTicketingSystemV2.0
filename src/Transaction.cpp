@@ -14,21 +14,23 @@ Transaction::~Transaction () {
 
 }
 
-Transaction::Transaction (string type, string name, string schedule, int quantity, int earnings) {
+Transaction::Transaction (string type, string name, string schedule,int price, int quantity, int earnings) {
 
     storedType = type;
     storedName = name;
     storedSchedule = schedule;
+    storedPrice = price;
     storedQuantity = quantity;
     storedEarnings = earnings;
 
 }
 
-Transaction::Transaction (string type, string name, int quantity, int earnings) {
+Transaction::Transaction (string type, string name, int price, int quantity, int earnings) {
 
     storedType = type;
     storedName = name;
     storedSchedule = "N/A";
+    storedPrice = price;
     storedQuantity = quantity;
     storedEarnings = earnings;
 
@@ -48,6 +50,10 @@ Transaction::Transaction (string type, string name, int quantity, int earnings) 
         return storedSchedule;
     }
 
+    int Transaction::getPrice() const {
+        return storedPrice;
+    }   
+
     int Transaction::getQuantity() const {
         return storedQuantity;
     }
@@ -55,6 +61,8 @@ Transaction::Transaction (string type, string name, int quantity, int earnings) 
     int Transaction::getEarnings() const {
         return storedEarnings;
     }
+
+
 
 //  Mutators
 
@@ -68,6 +76,10 @@ Transaction::Transaction (string type, string name, int quantity, int earnings) 
 
     void Transaction::setSchedule (string schedule) {
         storedSchedule = schedule;
+    }
+
+    void Transaction::setPrice (int price) {
+        storedPrice = price;
     }
 
     void Transaction::setQuantity (int quantity) {

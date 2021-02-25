@@ -42,11 +42,13 @@ static vector<string> adminCredentials;
 
     void manageFilms (int&);
     void addFilms (int&, vector<Film>&);
+    void setSchedule (int&, vector<Film>&);
     void viewFilms (int&, vector<Film>&);
     void editFilms (int&, vector<Film>&);
     void deactivateFilms (int&, vector<Film>&);
     void reactivateFilms (int&, vector<Film>&);
     void deleteFilms (int&, vector<Film>&);
+    void resetReservation (int&, vector<Film>&);
 
     void manageSnacks(int&);
     void addSnacks (int&, vector<Snack>&);
@@ -85,6 +87,7 @@ int main() {
                         Deactivate Films = 314
                         Reactivate Films = 315
                         Delete Films = 316
+                        Reset Reservation = 317
 
                     Manage Snacks = 32
                         Add Snacks = 321
@@ -95,7 +98,7 @@ int main() {
                         Delete Snacks = 326
 
                     View Sales = 33
-                    
+
                     Account Settings = 34
 
 */
@@ -152,6 +155,10 @@ int main() {
 
         else if (menuSelector == 316) {
             deleteFilms (menuSelector, SavedFilms);
+        }
+
+        else if (menuSelector == 317) {
+            resetReservation (menuSelector, SavedFilms);
         }
 
         else if (menuSelector == 32) {
@@ -581,6 +588,7 @@ void manageFilms (int& menuSelector) {
          << " " << "[4] Deactivate Films                                " << "\n"
          << " " << "[5] Reactivate Films                                " << "\n"
          << " " << "[6] Delete Films                                    " << "\n"
+         << " " << "[7] Reset Reservation                               " << "\n"
          << " " << "[0] Admin Mode                                      " << "\n"
          << " " << "====================================================" << "\n"
          << endl;
@@ -595,42 +603,58 @@ void manageFilms (int& menuSelector) {
                 cout << " " << "[INP] Select Option: ";
                 cin >> userInput;
             }
+
         if (userInput == 1) {
 
             clrscreen();
             menuSelector = 311;
             break;
         }
+
         else if (userInput == 2) {
 
             clrscreen();
             menuSelector = 312;
             break;
         }
+
         else if (userInput == 3) {
 
             clrscreen();
             menuSelector = 313;
             break;
         }
+
         else if (userInput == 4) {
 
             clrscreen();
             menuSelector = 314;
             break;
         }
+
         else if (userInput == 5) {
 
             clrscreen();
             menuSelector = 315;
             break;
         }
+
         else if (userInput == 6) {
 
             clrscreen();
             menuSelector = 316;
             break;
+
         }
+
+        else if (userInput == 7) {
+
+            clrscreen();
+            menuSelector = 317;
+            break;
+
+        }
+
         else if (userInput == 0) {
 
             clrscreen();
@@ -753,22 +777,23 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
                                 cout << " " << "     Year Released  : ";
                                 cin >> year;
                             }
-                        cout << " " << "     Ticket Price   : ";
+                        cout << " " << "     Ticket Price   : Php ";
                         cin >> price;
                             while (cin.fail()) {
                                 cinError();
                                 cout << "     ";
                                 inpError();
-                                cout << " " << "     Ticket Price   : ";
+                                cout << " " << "     Ticket Price   : Php ";
                                 cin >> price;
                             }
                         cout << " " << "     Alloted Seats  : ";
                         cin >> seats;
-                            while (cin.fail()) {
+                            while (cin.fail() || (seats <=  0) || (seats > 300)) {
                                 cinError();
                                 cout << "     ";
                                 inpError();
-                                cout << " " << "     Available Seats: ";
+                                cout << "      [INF] 300 is the maximum alloted seats" << "\n";
+                                cout << " " << "     Alloted Seats  : ";
                                 cin >> seats;
                             }
 
@@ -793,9 +818,9 @@ void addFilms(int& menuSelector, vector<Film>& CurrentFilms) {
                          << " " << "                      ADD FILMS                     " << "\n"
                          << " " << "====================================================" << "\n"
                          << " " << "[INF] " << desiredNum << " film(s) has been successfully added" << "\n"
-                         << " " << "[SYS] Add sequence completed successfully" << "\n"
                          << " " << "====================================================" << "\n"
-                         << endl;
+                         << "\n"
+                         << " " << "[SYS] Add sequence completed successfully" << endl;
 
                     progStop();
                     break;
@@ -930,7 +955,7 @@ void viewFilms (int& menuSelector, vector<Film>& addedFilms) {
                          << " " << "     Film Title    : " << addedFilms[i].getTitle() << "\n"
                          << " " << "     Film Director : " << addedFilms[i].getDirector() << "\n"
                          << " " << "     Year Released : " << addedFilms[i].getYear() << "\n"
-                         << " " << "     Ticket Price  : " << addedFilms[i].getPrice() << "\n"
+                         << " " << "     Ticket Price  : Php " << addedFilms[i].getPrice() << "\n"
                          << " " << "     Seats Alloted : " << addedFilms[i].getSeats() << "\n"
                          << " " << "----------------------------------------------------" << "\n"
                          << endl;
@@ -1052,7 +1077,7 @@ void viewFilms (int& menuSelector, vector<Film>& addedFilms) {
                              << " " << "     Film Title    : " << addedFilms[movienum].getTitle() << "\n"
                              << " " << "     Film Director : " << addedFilms[movienum].getDirector() << "\n"
                              << " " << "     Year Released : " << addedFilms[movienum].getYear() << "\n"
-                             << " " << "     Ticket Price  : " << addedFilms[movienum].getPrice() << "\n"
+                             << " " << "     Ticket Price  : Php " << addedFilms[movienum].getPrice() << "\n"
                              << " " << "     Seats Alloted : " << addedFilms[movienum].getSeats() << "\n"
                              << " " << "----------------------------------------------------" << "\n"
                              << "\n"
@@ -1192,7 +1217,7 @@ void editFilms (int& menuSelector, vector<Film>& currentFilms) {
                          << " " << "     Film Title    : " << currentFilms[i].getTitle() << "\n"
                          << " " << "     Film Director : " << currentFilms[i].getDirector() << "\n"
                          << " " << "     Year Released : " << currentFilms[i].getYear() << "\n"
-                         << " " << "     Ticket Price  : " << currentFilms[i].getPrice() << "\n"
+                         << " " << "     Ticket Price  : Php " << currentFilms[i].getPrice() << "\n"
                          << " " << "     Seats Alloted : " << currentFilms[i].getSeats() << "\n"
                          << " " << "----------------------------------------------------" << "\n"
                          << endl;
@@ -1269,7 +1294,7 @@ void editFilms (int& menuSelector, vector<Film>& currentFilms) {
                              << " " << "     Film Title    : " << currentFilms[realref].getTitle() << "\n"
                              << " " << "     Film Director : " << currentFilms[realref].getDirector() << "\n"
                              << " " << "     Year Released : " << currentFilms[realref].getYear() << "\n"
-                             << " " << "     Ticket Price  : " << currentFilms[realref].getPrice() << "\n"
+                             << " " << "     Ticket Price  : Php " << currentFilms[realref].getPrice() << "\n"
                              << " " << "     Seats Alloted : " << currentFilms[realref].getSeats() << "\n"
                              << " " << "----------------------------------------------------" << "\n"
                              << endl;
@@ -1318,24 +1343,25 @@ void editFilms (int& menuSelector, vector<Film>& currentFilms) {
                             }
                         currentFilms[realref].setYear(year);
 
-                        cout << " " << "     Ticket Price  : ";
+                        cout << " " << "     Ticket Price  : Php ";
                         cin >> price;
                             while (cin.fail()) {
                                 cinError();
                                 cout << "     ";
                                 inpError();
-                                cout << " " << "     Ticket Price  : ";
+                                cout << " " << "     Ticket Price  : Php ";
                                 cin >> price;
                             }
                         currentFilms[realref].setPrice(price);
 
                         cout << " " << "     Alloted Seats : ";
                         cin >> seats;
-                            while (cin.fail()) {
+                            while (cin.fail() || (seats <=  0) || (seats > 300)) {
                                 cinError();
                                 cout << "     ";
                                 inpError();
-                                cout << " " << "     Alloted Seats : ";
+                                cout << "      [INF] 300 is the maximum alloted seats" << "\n";
+                                cout << " " << "     Alloted Seats  : ";
                                 cin >> seats;
                             }
                         currentFilms[realref].setSeats(seats);
@@ -1506,7 +1532,7 @@ void deactivateFilms (int& menuSelector, vector<Film>& activeFilms) {
                                 << " " << "     Film Title    : " << activeFilms[realRef].getTitle() << "\n"
                                 << " " << "     Film Director : " << activeFilms[realRef].getDirector() << "\n"
                                 << " " << "     Year Released : " << activeFilms[realRef].getYear() << "\n"
-                                << " " << "     Ticket Price  : " << activeFilms[realRef].getPrice() << "\n"
+                                << " " << "     Ticket Price  : Php " << activeFilms[realRef].getPrice() << "\n"
                                 << " " << "     Seats Alloted : " << activeFilms[realRef].getSeats() << "\n"
                                 << " " << "----------------------------------------------------" << "\n"
                                 << endl;
@@ -1521,7 +1547,7 @@ void deactivateFilms (int& menuSelector, vector<Film>& activeFilms) {
                                     << " " << "     Film Title    : " << activeFilms[realRef].getTitle() << "\n"
                                     << " " << "     Film Director : " << activeFilms[realRef].getDirector() << "\n"
                                     << " " << "     Year Released : " << activeFilms[realRef].getYear() << "\n"
-                                    << " " << "     Ticket Price  : " << activeFilms[realRef].getPrice() << "\n"
+                                    << " " << "     Ticket Price  : Php " << activeFilms[realRef].getPrice() << "\n"
                                     << " " << "     Seats Alloted : " << activeFilms[realRef].getSeats() << "\n"
                                     << " " << "----------------------------------------------------" << "\n"
                                     << endl;
@@ -1672,7 +1698,7 @@ void reactivateFilms (int& menuSelector, vector<Film>& inactiveFilms) {
                             cout << " " << "====================================================" << "\n"
                                  << " " << "                  REACTIVATE FILMS                  " << "\n"
                                  << " " << "====================================================" << "\n"
-                                 << " " << "[ERR] All films are activated" << "\n"
+                                 << " " << "[ERR] All films are activated                       " << "\n"
                                  << " " << "====================================================" << "\n"
                                  << endl;
 
@@ -1724,7 +1750,7 @@ void reactivateFilms (int& menuSelector, vector<Film>& inactiveFilms) {
                                      << " " << "     Film Title    : " << inactiveFilms[realRef].getTitle() << "\n"
                                      << " " << "     Film Director : " << inactiveFilms[realRef].getDirector() << "\n"
                                      << " " << "     Year Released : " << inactiveFilms[realRef].getYear() << "\n"
-                                     << " " << "     Ticket Price  : " << inactiveFilms[realRef].getPrice() << "\n"
+                                     << " " << "     Ticket Price  : Php " << inactiveFilms[realRef].getPrice() << "\n"
                                      << " " << "     Seats Alloted : " << inactiveFilms[realRef].getSeats() << "\n"
                                      << " " << "----------------------------------------------------" << "\n"
                                      << endl;
@@ -1739,7 +1765,7 @@ void reactivateFilms (int& menuSelector, vector<Film>& inactiveFilms) {
                                      << " " << "     Film Title    : " << inactiveFilms[realRef].getTitle() << "\n"
                                      << " " << "     Film Director : " << inactiveFilms[realRef].getDirector() << "\n"
                                      << " " << "     Year Released : " << inactiveFilms[realRef].getYear() << "\n"
-                                     << " " << "     Ticket Price  : " << inactiveFilms[realRef].getPrice() << "\n"
+                                     << " " << "     Ticket Price  : Php " << inactiveFilms[realRef].getPrice() << "\n"
                                      << " " << "     Seats Alloted : " << inactiveFilms[realRef].getSeats() << "\n"
                                      << " " << "----------------------------------------------------" << "\n"
                                      << endl;
@@ -1907,7 +1933,7 @@ void deleteFilms (int& menuSelector, vector<Film>& availableFilms) {
                              << " " << "     Film Title    : " << availableFilms[realRef].getTitle() << "\n"
                              << " " << "     Film Director : " << availableFilms[realRef].getDirector() << "\n"
                              << " " << "     Year Released : " << availableFilms[realRef].getYear() << "\n"
-                             << " " << "     Ticket Price  : " << availableFilms[realRef].getPrice() << "\n"
+                             << " " << "     Ticket Price  : Php " << availableFilms[realRef].getPrice() << "\n"
                              << " " << "     Alloted Seats : " << availableFilms[realRef].getSeats() << "\n"
                              << " " << "----------------------------------------------------" << "\n"
                              << endl;
@@ -1929,7 +1955,7 @@ void deleteFilms (int& menuSelector, vector<Film>& availableFilms) {
                              << " " << "     Film Title    : " << availableFilms[realRef].getTitle() << "\n"
                              << " " << "     Film Director : " << availableFilms[realRef].getDirector() << "\n"
                              << " " << "     Year Released : " << availableFilms[realRef].getYear() << "\n"
-                             << " " << "     Ticket Price  : " << availableFilms[realRef].getPrice() << "\n"
+                             << " " << "     Ticket Price  : Php " << availableFilms[realRef].getPrice() << "\n"
                              << " " << "     Alloted Seats : " << availableFilms[realRef].getSeats() << "\n"
                              << " " << "----------------------------------------------------" << "\n"
                              << endl;
@@ -1987,6 +2013,167 @@ void deleteFilms (int& menuSelector, vector<Film>& availableFilms) {
                 clrscreen();
                 menuSelector = 31;
                 break;
+            }
+
+            else {
+
+                inpErr();
+
+            }
+
+        }
+
+    }
+
+}
+
+void resetReservation (int& menuSelector, vector<Film>& savedFilms) {
+
+    if (savedFilms.empty()) {
+
+        mainProgHeader ();
+
+        cout << " " << "HOME >> ADMIN MODE >> MANAGE FILMS >> RESET RESERVATION" << "\n";
+
+        cout << " " << "====================================================" << "\n"
+             << " " << "                  RESET RESERVATION                 " << "\n"
+             << " " << "====================================================" << "\n"
+             << " " << "[ERR] Unable to reset. No films are added yet                            " << "\n"
+             << " " << "====================================================" << "\n"
+             << endl;
+
+        progStop();
+        clrscreen();
+        menuSelector = 31;
+
+    }
+
+    else {
+
+        mainProgHeader ();
+
+        cout << " " << "HOME >> ADMIN MODE >> MANAGE FILMS >> RESET RESERVATION" << "\n";
+
+        cout << " " << "====================================================" << "\n"
+             << " " << "                  RESET RESERVATION                 " << "\n"
+             << " " << "====================================================" << "\n"
+             << " " << "[1] Reset Reservation                               " << "\n"
+             << " " << "[0] Manage Films                                    " << "\n"
+             << " " << "====================================================" << "\n"
+             << endl;
+
+        while (1) {
+
+            int usersMenu;
+
+            cout << " " << "[INP] Select Option: ";
+            cin >> usersMenu;
+            while (cin.fail()) {
+                cinError();
+                inpErr();
+                cout << " " << "[INP] Select Option: ";
+                cin >> usersMenu;
+            }
+
+            if (usersMenu == 1) {
+
+                clrscreen();
+
+                cout << " " << "HOME >> ADMIN MODE >> MANAGE FILMS >> RESET RESERVATION" << "\n";
+
+                cout << " " << "====================================================" << "\n"
+                     << " " << "                  RESET RESERVATION                 " << "\n"
+                     << " " << "====================================================" << "\n"
+                     << endl;
+
+                cout << " " << "----------------------------------------------------" << "\n"
+                     << " " << "[SYS] Showing all films available for reset         " << "\n"
+                     << " " << "----------------------------------------------------" << "\n"
+                     << endl;
+
+                int numFilms = savedFilms.size();
+                int displayRef = 0;
+
+                for (int realRef = 0; realRef < numFilms ; realRef++) {
+
+                    displayRef++;
+
+                    cout << " " << "----------------------------------------------------" << "\n";
+
+                    if (realRef < 9) {
+                        cout << " " << "[0" << displayRef << "] Title         : " << savedFilms[realRef].getTitle() << "\n";
+                    }
+                    else {
+                        cout << " " << "[" << displayRef << "] Title         : " << savedFilms[realRef].getTitle() << "\n";
+                    }
+
+                    if (savedFilms[realRef].getStatus()) {
+                        cout << " " << "     Status        : Active" << "\n";
+                    }
+                    else {
+                        cout << " " << "     Status        : Inactive" << "\n";
+                    }
+
+                    cout << " " << "----------------------------------------------------" << "\n"
+                         << " " << "     Film Title    : " << savedFilms[realRef].getTitle() << "\n"
+                         << " " << "     Film Director : " << savedFilms[realRef].getDirector() << "\n"
+                         << " " << "     Year Released : " << savedFilms[realRef].getYear() << "\n"
+                         << " " << "     Ticket Price  : Php " << savedFilms[realRef].getPrice() << "\n"
+                         << " " << "     Seats Alloted : " << savedFilms[realRef].getSeats() << "\n"
+                         << " " << "----------------------------------------------------" << "\n"
+                         << endl;
+
+                }
+
+                cout << " " << "====================================================" << "\n";
+
+                while (1) {
+
+                    int chosenFilm;
+                    cout << " " << "[INP] Select Film: ";
+                    cin >> chosenFilm;
+                    while (cin.fail()) {
+                        cinError();
+                        inpErr();
+                        cout << " " << "[INP] Select Film: ";
+                        cin >> chosenFilm;
+                    }
+
+                    if ((chosenFilm > 0) && (chosenFilm <= savedFilms.size())) {
+
+                        int realRef = chosenFilm -1;
+
+                        cout << " " << "[INF] You selected " << savedFilms[realRef].getTitle() << "\n"
+                             << "\n"
+                             << " " << "====================================================" << "\n"
+                             << endl;
+
+                        savedFilms[realRef].initialReservation(savedFilms[realRef].getSeats());
+
+                        cout << " " << "[SYS] Reset Successful" << endl;
+
+                        progStop();
+                        break;
+
+                    }
+
+                    else {
+
+                        inpErr();
+
+                    }
+
+                }
+
+                break;
+            }
+
+            else if (usersMenu == 0) {
+
+                clrscreen();
+                menuSelector = 31;
+                break;
+
             }
 
             else {
@@ -2178,13 +2365,13 @@ void addSnacks (int& menuSelector, vector<Snack>& currentSnacks) {
                         getline(cin, name);
                         cout << " " << "     Product Size   : ";
                         getline (cin, size);
-                        cout << " " << "     Product Price  : ";
+                        cout << " " << "     Product Price  : Php ";
                         cin >> price;
                             while(cin.fail()) {
                                 cinError();
                                 cout << "     ";
                                 inpError();
-                                cout << " " << "     Product Price  : ";
+                                cout << " " << "     Product Price  : Php ";
                                 cin >> price;
                             }
                         cout << " " << "     Quantity       : ";
@@ -2353,7 +2540,7 @@ void viewSnacks (int& menuSelector, vector<Snack>& storedSnacks) {
                     cout << " " << "----------------------------------------------------" << "\n"
                          << " " << "     Product Name  : " << storedSnacks[i].getName() << "\n"
                          << " " << "     Product Size  : " << storedSnacks[i].getSize() << "\n"
-                         << " " << "     Prodcut Price : " << storedSnacks[i].getPrice() << "\n"
+                         << " " << "     Prodcut Price : Php " << storedSnacks[i].getPrice() << "\n"
                          << " " << "     Quantity      : " << storedSnacks[i].getQuantity() << "\n"
                          << " " << "----------------------------------------------------" << "\n"
                          << endl;
@@ -2472,7 +2659,7 @@ void viewSnacks (int& menuSelector, vector<Snack>& storedSnacks) {
                         cout << " " << "----------------------------------------------------" << "\n"
                              << " " << "     Product Name  : " << storedSnacks[snacknum].getName() << "\n"
                              << " " << "     Product Size  : " << storedSnacks[snacknum].getSize() << "\n"
-                             << " " << "     Product Price : " << storedSnacks[snacknum].getPrice() << "\n"
+                             << " " << "     Product Price : Php " << storedSnacks[snacknum].getPrice() << "\n"
                              << " " << "     Quantity      : " << storedSnacks[snacknum].getQuantity() << "\n"
                              << " " << "----------------------------------------------------" << "\n"
                              << "\n"
@@ -2611,7 +2798,7 @@ void editSnacks (int& menuSelector, vector<Snack>& savedSnacks) {
                     cout << " " << "----------------------------------------------------" << "\n"
                          << " " << "     Product Name  : " << savedSnacks[i].getName() << "\n"
                          << " " << "     Product Size  : " << savedSnacks[i].getSize() << "\n"
-                         << " " << "     Product Price : " << savedSnacks[i].getPrice() << "\n"
+                         << " " << "     Product Price : Php " << savedSnacks[i].getPrice() << "\n"
                          << " " << "     Quantity      : " << savedSnacks[i].getQuantity() << "\n"
                          << " " << "----------------------------------------------------" << "\n"
                          << endl;
@@ -2687,7 +2874,7 @@ void editSnacks (int& menuSelector, vector<Snack>& savedSnacks) {
                         cout << " " << "----------------------------------------------------" << "\n"
                              << " " << "     Product Name  : " << savedSnacks[realref].getName() << "\n"
                              << " " << "     Product Size  : " << savedSnacks[realref].getSize() << "\n"
-                             << " " << "     Product Price : " << savedSnacks[realref].getPrice() << "\n"
+                             << " " << "     Product Price : Php " << savedSnacks[realref].getPrice() << "\n"
                              << " " << "     Quantity      : " << savedSnacks[realref].getQuantity() << "\n"
                              << " " << "----------------------------------------------------" << "\n"
                              << endl;
@@ -2725,13 +2912,13 @@ void editSnacks (int& menuSelector, vector<Snack>& savedSnacks) {
                         getline(cin, size);
                         savedSnacks[realref].setSize(size);
 
-                        cout << " " << "     Product Price : ";
+                        cout << " " << "     Product Price : Php ";
                         cin >> price;
                             while (cin.fail()) {
                                 cinError();
                                 cout << "     ";
                                 inpError();
-                                cout << " " << "     Product Price : ";
+                                cout << " " << "     Product Price : Php ";
                                 cin >> price;
                             }
                         savedSnacks[realref].setPrice(price);
@@ -2915,7 +3102,7 @@ void deactivateSnacks (int& menuSelector, vector<Snack>& savedSnacks) {
                                  << " " << "----------------------------------------------------" << "\n"
                                  << " " << "     Product Name  : " << savedSnacks[realRef].getName() << "\n"
                                  << " " << "     Product Size  : " << savedSnacks[realRef].getSize() << "\n"
-                                 << " " << "     Product Price : " << savedSnacks[realRef].getPrice() << "\n"
+                                 << " " << "     Product Price : Php " << savedSnacks[realRef].getPrice() << "\n"
                                  << " " << "     Quantity      : " << savedSnacks[realRef].getQuantity() << "\n"
                                  << " " << "----------------------------------------------------" << "\n"
                                  << endl;
@@ -3118,7 +3305,7 @@ void reactivateSnacks (int& menuSelector, vector<Snack>& savedSnacks) {
                                  << " " << "----------------------------------------------------" << "\n"
                                  << " " << "     Product Name  : " << savedSnacks[realRef].getName() << "\n"
                                  << " " << "     Product Size  : " << savedSnacks[realRef].getSize() << "\n"
-                                 << " " << "     Product Price : " << savedSnacks[realRef].getPrice() << "\n"
+                                 << " " << "     Product Price : Php " << savedSnacks[realRef].getPrice() << "\n"
                                  << " " << "     Quantity      : " << savedSnacks[realRef].getQuantity() << "\n"
                                  << " " << "----------------------------------------------------" << "\n"
                                  << endl;
@@ -3288,7 +3475,7 @@ void deleteSnacks (int& menuSelector, vector<Snack>& savedSnacks) {
                         cout << " " << "----------------------------------------------------" << "\n"
                              << " " << "     Product Name  : " << savedSnacks[realRef].getName() << "\n"
                              << " " << "     Product Size  : " << savedSnacks[realRef].getSize() << "\n"
-                             << " " << "     Product Price : " << savedSnacks[realRef].getPrice() << "\n"
+                             << " " << "     Product Price : Php " << savedSnacks[realRef].getPrice() << "\n"
                              << " " << "     Quantity      : " << savedSnacks[realRef].getQuantity() << "\n"
                              << " " << "----------------------------------------------------" << "\n"
                              << endl;
@@ -3387,7 +3574,7 @@ void viewSales (int& menuSelector, vector<Transaction>& transactionTracker) {
              << " " << "[0] Admin Mode                                      " << "\n"
              << " " << "====================================================" << "\n"
              << endl;
-        
+
         while (1) {
 
             int usersMenu;
@@ -3397,7 +3584,7 @@ void viewSales (int& menuSelector, vector<Transaction>& transactionTracker) {
                 cinError();
                 inpErr();
                 cout << " " << "[INP] Select Option: ";
-                cin >> usersMenu;                
+                cin >> usersMenu;
             }
 
             if (usersMenu == 1) {
@@ -3424,7 +3611,7 @@ void viewSales (int& menuSelector, vector<Transaction>& transactionTracker) {
                      << " " << "====================================================" << "\n"
                      << "\n"
                      << " " << "[SYS] Showing Sales Statistics" << "\n";
-                
+
                 progStop();
                 clrscreen();
                 menuSelector = 33;
@@ -3446,12 +3633,12 @@ void viewSales (int& menuSelector, vector<Transaction>& transactionTracker) {
                      << " " << "[SYS] Showing all transactions                      " << "\n"
                      << " " << "----------------------------------------------------" << "\n"
                      << endl;
-                
+
                 unsigned int transactions = transactionTracker.size();
                 int displayRef = 0;
 
                 for (unsigned int realRef = 0; realRef < transactions; realRef++) {
-                    
+
                     displayRef = displayRef + 1;
 
                     cout << " " << "----------------------------------------------------" << "\n"
@@ -3460,6 +3647,7 @@ void viewSales (int& menuSelector, vector<Transaction>& transactionTracker) {
                          << " " << "      Transaction Type : " << transactionTracker[realRef].getType() << "\n"
                          << " " << "      Transaction Name : " << transactionTracker[realRef].getName() << "\n"
                          << " " << "      Schedule         : " << transactionTracker[realRef].getSchedule() << "\n"
+                         << " " << "      Price            : Php " << transactionTracker[realRef].getPrice() << "\n"
                          << " " << "      Quantity         : " << transactionTracker[realRef].getQuantity() << "\n"
                          << " " << "      Earnings         : Php " << transactionTracker[realRef].getEarnings() << "\n"
                          << " " << "----------------------------------------------------" << "\n"
@@ -3482,7 +3670,7 @@ void viewSales (int& menuSelector, vector<Transaction>& transactionTracker) {
                      << " " << "====================================================" << "\n"
                      << "\n"
                      << " " << "[SYS] Showing Sales Statistics" << "\n";
-                
+
                 progStop();
                 clrscreen();
                 menuSelector = 33;
@@ -3692,6 +3880,29 @@ void accountSettings (int& menuSelector, vector<string>& adminCredentials) {
 
 }
 
+void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>& salesCounter)  {
+
+    if (savedFilms.empty()) {
+
+        mainProgHeader();
+
+        cout << " " << "HOME >> MAIN MODE >> BOOK MOVIE" << "\n"
+             << " " << "====================================================" << "\n"
+             << " " << "                       MOVIES                       " << "\n"
+             << " " << "====================================================" << "\n"
+             << " " << "[ERR] No movies are available                       " << "\n"
+             << " " << "====================================================" << "\n"
+             << endl;
+
+        progStop();
+        clrscreen();
+        menuSelector = 1;
+
+    }
+
+}
+
+
 void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transaction>& salesCounter) {
 
     if (savedSnacks.empty()) {
@@ -3832,7 +4043,7 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
                             cout << " " << "----------------------------------------------------" << "\n";
                             cout << " " << "     Product Name  : " << savedSnacks[i].getName() << "\n"
                                  << " " << "     Product Size  : " << savedSnacks[i].getSize() << "\n"
-                                 << " " << "     Product Price : " << savedSnacks[i].getPrice() << "\n"
+                                 << " " << "     Product Price : Php " << savedSnacks[i].getPrice() << "\n"
                                  << " " << "     Quantity      : " << savedSnacks[i].getQuantity() << "\n"
                                  << " " << "----------------------------------------------------" << "\n"
                                  << endl;
@@ -3889,7 +4100,7 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
                                 cout << " " << "----------------------------------------------------" << "\n";
                                 cout << " " << "     Product Name  : " << savedSnacks[realRef].getName() << "\n"
                                      << " " << "     Product Size  : " << savedSnacks[realRef].getSize() << "\n"
-                                     << " " << "     Product Price : " << savedSnacks[realRef].getPrice() << "\n"
+                                     << " " << "     Product Price : Php " << savedSnacks[realRef].getPrice() << "\n"
                                      << " " << "     Quantity      : " << savedSnacks[realRef].getQuantity() << "\n"
                                      << " " << "----------------------------------------------------" << "\n"
                                      << "\n"
@@ -3915,7 +4126,7 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
                                             cout << " " << "[INF] You want to buy " << quantity << " " << savedSnacks[realRef].getProduct() << "\n"
                                                  << "\n"
                                                  << " " << "====================================================" << "\n"
-                                                 << "\n" 
+                                                 << "\n"
                                                  << " " << "[SYS] Buying..." << "\n"
                                                  << " " << "[INF] Purchase complete " << "\n"
                                                 << "\n"
@@ -3928,9 +4139,9 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
                                                  << " " << "[SYS] Transaction Receipt" << "\n"
                                                  << " " << "----------------------------------------------------" << "\n"
                                                  << " " << "      Product      : " << savedSnacks[realRef].getProduct() << "\n"
-                                                 << " " << "      Price        : " << savedSnacks[realRef].getPrice() << "\n"
+                                                 << " " << "      Price        : Php " << savedSnacks[realRef].getPrice() << "\n"
                                                  << " " << "      Quantity     : " << quantity << "\n"
-                                                 << " " << "      Total Amount : " << total << "\n"
+                                                 << " " << "      Total Amount : Php " << total << "\n"
                                                  << " " << "----------------------------------------------------" << "\n"
                                                  << "\n"
                                                  << " " << "====================================================" << "\n"
@@ -3939,7 +4150,7 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
 
                                             savedSnacks[realRef].setQuantity(savedSnacks[realRef].getQuantity() - quantity);
 
-                                            Transaction transaction("Snack", savedSnacks[realRef].getProduct(), quantity, total);
+                                            Transaction transaction("Snack", savedSnacks[realRef].getProduct(), savedSnacks[realRef].getPrice(), quantity, total);
                                             transactionTracker.push_back(transaction);
 
                                             progStop();
@@ -3994,3 +4205,4 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
     }
 
 }
+

@@ -14,8 +14,8 @@ class Transaction
         Transaction();
 
         //Overload Constructor
-        Transaction(string, string, string, int, int);
-        Transaction(string, string, int, int);
+        Transaction(string, string, string, int, int, int);
+        Transaction(string, string, int, int, int);
 
         //Deconstructor
         virtual ~Transaction();
@@ -24,6 +24,7 @@ class Transaction
         string  getType() const;
         string  getName() const;
         string  getSchedule() const;
+        int     getPrice() const;
         int     getQuantity() const;
         int     getEarnings() const;
 
@@ -31,6 +32,7 @@ class Transaction
         void    setType(string);
         void    setName(string);
         void    setSchedule (string);
+        void    setPrice (int);
         void    setQuantity (int);
         void    setEarnings (int);
 
@@ -38,6 +40,7 @@ class Transaction
         string  storedType;
         string  storedName;
         string  storedSchedule;
+        int     storedPrice;
         int     storedQuantity;
         int     storedEarnings;
 

@@ -2,7 +2,7 @@
 
 Film::Film(){
     StoredYear = 0;
-    StoredPrice = 0.00;
+    StoredPrice = 0;
 }
 
 Film::~Film(){
@@ -16,6 +16,9 @@ Film::Film(string newTitle, string newDirector, int newYear, int newPrice, int n
     StoredPrice = newPrice;
     StoredSeats = newSeats;
     StoredStatus = true;
+
+    initialReservation (StoredSeats);
+
 }
 
 
@@ -69,4 +72,14 @@ void Film::setStatus(bool newStatus){
 
 void Film::setSeats(int newSeats){
     StoredSeats = newSeats;
+    
+    initialReservation (StoredSeats);
+}
+
+void Film::initialReservation (int seats) {
+
+    for (int seatRef = 1; seatRef <= seats; seatRef++) {
+        availableSeats.push_back(seatRef);
+    }
+
 }
