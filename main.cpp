@@ -382,7 +382,7 @@ void mainMenu (int& menuSelector) {
             break;
 
         }
-        
+
         else if (userInput == 1) {
 
             clrscreen();
@@ -398,7 +398,7 @@ void mainMenu (int& menuSelector) {
             break;
 
         }
-        
+
         else {
 
             inpErr();
@@ -634,7 +634,7 @@ void manageFilms (int& menuSelector) {
             menuSelector = 3;
             break;
         }
-        
+
         else {
             inpErr();
         }
@@ -1860,7 +1860,7 @@ void deleteFilms (int& menuSelector, vector<Film>& availableFilms) {
             cin >> usersChoice;
             while (cin.fail()){
                 cinError();
-                inpErr;
+                inpErr();
                 cout << " " << "[INP] Select Option: ";
                 cin >> usersChoice;
             }
@@ -3238,7 +3238,7 @@ void deleteSnacks (int& menuSelector, vector<Snack>& savedSnacks) {
             cin >> usersChoice;
             while (cin.fail()){
                 cinError();
-                inpErr;
+                inpErr();
                 cout << " " << "[INP] Select Option: ";
                 cin >> usersChoice;
             }
@@ -3551,10 +3551,10 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
              << " " << "====================================================" << "\n"
              << " " << "                    MOVIE SNACKS                    " << "\n"
              << " " << "====================================================" << "\n"
-             << " " << "[ERR] No snacks available for selling               " << "\n"
+             << " " << "[ERR] No snacks are available                       " << "\n"
              << " " << "====================================================" << "\n"
              << endl;
-        
+
         progStop();
         clrscreen();
         menuSelector = 1;
@@ -3573,7 +3573,7 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
              << " " << "[0] Main Mode                                       " << "\n"
              << " " << "====================================================" << "\n"
              << endl;
-        
+
         while (1) {
 
             int menuChoice;
@@ -3584,11 +3584,11 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
                 cinError();
                 inpErr();
             cout << " " << "[INP] Select Option: ";
-            cin >> menuChoice;                
+            cin >> menuChoice;
             }
 
             if (menuChoice == 1) {
-                
+
                 int numSnacks = savedSnacks.size();
                 int verifier = 0;
                 int displayRef = 1;
@@ -3611,7 +3611,7 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
                         << " " << "====================================================" << "\n"
                         << " " << "                    MOVIE SNACKS                    " << "\n"
                         << " " << "====================================================" << "\n"
-                        << " " << "[ERR] No snacks available for selling               " << "\n"
+                        << " " << "[ERR] No snacks are available                       " << "\n"
                         << " " << "====================================================" << "\n"
                         << endl;
 
@@ -3631,14 +3631,14 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
                          << " " << "====================================================" << "\n"
                          << "\n"
                          << " " << "----------------------------------------------------" << "\n"
-                         << " " << "[SYS] Showing all snacks available                  " << "\n"
+                         << " " << "[SYS] Showing all available snacks                  " << "\n"
                          << " " << "----------------------------------------------------" << "\n"
                          << endl;
-                    
+
                     displayRef = 0;
-                    
+
                     for (int i = 0; i < numSnacks; i++) {
-                        
+
                         displayRef = displayRef + 1;
 
 
@@ -3646,10 +3646,10 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
                             cout << " " << "----------------------------------------------------" << "\n";
                             if (displayRef < 10) {
                             cout << " " << "[0" << displayRef << "] Product       : " << savedSnacks[i].getProduct() << "\n";
-                            }                                       
+                            }
                             else {
-                            cout << " " << "[" <<  displayRef << "] Product       : " << savedSnacks[i].getProduct() << "\n";    
-                            }                    
+                            cout << " " << "[" <<  displayRef << "] Product       : " << savedSnacks[i].getProduct() << "\n";
+                            }
                             cout << " " << "     Status        : Not Available                  " << "\n";
                             cout << " " << "----------------------------------------------------" << "\n";
                             cout << endl;
@@ -3661,7 +3661,7 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
                             cout << " " << "[0" << displayRef << "] Product       : " << savedSnacks[i].getProduct() << "\n";
                             }
                             else {
-                            cout << " " << "[" <<  displayRef << "] Product       : " << savedSnacks[i].getProduct() << "\n";    
+                            cout << " " << "[" <<  displayRef << "] Product       : " << savedSnacks[i].getProduct() << "\n";
                             }
                             cout << " " << "     Status        : Out of Stock                   " << "\n";
                             cout << " " << "----------------------------------------------------" << "\n";
@@ -3675,7 +3675,7 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
                             cout << " " << "[0" << displayRef << "] Product       : " << savedSnacks[i].getProduct() << "\n";
                             }
                             else {
-                            cout << " " << "[" <<  displayRef << "] Product       : " << savedSnacks[i].getProduct() << "\n";    
+                            cout << " " << "[" <<  displayRef << "] Product       : " << savedSnacks[i].getProduct() << "\n";
                             }
                             cout << " " << "     Status        : Available                      " << "\n";
                             cout << " " << "----------------------------------------------------" << "\n";
@@ -3692,23 +3692,23 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
 
                     cout << " " << "====================================================" << "\n"
                          << endl;
-                    
+
                     while (1) {
 
                         int usersChosen;
-                        cout << " " << "[INP] Select a Snack to Buy: ";
+                        cout << " " << "[INP] Select a Snack: ";
                         cin >> usersChosen;
                         while (cin.fail()){
                             cinError();
                             inpErr();
-                            cout << " " << "[INP] Select a Snack to Buy: ";
+                            cout << " " << "[INP] Select a Snack: ";
                             cin >> usersChosen;
                         }
 
                         int realRef = usersChosen - 1;
 
                         if ((savedSnacks[realRef].getStatus()) && (savedSnacks[realRef].getQuantity() > 0)) {
-                            
+
                             cout << " " << "[INF] You selected " << savedSnacks[realRef].getProduct() << "\n"
                                  << "\n"
                                  << " " << "====================================================" << "\n"
@@ -3732,7 +3732,7 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
                                     cout << " " << "[0" << displayRef << "] Product       : " << savedSnacks[realRef].getProduct() << "\n";
                                     }
                                     else {
-                                    cout << " " << "[" <<  displayRef << "] Product       : " << savedSnacks[realRef].getProduct() << "\n";    
+                                    cout << " " << "[" <<  displayRef << "] Product       : " << savedSnacks[realRef].getProduct() << "\n";
                                     }
                                 cout << " " << "     Status        : Available                      " << "\n";
                                 cout << " " << "----------------------------------------------------" << "\n";
@@ -3749,19 +3749,19 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
 
                                         int quantity;
 
-                                        cout << " " << "[INP] Enter how many " << savedSnacks[realRef].getProduct() << " you want to Buy: ";
+                                        cout << " " << "[INP] Enter quantity of " << savedSnacks[realRef].getProduct() << " you want to Buy: ";
                                         cin >> quantity;
                                         while (cin.fail()) {
                                             cinError();
                                             inpErr();
-                                        cout << " " << "[INP] Enter how many " << savedSnacks[realRef].getProduct() << " you want to Buy: ";
-                                        cin >> quantity;                                            
+                                        cout << " " << "[INP] Enter quantity of " << savedSnacks[realRef].getProduct() << " you want to Buy: ";
+                                        cin >> quantity;
                                         }
 
                                         if (quantity <= savedSnacks[realRef].getQuantity() && (quantity >=0)) {
 
 
-                                            cout << " " << "[INF] You want to buy " << quantity << "\n"
+                                            cout << " " << "[INF] You want to buy " << quantity << " " << savedSnacks[realRef].getProduct() << "\n"
                                                  << "\n"
                                                  << " " << "====================================================" << "\n"
                                                  << "\n"
@@ -3770,7 +3770,7 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
                                                  << "\n"
                                                  << " " << "====================================================" << "\n"
                                                  << endl;
-                                                
+
                                             int total = savedSnacks[realRef].getPrice() * quantity;
 
                                             cout << " " << "----------------------------------------------------" << "\n"
@@ -3786,24 +3786,24 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
                                                  << "\n"
                                                  << " " << "[SYS] Buy Sequence Completed " << endl;
 
-                                                savedSnacks[realRef].setQuantity(savedSnacks[realRef].getQuantity() - quantity);
+                                            savedSnacks[realRef].setQuantity(savedSnacks[realRef].getQuantity() - quantity);
 
-                                                Transaction transaction("Snack", savedSnacks[realRef].getProduct(), quantity, total);
-                                                transactionTracker.push_back(transaction);
+                                            Transaction transaction("Snack", savedSnacks[realRef].getProduct(), quantity, total);
+                                            transactionTracker.push_back(transaction);
 
-                                                progStop();
+                                            progStop();
 
                                             break;
 
                                         }
-                                        
+
                                         else {
 
                                             inpErr();
 
                                         }
 
-                                    }                                     
+                                    }
 
                             break;
                         }
