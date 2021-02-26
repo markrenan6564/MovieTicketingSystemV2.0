@@ -1082,7 +1082,7 @@ void viewFilms (int& menuSelector, vector<Film>& addedFilms) {
                              << " " << "     Film Director : " << addedFilms[movienum].getDirector() << "\n"
                              << " " << "     Year Released : " << addedFilms[movienum].getYear() << "\n"
                              << " " << "     Ticket Price  : Php " << addedFilms[movienum].getPrice() << "\n"
-                             << " " << "     Seats Alloted : " << addedFilms[movienum].getSeats() << "\n"
+                             << " " << "     Alloted Seats : " << addedFilms[movienum].getSeats() << "\n"
                              << " " << "----------------------------------------------------" << "\n"
                              << "\n"
                              << " " << "====================================================" << "\n"
@@ -4969,7 +4969,7 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
 
                         int realRef = usersChosen - 1;
 
-                        if ((savedSnacks[realRef].getStatus()) && (savedSnacks[realRef].getQuantity() > 0) && (usersChosen > 0) && (realRef < savedSnacks.size())) {
+                        if ((usersChosen > 0) && (realRef < savedSnacks.size()) && (savedSnacks[realRef].getStatus()) && (savedSnacks[realRef].getQuantity() > 0)) {
 
                             cout << " " << "[INF] You selected " << savedSnacks[realRef].getProduct() << "\n"
                                  << "\n"
