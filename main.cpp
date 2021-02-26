@@ -291,6 +291,7 @@ void parentMenu (int& menuSelector) {
             clrscreen ();
             menuSelector = 1;
             break;
+
         }
 
         else if (input == 2) {
@@ -298,6 +299,7 @@ void parentMenu (int& menuSelector) {
             clrscreen ();
             menuSelector = 2;
             break;
+
         }
 
         else if (input == 0) {
@@ -484,7 +486,7 @@ void adminLogin (int& menuSelector, vector<string>& adminCredentials) {
                     system ("color 0c");
                     cout << " " << "[ERR] Login Unsuccessful | Wrong Credentials" << endl;
 
-                    progStop ();
+                    progStop();
                     clrscreen();
                     menuSelector = 2;
                 }
@@ -537,6 +539,7 @@ void adminMenu (int& menuSelector) {
             clrscreen();
             menuSelector = 31;
             break;
+
         }
 
         else if (userInput == 2) {
@@ -551,6 +554,7 @@ void adminMenu (int& menuSelector) {
             clrscreen();
             menuSelector = 33;
             break;
+
         }
 
         else if (userInput == 4) {
@@ -558,13 +562,15 @@ void adminMenu (int& menuSelector) {
             clrscreen();
             menuSelector = 34;
             break;
+
         }
 
         else if (userInput == 0) {
 
             clrscreen();
-            menuSelector = 0;
+            menuSelector = -1;
             break;
+
         }
 
         else {
@@ -4640,7 +4646,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
                                         cout << "[***]";
                                     }
-                                    
+
                                     else {
                                         cout << "[" << Seats << "]";
                                         vectorite++;
