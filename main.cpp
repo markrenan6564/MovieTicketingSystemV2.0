@@ -38,8 +38,6 @@ static vector<string> adminCredentials;
     void adminLogin (int&, vector<string>&);
     void adminMenu (int&);
 
-    void accountSettings (int&, vector<string>&);
-
     void manageFilms (int&);
     void addFilms (int&, vector<Film>&);
     void setSchedule (int&, vector<Film>&);
@@ -4642,6 +4640,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
                                         cout << "[***]";
                                     }
+                                    
                                     else {
                                         cout << "[" << Seats << "]";
                                         vectorite++;
@@ -4658,6 +4657,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
                                         cout << "[***]";
                                     }
+
                                     else {
                                         cout << "[" << Seats << "]";
                                         vectorite++;
@@ -4682,8 +4682,6 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                 cout << endl;
                                 cout << " " << "-------------------------------------------------------------------------------------------------------" << "\n"
                                      << endl;
-
-
 
                             }
 
