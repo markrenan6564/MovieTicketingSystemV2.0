@@ -4049,6 +4049,9 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                         }
 
                     }
+
+                    cout << " " << "====================================================" << "\n"
+                         << endl;
             
                     
                     while (1) {
@@ -4665,10 +4668,32 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
 
                             }
 
+                            if ((savedFilms[realRef].getSeats() == 100) || (savedFilms[realRef].getSeats() == 200)) {
+                            
+                                cout << " " << "-------------------------------------------------------------------------------------------------------" << "\n"
+                                     << endl;
 
-                            cout << endl << endl;
-                            cout << " " << "-------------------------------------------------------------------------------------------------------" << "\n"
-                                 << endl;
+                            }
+
+                            else if ((savedFilms[realRef].getSeats() == 20) || (savedFilms[realRef].getSeats() == 40) || (savedFilms[realRef].getSeats() == 60) || (savedFilms[realRef].getSeats() == 80) || 
+                                     (savedFilms[realRef].getSeats() == 120) || (savedFilms[realRef].getSeats() == 140) || (savedFilms[realRef].getSeats() == 160) || (savedFilms[realRef].getSeats() == 180) ||
+                                     (savedFilms[realRef].getSeats() == 220) || (savedFilms[realRef].getSeats() == 240) || (savedFilms[realRef].getSeats() == 260)  || (savedFilms[realRef].getSeats() == 280)) {
+
+                                cout << endl;
+                                cout << " " << "-------------------------------------------------------------------------------------------------------" << "\n"
+                                     << endl;
+
+
+
+                            }
+
+                            else{
+
+                                cout << endl << endl;
+                                cout << " " << "-------------------------------------------------------------------------------------------------------" << "\n"
+                                     << endl;
+
+                            }
 
                             while (10) {
 
