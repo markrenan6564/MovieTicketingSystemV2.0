@@ -8,7 +8,6 @@
 #include "Snack.h"
 #include "Transaction.h"
 
-
 using namespace std;
 
 static vector<Film> SavedFilms;
@@ -17,7 +16,7 @@ static vector<Transaction> transactionTracker;
 
 static vector<string> adminCredentials;
 
-// Funtion Declarations
+// Function Declarations
 
     void mainProgHeader ();
 
@@ -48,7 +47,7 @@ static vector<string> adminCredentials;
     void deleteFilms (int&, vector<Film>&);
     void resetReservation (int&, vector<Film>&);
 
-    void manageSnacks(int&);
+    void manageSnacks (int&);
     void addSnacks (int&, vector<Snack>&);
     void viewSnacks (int&, vector<Snack>&);
     void editSnacks (int&, vector<Snack>&);
@@ -240,7 +239,7 @@ void progStop () {
 
     cin.clear();
     fflush(stdin);
-    cout <<" " << "[SYS] Press \"Enter\" to continue";
+    cout << " " << "[SYS] Press \"Enter\" to continue";
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
 }
@@ -315,6 +314,7 @@ void parentMenu (int& menuSelector) {
         }
 
     }
+
 }
 
 void programTerminator (int& menuSelector) {
@@ -345,13 +345,17 @@ void programTerminator (int& menuSelector) {
                 cin >> userinput;
             }
         if (userinput == 1) {
+
             exit(1);
+
         }
+
         if (userinput == 0) {
 
             clrscreen();
             menuSelector = -1;
             break;
+
         }
 
         else{
@@ -389,6 +393,7 @@ void mainMenu (int& menuSelector) {
             cout << " " << "[INP] Select Option: ";
             cin >> userInput;
         }
+
         if (userInput == 0) {
 
             clrscreen();
@@ -418,7 +423,9 @@ void mainMenu (int& menuSelector) {
             inpErr();
 
         }
+
     }
+
 }
 
 void adminLogin (int& menuSelector, vector<string>& adminCredentials) {
@@ -547,6 +554,7 @@ void adminMenu (int& menuSelector) {
             clrscreen();
             menuSelector = 32;
             break;
+
         }
 
         else if (userInput == 3) {
@@ -3695,7 +3703,7 @@ void viewSales (int& menuSelector, vector<Transaction>& transactionTracker) {
 
             }
 
-            else if (usersMenu ==0) {
+            else if (usersMenu == 0) {
 
                 clrscreen();
                 menuSelector = 3;
@@ -3720,7 +3728,7 @@ void accountSettings (int& menuSelector, vector<string>& adminCredentials) {
     mainProgHeader();
 
     cout << " " << "HOME >> ADMIN MODE >> ACCOUNT SETTINGS" << "\n"
-         << " " << "====================================================" << "\n" 
+         << " " << "====================================================" << "\n"
          << " " << "                  ACCOUNT SETTINGS                  " << "\n"
          << " " << "====================================================" << endl;
 
@@ -3749,9 +3757,9 @@ void accountSettings (int& menuSelector, vector<string>& adminCredentials) {
 
         mainProgHeader();
         cout << " " << "HOME >> ADMIN MODE >> ACCOUNT SETTINGS" << "\n"
-             << " " << "====================================================" << "\n" 
+             << " " << "====================================================" << "\n"
              << " " << "                  ACCOUNT SETTINGS                  " << "\n"
-             << " " << "====================================================" << "\n" 
+             << " " << "====================================================" << "\n"
              << " " << "[1] Change Username                                 " << "\n"
              << " " << "[2] Change Password                                 " << "\n"
              << " " << "[0] Admin Mode                                      " << "\n"
@@ -3778,7 +3786,7 @@ void accountSettings (int& menuSelector, vector<string>& adminCredentials) {
                 mainProgHeader();
 
                 cout << " " << "HOME >> ADMIN MODE >> ACCOUNT SETTINGS >> CHANGE USERNAME" << "\n"
-                     << " " << "====================================================" << "\n" 
+                     << " " << "====================================================" << "\n"
                      << " " << "                  ACCOUNT SETTINGS                  " << "\n"
                      << " " << "====================================================" << "\n";
 
@@ -3828,9 +3836,9 @@ void accountSettings (int& menuSelector, vector<string>& adminCredentials) {
                 mainProgHeader();
 
                 cout << " " << "HOME >> ADMIN MODE >> ACCOUNT SETTINGS >> CHANGE PASSWORD" << "\n"
-                     << " " << "====================================================" << "\n" 
+                     << " " << "====================================================" << "\n"
                      << " " << "                  ACCOUNT SETTINGS                  " << "\n"
-                     << " " << "====================================================" << "\n"; 
+                     << " " << "====================================================" << "\n";
 
                 string newPass, repnewPass;
 
@@ -4026,7 +4034,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                             }
                             else {
                             cout << " " << "[" <<  displayRef << "] Movie         : " << savedFilms[i].getTitle() << " (" << savedFilms[i].getYear() << ")" << "\n";
-                            }                                       
+                            }
                             cout << " " << "     Status        : Fully Booked                   " << "\n";
                             cout << " " << "----------------------------------------------------" << "\n";
                             cout << endl;
@@ -4056,8 +4064,8 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
 
                     cout << " " << "====================================================" << "\n"
                          << endl;
-            
-                    
+
+
                     while (1) {
 
                         int chosenFilm;
@@ -4068,7 +4076,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                             cinError();
                             inpErr();
                             cout << " " << "[INP] Choose Movie: ";
-                            cin >> chosenFilm;                            
+                            cin >> chosenFilm;
                         }
 
                         int realRef = chosenFilm - 1;
@@ -4080,7 +4088,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                  << " " << "====================================================" << "\n"
                                  << "\n"
                                  << " " << "[SYS] Book sequence initiated" << endl;
-                            
+
                             progStop();
 
                             clrscreen();
@@ -4104,25 +4112,26 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                             int vectorite = 0;
 
                             for (int Seats = 1; Seats <= savedFilms[realRef].getSeats(); Seats++) {
-                                
-                                
+
+
 
                                 if (Seats < 10) {
 
                                     if (Seats == 1) {
                                         cout << " ";
                                     }
-                                
+
                                     if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
                                         cout << "[***]";
                                     }
+
                                     else {
                                         cout << "[00" << Seats << "]";
                                         vectorite++;
                                     }
 
                                 }
-                                    
+
                                 else if (Seats == 10) {
 
                                     if (Seats != savedFilms[realRef].availableSeats[vectorite]) {
@@ -4149,7 +4158,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 20) {
                                         cout << endl;
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 21 && Seats <= 30) {
@@ -4170,7 +4179,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 30) {
                                         cout << "   ";
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 31 && Seats <= 40) {
@@ -4187,7 +4196,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 40) {
                                         cout << endl;
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 41 && Seats <= 50) {
@@ -4208,7 +4217,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 50) {
                                         cout << "   ";
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 51 && Seats <= 60) {
@@ -4224,7 +4233,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 60) {
                                         cout << endl;
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 61 && Seats <= 70) {
@@ -4245,7 +4254,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 70) {
                                         cout << "   ";
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 71 && Seats <= 80) {
@@ -4261,7 +4270,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 80) {
                                         cout << endl;
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 81 && Seats <= 90) {
@@ -4283,7 +4292,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 90) {
                                         cout << "   ";
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 91 && Seats <= 99) {
@@ -4296,7 +4305,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                         cout << "[0" << Seats << "]";
                                         vectorite++;
                                     }
-                                    
+
                                 }
 
                                 else if (Seats == 100) {
@@ -4330,7 +4339,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 110) {
                                         cout << "   ";
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 111 && Seats <= 120) {
@@ -4346,7 +4355,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 120) {
                                         cout << endl;
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 121 && Seats <= 130) {
@@ -4366,7 +4375,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 130) {
                                         cout << "   ";
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 131 && Seats <= 140) {
@@ -4382,7 +4391,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 140) {
                                         cout << endl;
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 141 && Seats <= 150) {
@@ -4402,7 +4411,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 150) {
                                         cout << "   ";
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 151 && Seats <= 160) {
@@ -4418,7 +4427,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 160) {
                                         cout << endl;
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 161 && Seats <= 170) {
@@ -4438,7 +4447,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 170) {
                                         cout << "   ";
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 171 && Seats <= 180) {
@@ -4454,7 +4463,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 180) {
                                         cout << endl;
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 181 && Seats <= 190) {
@@ -4474,7 +4483,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 190) {
                                         cout << "   ";
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 191 && Seats <= 200) {
@@ -4490,7 +4499,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 200) {
                                         cout << endl << endl;
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 201 && Seats <= 210) {
@@ -4510,7 +4519,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 210) {
                                         cout << "   ";
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 211 && Seats <= 220) {
@@ -4526,7 +4535,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 220) {
                                         cout << endl;
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 221 && Seats <= 230) {
@@ -4546,7 +4555,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 230) {
                                         cout << "   ";
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 231 && Seats <= 240) {
@@ -4562,7 +4571,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 240) {
                                         cout << endl;
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 241 && Seats <= 250) {
@@ -4582,7 +4591,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 250) {
                                         cout << "   ";
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 251 && Seats <= 260) {
@@ -4598,7 +4607,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 260) {
                                         cout << endl;
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 261 && Seats <= 270) {
@@ -4618,7 +4627,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 270) {
                                         cout << "   ";
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 271 && Seats <= 280) {
@@ -4634,7 +4643,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 280) {
                                         cout << endl;
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 281 && Seats <= 290) {
@@ -4655,7 +4664,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                     if (Seats == 290) {
                                         cout << "   ";
                                     }
-                                    
+
                                 }
 
                                 else if (Seats >= 291 && Seats <= 300) {
@@ -4669,19 +4678,19 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                                         vectorite++;
                                     }
 
-                                    
+
                                 }
 
                             }
 
                             if ((savedFilms[realRef].getSeats() == 100) || (savedFilms[realRef].getSeats() == 200)) {
-                            
+
                                 cout << " " << "-------------------------------------------------------------------------------------------------------" << "\n"
                                      << endl;
 
                             }
 
-                            else if ((savedFilms[realRef].getSeats() == 20) || (savedFilms[realRef].getSeats() == 40) || (savedFilms[realRef].getSeats() == 60) || (savedFilms[realRef].getSeats() == 80) || 
+                            else if ((savedFilms[realRef].getSeats() == 20) || (savedFilms[realRef].getSeats() == 40) || (savedFilms[realRef].getSeats() == 60) || (savedFilms[realRef].getSeats() == 80) ||
                                      (savedFilms[realRef].getSeats() == 120) || (savedFilms[realRef].getSeats() == 140) || (savedFilms[realRef].getSeats() == 160) || (savedFilms[realRef].getSeats() == 180) ||
                                      (savedFilms[realRef].getSeats() == 220) || (savedFilms[realRef].getSeats() == 240) || (savedFilms[realRef].getSeats() == 260)  || (savedFilms[realRef].getSeats() == 280)) {
 
@@ -4699,7 +4708,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
 
                             }
 
-                            while (10) {
+                            while (1) {
 
                                 int chosenSeat;
 
@@ -4782,7 +4791,7 @@ void bookMovie (int& menuSelector, vector<Film>& savedFilms, vector<Transaction>
                         }
 
                     }
-                    
+
                 }
 
                 clrscreen();
@@ -4994,11 +5003,11 @@ void buySnacks (int& menuSelector, vector<Snack>& savedSnacks , vector<Transacti
                                      << endl;
 
                                 cout << " " << "----------------------------------------------------" << "\n";
-                                    if (displayRef < 10) {
-                                    cout << " " << "[0" << displayRef << "] Product       : " << savedSnacks[realRef].getProduct() << "\n";
+                                    if (usersChosen < 10) {
+                                    cout << " " << "[0" << usersChosen << "] Product       : " << savedSnacks[realRef].getProduct() << "\n";
                                     }
                                     else {
-                                    cout << " " << "[" <<  displayRef << "] Product       : " << savedSnacks[realRef].getProduct() << "\n";
+                                    cout << " " << "[" <<  usersChosen << "] Product       : " << savedSnacks[realRef].getProduct() << "\n";
                                     }
                                 cout << " " << "     Status        : Available                      " << "\n";
                                 cout << " " << "----------------------------------------------------" << "\n";

@@ -48,14 +48,6 @@ int Film::getSeats() const{
     return StoredSeats;
 }
 
-int Film::getmainSeats() const{
-    return mainSeats;
-}
-
-void Film::setmainSeats (int seat) {
-    mainSeats = seat;
-}
-
 void Film::setTitle(string newTitle){
     StoredTitle = newTitle;
 }

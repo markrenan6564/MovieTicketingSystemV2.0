@@ -41,10 +41,6 @@ class Film
 
         void    initialReservation (int);
 
-
-
-        
-
     private:
         string  StoredTitle;
         string  StoredDirector;

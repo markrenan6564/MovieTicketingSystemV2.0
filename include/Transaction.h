@@ -9,6 +9,7 @@ using namespace std;
 
 class Transaction
 {
+    
     public:
         //default Constructor
         Transaction();
